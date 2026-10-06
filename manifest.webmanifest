@@ -1,0 +1,10 @@
+{
+  "name": "Florence · 10–13 octobre",
+  "short_name": "Florence",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f1e9",
+  "theme_color": "#b4532a",
+  "lang": "fr",
+  "icons": [{ "src": "icone.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
