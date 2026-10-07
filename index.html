@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Florence · 10–13 octobre</title>
-<meta name="description" content="Notre carnet de voyage à Florence : programme jour par jour avec options, réservations, histoires des lieux et bonnes adresses.">
+<meta name="description" content="Notre carnet de voyage à Florence : parcours à pied jour par jour, guides des musées, histoires des lieux, réservations et bonnes adresses.">
 <meta name="theme-color" content="#b4532a">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icone.svg" type="image/svg+xml">
@@ -160,7 +160,129 @@
 
   footer { color: var(--doux); font-size: 13px; text-align: center; padding: 10px 16px 40px; }
   @media (min-width: 640px) { .options { grid-template-columns: 1fr 1fr; } .options .option:only-child { grid-column: 1 / -1; } }
-  @media print { nav.onglets, .outils, .choisir { display: none; } .page[hidden] { display: block; } }
+
+  /* --- Parcours du jour (étapes) --- */
+  .parcours { margin-top: 4px; }
+  .etape { position: relative; padding-left: 24px; margin-bottom: 30px; scroll-margin-top: 64px; }
+  .etape::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: -30px; width: 2px; background: var(--trait); }
+  .etape:last-child::before { bottom: 0; }
+  .etape .heure { position: relative; }
+  .etape .heure::before { content: ""; position: absolute; left: -24px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--fond); border: 2px solid var(--accent); }
+  .etape.reserve .heure::before { background: var(--vert); border-color: var(--vert); }
+  .etape.type-repas .heure::before, .etape.type-apero .heure::before { border-color: var(--or); }
+  .etape.maintenant .heure::before { background: var(--accent); box-shadow: 0 0 0 5px var(--accent-doux); }
+  .etape.maintenant > h2 { color: var(--accent); }
+  .etape .heure { font-size: 13px; color: var(--accent); font-weight: 600; letter-spacing: .02em; }
+  .etape h2 { font-size: 22px; margin: 2px 0 8px; }
+  .etape .texte { margin: 0 0 10px; font-size: 15.5px; }
+  .pastille { display: inline-block; font-size: 11.5px; background: var(--accent); color: #fff; border-radius: 999px; padding: 1px 8px; font-weight: 600; letter-spacing: .02em; }
+  .aller { margin: 0 0 12px; padding: 10px 12px; border: 1.5px dashed var(--trait); border-radius: 12px; font-size: 14px; }
+  .aller-haut { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .aller .via { color: var(--doux); font-size: 13.5px; margin-top: 4px; }
+  .sous-titre { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--or); font-weight: 700; margin: 16px 0 8px; }
+  .regards, .detours { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .regard, .detours li { background: var(--carte); border: 1px solid var(--trait); border-radius: 14px; padding: 12px 14px; box-shadow: var(--ombre); }
+  .regard.avec-photo { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: start; }
+  .regard.avec-photo:has(.photo.ko) { grid-template-columns: 1fr; }
+  .regard b, .detours b { font-weight: 600; }
+  .regard p, .detours p { margin: 4px 0 0; font-size: 14.5px; }
+  .detours .duree { color: var(--accent); font-size: 13px; font-weight: 600; }
+  .detours .actions { margin-top: 8px; }
+
+  /* --- Photos --- */
+  .photo { display: block; border-radius: 10px; overflow: hidden; background: var(--trait); }
+  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .photo.ko { display: none; }
+  .photo.vignette { width: 96px; height: 124px; }
+  .photo.grande { background: transparent; border-radius: 8px; margin: 4px 0 8px; display: flex; justify-content: center; }
+  .photo.grande img { width: auto; height: auto; max-width: 100%; max-height: 360px; object-fit: contain; border-radius: 8px; }
+  .photo.entete { margin: -14px -16px 14px; border-radius: 0; height: 220px; }
+  .galerie { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 14px; }
+  .photo.galerie { height: 140px; }
+  @media (min-width: 640px) { .photo.vignette { width: 130px; height: 160px; } .regard.avec-photo { grid-template-columns: 130px 1fr; } .photo.entete { height: 300px; } }
+
+  /* --- Repas : trois choix --- */
+  .repas { display: grid; gap: 10px; margin: 10px 0; }
+  @media (min-width: 640px) { .repas { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } }
+  .choix { background: var(--carte); border: 1px solid var(--trait); border-radius: 14px; padding: 12px 14px; box-shadow: var(--ombre); }
+  .choix.reco { border-color: color-mix(in srgb, var(--accent) 55%, var(--trait)); box-shadow: 0 0 0 2px var(--accent-doux); }
+  .choix h3 { font: 600 17px/1.2 Fraunces, Georgia, serif; margin: 6px 0 2px; }
+  .choix .ligne { font-size: 13px; color: var(--doux); }
+  .choix p { font-size: 14.5px; margin: 8px 0 10px; }
+  .choix-haut { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .gamme { font-weight: 700; font-size: 12.5px; padding: 2px 9px; border-radius: 999px; background: var(--vert-doux); color: var(--vert); }
+  .gamme.g2 { background: var(--or-doux); color: var(--or); }
+  .gamme.g3 { background: var(--accent-doux); color: var(--accent); }
+  .gamme.g0 { background: var(--bleu-doux); color: var(--bleu); }
+  .etiquette.prio { background: var(--texte); color: var(--fond); border-color: transparent; }
+  .petit-btn { font-size: 13px; padding: 5px 10px; }
+  .lien-fiche.guide::before { content: "🎧 "; }
+
+  /* --- Autres options et plans B --- */
+  details.autres { margin-top: 12px; }
+  details.autres summary { cursor: pointer; font-size: 14px; color: var(--doux); padding: 6px 0; }
+  details.autres .options { margin-top: 6px; }
+  body.pluie details.a-pluie summary { color: var(--bleu); font-weight: 600; }
+  .plans-b .option { margin-bottom: 10px; }
+  .plans-b .option:last-child { margin-bottom: 0; }
+  .aller-maintenant { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 15; background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+
+  /* --- Accueil --- */
+  .maintenant-carte { display: block; background: var(--accent); color: #fff; border-radius: 14px; padding: 14px 16px; margin: 4px 0 18px; text-decoration: none; }
+  .maintenant-carte .pastille { background: rgba(255,255,255,.22); }
+  .maintenant-carte.calme { background: var(--carte); color: var(--texte); border: 1px solid var(--trait); }
+  .maintenant-carte.calme .pastille { background: var(--accent); }
+  .maintenant-carte b { display: block; font: 600 18px/1.25 Fraunces, Georgia, serif; margin: 8px 0 2px; }
+  .maintenant-carte small { opacity: .85; }
+  .jour-lien { display: grid; grid-template-columns: 62px 1fr auto; gap: 8px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--trait); text-decoration: none; color: var(--texte); font-size: 15px; }
+  .jour-lien:last-child { border-bottom: 0; padding-bottom: 0; }
+  .jour-lien b { color: var(--accent); }
+  .jour-lien small { color: var(--doux); font-size: 12.5px; }
+  .checks { display: grid; gap: 10px; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; cursor: pointer; }
+  .check input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--vert); flex: none; }
+  .check input:checked + span { color: var(--doux); text-decoration: line-through; }
+  .petit { font-size: 13.5px; color: var(--doux); }
+  .bouton:disabled { opacity: .5; }
+  .credits summary { cursor: pointer; font-weight: 600; font-family: Fraunces, Georgia, serif; font-size: 18px; }
+  .credits ul { font-size: 12px; padding-left: 18px; margin: 8px 0 0; }
+  .credits li { margin-bottom: 3px; overflow-wrap: anywhere; }
+
+  /* --- Manger --- */
+  .gammes { display: grid; gap: 10px; margin-bottom: 14px; }
+  #filtres-manger { scroll-margin-top: 64px; }
+  @media (min-width: 640px) { .gammes { grid-template-columns: repeat(3, 1fr); } }
+  .gamme-carte { text-align: left; font: inherit; color: inherit; background: var(--carte); border: 1px solid var(--trait); border-radius: 14px; padding: 14px; cursor: pointer; box-shadow: var(--ombre); display: flex; flex-direction: column; gap: 4px; }
+  .gamme-carte b { font: 600 19px/1.2 Fraunces, Georgia, serif; }
+  .gamme-carte small { color: var(--doux); font-size: 13.5px; }
+  .gamme-carte .tops { font-size: 13px; color: var(--accent); font-weight: 600; margin-top: 4px; }
+  .gamme-carte .gamme { align-self: flex-start; }
+  .gamme-carte[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-doux); }
+  .resto .quand { color: var(--accent); font-weight: 600; }
+  .resto h3 { margin: 6px 0 2px; }
+  .astuce { font-size: 14px; background: var(--or-doux); border-radius: 10px; padding: 8px 12px; }
+  .commander { margin-top: 0; }
+  .commander li { margin-bottom: 3px; }
+  .plats { display: grid; gap: 16px; }
+  .plat h3 { font: 600 17px/1.2 Fraunces, Georgia, serif; margin: 0 0 4px; }
+  .plat p { margin: 0 0 8px; font-size: 14.5px; }
+
+  /* --- Lieux (liste) --- */
+  .item.avec-photo { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center; }
+  .item img { width: 72px; height: 72px; object-fit: cover; border-radius: 10px; background: var(--trait); }
+
+  /* --- Guide de visite (dans la fiche) --- */
+  .salle { display: grid; grid-template-columns: 28px 1fr; gap: 10px; margin: 18px 0; }
+  .salle-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+  .salle-nom { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+  .salle h5 { font: 600 19px/1.2 Fraunces, Georgia, serif; margin: 2px 0 8px; }
+  .oeuvre { margin: 8px 0 16px; padding-bottom: 14px; border-bottom: 1px solid var(--trait); }
+  .oeuvre:last-child { border-bottom: 0; }
+  .oeuvre-texte b { font-weight: 600; font-size: 15.5px; }
+  .oeuvre-texte .auteur { display: block; color: var(--doux); font-size: 13px; }
+  .oeuvre-texte p { margin: 4px 0 0; font-size: 15px; }
+
+  @media print { nav.onglets, .outils, .choisir, .aller-maintenant { display: none; } .page[hidden] { display: block; } details { display: block; } }
 </style>
 </head>
 <body>
