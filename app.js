@@ -146,28 +146,41 @@
       if (mo) momentPrec = mo;
       const a = e.aller;
       const allerHtml = a ? `<div class="aller"><div class="aller-haut"><span>🚶 <b>${esc(a.duree)}</b></span><a class="bouton petit-btn" href="${aPied(a.vers)}" target="_blank" rel="noopener">Itinéraire à pied</a></div><div class="via">${esc(a.via)}</div></div>` : "";
-      const boutons = (e.lieu ? btnLieu(e.lieu) : "") + (e.resto && !e.repas ? btnResto(e.resto) : "");
-      const regarder = e.regarder && e.regarder.length ? `<div class="sous-titre">👀 ${a ? "En chemin et sur place" : "À regarder"}</div><ul class="regards">${e.regarder.map(carteRegarder).join("")}</ul>` : "";
+      const L = e.lieu && F.lieux[e.lieu];
+      const carteGuide = L ? (L.guide
+        ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}</small></span><span class="cg-fl">›</span></button>`
+        : `<button class="carte-guide fiche" data-lieu="${e.lieu}"><span class="cg-ic">📖</span><span><b>Fiche du lieu</b><small>Histoires, horaires, prix, liens</small></span><span class="cg-fl">›</span></button>`) : "";
+      const boutons = e.resto && !e.repas ? btnResto(e.resto) : "";
+      const tousChemin = e.type === "balade" || e.type === "pause";
+      const rChemin = (e.regarder || []).filter((r) => tousChemin || r.chemin);
+      const rPlace = (e.regarder || []).filter((r) => !(tousChemin || r.chemin));
+      const listeChemin = rChemin.length ? `<ul class="regards">${rChemin.map(carteRegarder).join("")}</ul>` : "";
+      const listePlace = rPlace.length ? `<ul class="regards">${rPlace.map(carteRegarder).join("")}</ul>` : "";
+      const regarder = (listeChemin ? `<div class="sous-titre">🚶 En chemin</div>${listeChemin}` : "") + (listePlace ? `<div class="sous-titre">📍 Sur place</div>${listePlace}` : "");
       const detours = e.detours && e.detours.length ? `<div class="sous-titre">↪ Petits détours</div><ul class="detours">${e.detours.map((d) => `<li><b>${esc(d.titre)}</b> <span class="duree">${esc(d.duree || "")}</span><p>${d.texte}</p>${d.lieu ? `<div class="actions">${btnLieu(d.lieu, F.lieux[d.lieu] && F.lieux[d.lieu].nom)}</div>` : ""}</li>`).join("")}</ul>` : "";
       const repas = e.repas && e.repas.length ? `<div class="repas">${e.repas.map(choixRepas).join("")}</div>` : "";
       const nVoir = (e.regarder || []).length + (e.detours || []).length;
+      const nChemin = rChemin.length + (e.detours || []).length;
       if (!princ) {
-        const resume = `<button class="route-resume" aria-expanded="false"><span>🚶 ${esc(e.heure)} · ${esc(e.titre)}</span><small>${nVoir ? nVoir + " à voir en route" : "en route"}${a ? " · " + esc(a.duree) : ""} ▸</small></button>`;
+        const resume = `<button class="route-resume" aria-expanded="false"><span>🚶 ${esc(e.heure)} · ${esc(e.titre)}</span><small>${nVoir ? nVoir + " à voir en chemin" : "en chemin"}${a ? " · " + esc(a.duree) : ""} ▸</small></button>`;
         return `${enTete}<div class="etape route type-${e.type || "balade"} ${i === ici ? "maintenant" : ""}" id="${j.id}-${i}">${resume}<div class="route-corps">
         ${allerHtml}
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
         <h2>${esc(e.titre)}</h2>
+        ${carteGuide}
         <p class="texte">${e.texte || ""}</p>
         ${boutons ? `<div class="actions">${boutons}</div>` : ""}
         ${repas}${regarder}${detours}
         ${blocAutres(e.autres, "Autres options pour ce créneau")}
       </div></div>`;
       }
-      const chemin = allerHtml || regarder || detours ? `<details class="en-chemin"><summary>👀 Sur le chemin et sur place${nVoir ? " (" + nVoir + ")" : ""}</summary>${allerHtml}${regarder}${detours}</details>` : "";
+      const chemin = (allerHtml || listeChemin || detours ? `<details class="bloc-repli chemin"><summary><span>🚶 Pour y aller</span><small>${a ? esc(a.duree) : ""}${nChemin ? (a ? " · " : "") + nChemin + " à voir en chemin" : ""}</small></summary>${allerHtml}${listeChemin}${detours}</details>` : "")
+        + (listePlace ? `<details class="bloc-repli place" open><summary><span>📍 Sur place : à ne pas manquer</span><small>${rPlace.length}</small></summary>${listePlace}</details>` : "");
       return `${enTete}<div class="etape principale type-${e.type || "balade"} ${e.resa ? "reserve" : ""} ${i === ici ? "maintenant" : ""}" id="${j.id}-${i}">
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
         <h2>${esc(e.titre)}</h2>
         ${e.resa ? `<div class="resa-bandeau ${e.resaTodo ? "todo" : ""}">${e.resaTodo ? "🟡" : "✅"} ${esc(e.resa)}</div>` : ""}
+        ${carteGuide}
         <p class="texte">${e.texte || ""}</p>
         ${boutons ? `<div class="actions">${boutons}</div>` : ""}
         ${repas}${chemin}
@@ -297,7 +310,7 @@
   function majDetail(on) {
     document.body.classList.toggle("detail", on); memo.ecrire("detail", on);
     $$(".btn-detail").forEach((b) => { b.setAttribute("aria-pressed", on); b.textContent = on ? "🔎 Vue essentielle" : "🔎 Tout le détail"; });
-    $$("details.en-chemin").forEach((d) => { d.open = on; });
+    $$("details.bloc-repli.chemin").forEach((d) => { d.open = on; });
     $$(".etape.route").forEach((et) => { et.classList.remove("ouvert"); const b = $(".route-resume", et); if (b) b.setAttribute("aria-expanded", "false"); });
   }
   majDetail(memo.lire("detail", false));

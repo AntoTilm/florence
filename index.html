@@ -204,9 +204,26 @@
   body:not(.detail) .etape.route.ouvert .route-corps { margin-top: 12px; }
   body:not(.detail) .etape.route .heure::before { width: 8px; height: 8px; left: -22px; top: 5px; }
   body:not(.detail) .etape.route::before { opacity: .6; }
-  details.en-chemin { margin-top: 12px; }
-  details.en-chemin > summary { cursor: pointer; font-size: 14px; color: var(--accent); font-weight: 600; padding: 6px 0; }
-  details.en-chemin[open] > summary { margin-bottom: 6px; }
+  .carte-guide { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; color: var(--texte); background: var(--accent); border: 0; border-radius: 14px; padding: 13px 16px; margin: 6px 0 12px; cursor: pointer; box-shadow: var(--ombre); }
+  .carte-guide, .carte-guide b, .carte-guide small, .carte-guide .cg-fl { color: #fff; }
+  .carte-guide small { opacity: .9; }
+  .carte-guide.fiche { background: var(--carte); border: 1.5px solid var(--accent); }
+  .carte-guide.fiche small { color: var(--doux); opacity: 1; }
+  .carte-guide.fiche .cg-fl { color: var(--accent); }
+  .carte-guide .cg-ic { font-size: 26px; }
+  .carte-guide b { display: block; font-size: 16.5px; }
+  .carte-guide.fiche b { color: var(--texte); }
+  .carte-guide small { display: block; font-size: 13px; }
+  .carte-guide .cg-fl { margin-left: auto; font-size: 26px; }
+  details.bloc-repli { margin-top: 10px; border: 1px solid var(--trait); border-radius: 14px; padding: 0 12px; background: color-mix(in srgb, var(--carte) 55%, transparent); }
+  details.bloc-repli > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 11px 0; font-weight: 600; font-size: 14.5px; }
+  details.bloc-repli > summary::-webkit-details-marker { display: none; }
+  details.bloc-repli > summary::after { content: "▸"; color: var(--accent); margin-left: 6px; }
+  details.bloc-repli[open] > summary::after { content: "▾"; }
+  details.bloc-repli > summary small { margin-left: auto; color: var(--doux); font-weight: 400; font-size: 13px; }
+  details.bloc-repli[open] { padding-bottom: 12px; }
+  details.bloc-repli.place > summary span { color: var(--accent); }
+  details.bloc-repli .sous-titre:first-child, details.bloc-repli > .aller { margin-top: 0; }
   /* --- Photos --- */
   .photo { display: block; border-radius: 10px; overflow: hidden; background: var(--trait); }
   .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
