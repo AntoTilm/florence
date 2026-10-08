@@ -162,7 +162,7 @@
       const nVoir = (e.regarder || []).length + (e.detours || []).length;
       const nChemin = rChemin.length + (e.detours || []).length;
       if (!princ) {
-        const resume = `<button class="route-resume" aria-expanded="false"><span>🚶 ${esc(e.heure)} · ${esc(e.titre)}</span><small>${nVoir ? nVoir + " à voir en chemin" : "en chemin"}${a ? " · " + esc(a.duree) : ""} ▸</small></button>`;
+        const resume = `<button class="route-resume" aria-expanded="false"><span>🚶 ${esc(e.heure)} · ${esc(e.titre)}</span><small data-ferme="${esc((nVoir ? nVoir + " à voir en chemin" : "en chemin") + (a ? " · " + a.duree : "") + " ▸")}">${nVoir ? nVoir + " à voir en chemin" : "en chemin"}${a ? " · " + esc(a.duree) : ""} ▸</small></button>`;
         return `${enTete}<div class="etape route type-${e.type || "balade"} ${i === ici ? "maintenant" : ""}" id="${j.id}-${i}">${resume}<div class="route-corps">
         ${allerHtml}
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
@@ -291,7 +291,7 @@
     const t = e.target.closest("[data-lieu], [data-resto], .btn-pluie, .btn-detail, .route-resume, #btn-photos, [data-saut]");
     if (!t) return;
     if (t.matches(".btn-detail")) { majDetail(!document.body.classList.contains("detail")); return; }
-    if (t.matches(".route-resume")) { const et = t.closest(".etape"); const on = !et.classList.contains("ouvert"); et.classList.toggle("ouvert", on); t.setAttribute("aria-expanded", on); return; }
+    if (t.matches(".route-resume")) { const et = t.closest(".etape"); const on = !et.classList.contains("ouvert"); et.classList.toggle("ouvert", on); t.setAttribute("aria-expanded", on); const sm = $("small", t); sm.textContent = on ? "▾ Replier" : sm.dataset.ferme; return; }
     if (t.matches(".btn-pluie")) { majPluie(!document.body.classList.contains("pluie")); return; }
     if (t.id === "btn-photos") { telechargerPhotos(t); return; }
     if (t.dataset.saut) { e.preventDefault(); const cible = document.getElementById(t.dataset.saut); if (cible) cible.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
@@ -313,7 +313,7 @@
     document.body.classList.toggle("detail", on); memo.ecrire("detail", on);
     $$(".btn-detail").forEach((b) => { b.setAttribute("aria-pressed", on); b.textContent = on ? "🔎 Vue essentielle" : "🔎 Tout le détail"; });
     $$("details.bloc-repli.chemin").forEach((d) => { d.open = on; });
-    $$(".etape.route").forEach((et) => { et.classList.remove("ouvert"); const b = $(".route-resume", et); if (b) b.setAttribute("aria-expanded", "false"); });
+    $$(".etape.route").forEach((et) => { et.classList.remove("ouvert"); const b = $(".route-resume", et); if (b) { b.setAttribute("aria-expanded", "false"); const sm = $("small", b); if (sm) sm.textContent = sm.dataset.ferme; } });
   }
   majDetail(memo.lire("detail", false));
 

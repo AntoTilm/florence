@@ -199,16 +199,14 @@
   body:not(.detail) .etape.route { margin-bottom: 14px; }
   body:not(.detail) .etape.route .route-resume { display: block; }
   body:not(.detail) .etape.route:not(.ouvert):not(.maintenant) .route-corps { display: none; }
-  body:not(.detail) .etape.route.ouvert .route-resume small { visibility: hidden; }
   body:not(.detail) .etape.route .route-resume { margin-bottom: 0; }
-  body:not(.detail) .etape.route.ouvert .route-corps { margin-top: 12px; }
   body:not(.detail) .etape.route .heure::before { width: 8px; height: 8px; left: -22px; top: 5px; }
   body:not(.detail) .etape.route::before { opacity: .6; }
   .etape .a-voir { margin: -4px 0 10px; font-size: 14.5px; color: var(--doux); font-style: italic; }
-  .carte-guide { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; color: var(--texte); background: var(--accent); border: 0; border-radius: 14px; padding: 13px 16px; margin: 6px 0 12px; cursor: pointer; box-shadow: var(--ombre); }
-  .carte-guide, .carte-guide b, .carte-guide small, .carte-guide .cg-fl { color: #fff; }
-  .carte-guide small { opacity: .9; }
-  .carte-guide.fiche { background: var(--carte); border: 1.5px solid var(--accent); }
+  .carte-guide { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; color: var(--texte); background: var(--accent-doux); border: 1.5px solid var(--accent); border-radius: 14px; padding: 11px 14px; margin: 6px 0 12px; cursor: pointer; box-shadow: var(--ombre); }
+  .carte-guide b, .carte-guide .cg-fl { color: var(--accent); }
+  .carte-guide small { color: var(--texte); opacity: .75; }
+  .carte-guide.fiche { background: var(--carte); border: 1px solid var(--trait); }
   .carte-guide.fiche small { color: var(--doux); opacity: 1; }
   .carte-guide.fiche .cg-fl { color: var(--accent); }
   .carte-guide .cg-ic { font-size: 26px; }
@@ -225,6 +223,15 @@
   details.bloc-repli[open] { padding-bottom: 12px; }
   details.bloc-repli.place > summary span { color: var(--accent); }
   details.bloc-repli .sous-titre:first-child, details.bloc-repli > .aller { margin-top: 0; }
+
+  /* Étape « en chemin » dépliée : panneau décalé à droite, avec sa propre ligne */
+  body:not(.detail) .etape.route.ouvert .route-resume { border-style: solid; border-color: var(--accent); background: var(--accent-doux); border-radius: 12px 12px 12px 0; }
+  body:not(.detail) .etape.route.ouvert .route-resume small { visibility: visible; }
+  body:not(.detail) .etape.route.ouvert .route-corps { margin: 0 0 0 18px; padding: 14px 0 6px 18px; border-left: 3px solid var(--accent); position: relative; animation: deplier .25s ease-out; }
+  body:not(.detail) .etape.route.ouvert .route-corps::after { content: ""; position: absolute; left: -9px; bottom: -4px; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); }
+  body:not(.detail) .etape.route .route-corps > .heure, body:not(.detail) .etape.route .route-corps > h2 { display: none; }
+  details.bloc-repli[open] > :not(summary) { margin-left: 4px; padding-left: 12px; border-left: 3px solid var(--accent-doux); }
+  @keyframes deplier { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
   /* --- Photos --- */
   .photo { display: block; border-radius: 10px; overflow: hidden; background: var(--trait); }
   .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
