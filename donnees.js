@@ -98,7 +98,7 @@ window.FLO = {
           ]
         },
         {
-          heure: "~22h45", titre: "La boucle des ponts, de nuit", type: "balade",
+          heure: "~22h45", titre: "La boucle des ponts, de nuit", type: "balade", principal: true,
           aller: { duree: "40–50 min en flânant", via: "Piazza della Signoria → cour des Offices → lungarno → Ponte Vecchio → via Por Santa Maria → borgo Santi Apostoli → Ponte Santa Trinita → lungarno → via dei Neri", vers: "Ponte Santa Trinita, Firenze" },
           texte: "La ville est presque vide, les boutiques du Ponte Vecchio sont fermées : c'est le moment. Cette boucle passe par un meurtre qui a coupé Florence en deux pendant un siècle, un pont repêché pierre par pierre dans le fleuve, et la plus belle vue sur le Ponte Vecchio.",
           regarder: [
