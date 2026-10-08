@@ -134,9 +134,9 @@ window.FLO = {
           ]
         },
         {
-          heure: "8h15", titre: "Le David (Galleria dell'Accademia)", type: "visite", lieu: "accademia",
+          heure: "8h15", titre: "Le David, les Prisonniers de Michel-Ange", type: "visite", lieu: "accademia",
           resa: "Accademia · entrée 8h15 — réservé (B-ticket 24288201)",
-          texte: "Arrivez à 8h05 avec les billets sur le téléphone. La stratégie : <b>filez directement au David</b> sans vous arrêter, pendant que la salle est presque vide, puis revenez sur vos pas pour les Prisonniers, les plâtres et les instruments. Compter 1h–1h15. Le guide salle par salle est dans la fiche (bouton ci-dessous).",
+          texte: "Arrivez à 8h05 avec les billets sur le téléphone. La stratégie : <b>filez directement au David</b> sans vous arrêter, pendant que la salle est presque vide, puis revenez sur vos pas pour les Prisonniers, les plâtres et les instruments. Compter 1h–1h15.",
           regarder: [
             { titre: "Le David, 5,17 m", img: "david", texte: "Pas le vainqueur : l'<b>instant d'avant</b> le combat. Sourcils froncés, fronde sur l'épaule gauche, pierre cachée dans la main droite. La tête et les mains sont volontairement trop grandes : la statue devait être hissée sur la cathédrale et vue d'en bas." },
             { titre: "Les Prisonniers qui sortent du marbre", img: "atlas", texte: "Dans la galerie qui mène au David, quatre géants inachevés semblent se battre pour sortir de la pierre. Ils étaient prévus pour le tombeau du pape Jules II à Rome, qui ne fut jamais terminé." },
@@ -170,7 +170,7 @@ window.FLO = {
           ]
         },
         {
-          heure: "13h45", titre: "La Galerie des Offices", type: "visite", lieu: "offices",
+          heure: "13h45", titre: "Botticelli, Michel-Ange, Léonard, Caravage", type: "visite", lieu: "offices",
           resa: "Offices · entrée 13h45 — réservé (CoopCulture 6R325YDT)",
           texte: "Présentez-vous vers 13h30 à l'entrée des billets réservés, PDF sur le téléphone. Compter 2h30–3h. Depuis juin 2026, la <b>Naissance de Vénus</b> et le <b>Printemps</b> de Botticelli se font face pour la première fois, dans des salles rénovées. Le parcours salle par salle, avec les photos de ce qu'il faut voir, est dans le guide.",
           regarder: [

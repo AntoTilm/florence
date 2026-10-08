@@ -175,10 +175,12 @@
       </div></div>`;
       }
       const chemin = (allerHtml || listeChemin || detours ? `<details class="bloc-repli chemin"><summary><span>🚶 Pour y aller</span><small>${a ? esc(a.duree) : ""}${nChemin ? (a ? " · " : "") + nChemin + " à voir en chemin" : ""}</small></summary>${allerHtml}${listeChemin}${detours}</details>` : "")
-        + (listePlace ? `<details class="bloc-repli place" open><summary><span>📍 Sur place : à ne pas manquer</span><small>${rPlace.length}</small></summary>${listePlace}</details>` : "");
+        + (listePlace ? `<details class="bloc-repli place" open><summary><span>${L && /musée/i.test(L.theme) && e.type === "visite" ? "🏛 Dans le musée" : "📍 Sur place"} : à ne pas manquer</span><small>${rPlace.length}</small></summary>${listePlace}</details>` : "");
+      const nomLieu = L && e.type === "visite" ? L.nom.replace(/\s+—.*$/, "") : null;
+      const titreHtml = nomLieu ? `<h2>${esc(nomLieu)}</h2><div class="a-voir">🎯 ${esc(e.titre)}</div>` : `<h2>${esc(e.titre)}</h2>`;
       return `${enTete}<div class="etape principale type-${e.type || "balade"} ${e.resa ? "reserve" : ""} ${i === ici ? "maintenant" : ""}" id="${j.id}-${i}">
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
-        <h2>${esc(e.titre)}</h2>
+        ${titreHtml}
         ${e.resa ? `<div class="resa-bandeau ${e.resaTodo ? "todo" : ""}">${e.resaTodo ? "🟡" : "✅"} ${esc(e.resa)}</div>` : ""}
         ${carteGuide}
         <p class="texte">${e.texte || ""}</p>
