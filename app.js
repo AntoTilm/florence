@@ -19,6 +19,53 @@
   const moment = (h) => { const m = minutes(h); return m === null ? null : MOMENTS.find((x) => m < x[0])[1]; };
   const restoParId = Object.fromEntries(F.restos.map((r) => [r.id, r]));
 
+  /* ---------------- Lexique (lexique.js) : mots cliquables dans les textes ---------------- */
+  const LEX = F.lexique || {};
+  const motsLex = [];
+  Object.entries(LEX).forEach(([k, d]) => (d.mots || []).forEach((m) => motsLex.push([m, k])));
+  motsLex.sort((a, b) => b[0].length - a[0].length);
+  const cleDuMot = Object.fromEntries(motsLex.slice().reverse());
+  const reLex = motsLex.length ? new RegExp("(^|[^\\p{L}\\p{N}])(" + motsLex.map((m) => m[0].replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")(?![\\p{L}\\p{N}])", "gu") : null;
+  const LEX_EXCLU = "a,button,h1,h2,h3,h4,h5,summary,label,dt,.etiquette,.heure,.terme,.salle-nom,.auteur,input,textarea";
+  const LEX_BLOCS = "p,li,dd,.via";
+  const LEX_PORTEE = ".etape,.salle,.option,.plat,.resa,.resto,#feuille-corps,#bulle-corps,.page";
+  /* Première apparition de chaque mot, par carte : soulignée en pointillé, ouvre la bulle. */
+  function lierMots(racine, sauf) {
+    if (!reLex || !racine) return;
+    const vus = new Map();
+    const walker = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT);
+    const noeuds = [];
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      const p = n.parentElement;
+      if (!p || p.closest(LEX_EXCLU) || !p.closest(LEX_BLOCS)) continue;
+      reLex.lastIndex = 0;
+      if (reLex.test(n.nodeValue)) noeuds.push(n);
+    }
+    noeuds.forEach((n) => {
+      const portee = n.parentElement.closest(LEX_PORTEE) || racine;
+      if (!vus.has(portee)) vus.set(portee, new Set(sauf ? [sauf] : []));
+      const deja = vus.get(portee);
+      const txt = n.nodeValue;
+      const frag = document.createDocumentFragment();
+      let pos = 0, change = false;
+      reLex.lastIndex = 0;
+      for (const m of txt.matchAll(reLex)) {
+        const cle = cleDuMot[m[2]];
+        if (!cle || deja.has(cle)) continue;
+        deja.add(cle);
+        const debut = m.index + m[1].length;
+        frag.append(txt.slice(pos, debut));
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "terme"; b.dataset.terme = cle; b.textContent = m[2];
+        frag.append(b);
+        pos = debut + m[2].length; change = true;
+      }
+      if (!change) return;
+      frag.append(txt.slice(pos));
+      n.replaceWith(frag);
+    });
+  }
+
   /* Petite mémoire locale (check-list, mode pluie). Facultative : le site marche sans. */
   const memo = {
     lire(k, d) { try { const v = localStorage.getItem("flo:" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -53,6 +100,7 @@
   /* ---------------- Pages ---------------- */
   const THEMES = [...new Set(Object.values(F.lieux).map((l) => l.theme))];
   $("#contenu").innerHTML = [pageAccueil(), ...F.jours.map(pageJour), pageLieux(), pageManger()].join("");
+  lierMots($("#contenu"));
   $("#pied").innerHTML = `Infos vérifiées le ${esc(F.maj)} · à re-vérifier la veille · photos Wikimedia Commons · <a href="#accueil">haut</a>`;
 
   function etiquettes(tags, reco) {
@@ -202,13 +250,14 @@
 
   function pageLieux() {
     return `<section class="page" id="p-lieux"><p class="surtitre">${Object.keys(F.lieux).length} fiches · ${Object.values(F.lieux).filter((l) => l.guide).length} guides de visite</p><h1>Lieux & guides</h1>
-      <p class="intro">Pourquoi y aller, les histoires, ce qu'il faut regarder, et pour les musées un guide salle par salle avec les photos des pièces maîtresses (🎧).</p>
+      <p class="intro">Pourquoi y aller, les histoires, ce qu'il faut regarder, et pour les musées un guide salle par salle avec les photos des pièces maîtresses (🎧). Partout sur le site, les mots <span class="terme-demo">soulignés en pointillé</span> s'ouvrent d'un tap : qui, quoi, l'histoire, et un lien pour en savoir plus.</p>
       <input class="recherche" type="search" id="recherche-lieux" placeholder="Chercher un lieu, un nom (Médicis, Galilée, Botticelli…)" aria-label="Chercher">
       <div class="filtres" id="filtres-lieux"><button aria-pressed="true" data-theme="">Tous</button><button aria-pressed="false" data-theme="guide">🎧 Avec guide</button>${THEMES.map((t) => `<button aria-pressed="false" data-theme="${esc(t)}">${esc(t)}</button>`).join("")}</div>
       <div class="liste" id="liste-lieux">${Object.entries(F.lieux).map(([id, l]) => {
         const texte = [l.nom, l.resume, l.pourquoi].concat(l.histoires || []).concat(l.guide ? l.guide.etapes.flatMap((s) => s.oeuvres.map((o) => o.nom + " " + (o.auteur || ""))) : []).join(" ").toLowerCase().replace(/<[^>]+>/g, "");
         return `<button class="item ${l.img ? "avec-photo" : ""}" data-lieu="${id}" data-theme="${esc(l.theme)}" data-guide="${l.guide ? 1 : 0}" data-texte="${esc(texte)}">${l.img && F.photos[l.img] ? `<img loading="lazy" src="${F.photos[l.img].u}" alt="" onerror="this.remove()">` : ""}<div><div class="meta">${esc(l.theme)} · ${esc(l.zone)}${l.guide ? " · 🎧 guide" : ""}</div><h3>${esc(l.nom)}</h3><p>${esc(l.resume)}</p></div></button>`;
       }).join("")}</div>
+      ${Object.keys(LEX).length ? `<details class="bloc-repli lexique"><summary><span>📖 Petit lexique : personnages, familles, histoires</span><small>${Object.keys(LEX).length}</small></summary><div class="lexique-liste">${Object.entries(LEX).sort((a, b) => a[1].titre.localeCompare(b[1].titre, "fr")).map(([k, d]) => `<button class="lex-item" data-terme="${k}"><b>${esc(d.titre)}</b><small>${esc(d.sous || "")}</small></button>`).join("")}</div></details>` : ""}
     </section>`;
   }
 
@@ -244,12 +293,28 @@
   /* ---------------- Fiches (feuille modale) ---------------- */
   const feuille = $("#feuille");
   function ouvrir(meta, titre, corps) {
-    $("#feuille-meta").textContent = meta; $("#feuille-titre").textContent = titre; $("#feuille-corps").innerHTML = corps;
+    $("#feuille-meta").textContent = meta; $("#feuille-titre").textContent = titre; $("#feuille-corps").innerHTML = corps; lierMots($("#feuille-corps"));
     if (!feuille.open) { feuille.showModal(); history.pushState({ feuille: 1 }, ""); }
     feuille.scrollTop = 0; $("#feuille-corps").scrollTop = 0;
   }
   function fermer() { if (feuille.open) { if (history.state && history.state.feuille) history.back(); else feuille.close(); } }
-  window.addEventListener("popstate", () => { if (feuille.open) feuille.close(); });
+  window.addEventListener("popstate", () => { if (bulle.open) bulle.close(); if (feuille.open) feuille.close(); });
+
+  /* ---------------- Bulle du lexique ---------------- */
+  const bulle = $("#bulle");
+  function ouvrirTerme(k) {
+    const d = LEX[k]; if (!d) return;
+    $("#bulle-sous").textContent = d.sous || "";
+    $("#bulle-titre").textContent = d.titre;
+    const fiche = d.lieu && F.lieux[d.lieu] ? `<button class="lien-fiche" data-lieu="${d.lieu}">Fiche du site : ${esc(F.lieux[d.lieu].nom)}</button>` : "";
+    const corps = $("#bulle-corps");
+    corps.innerHTML = `<p>${d.texte}</p><div class="bulle-liens">${(d.liens || []).map((l) => `<a href="${l.url}" target="_blank" rel="noopener">En savoir plus · ${esc(l.texte)} ↗</a>`).join("")}${fiche}</div>`;
+    lierMots(corps, k);
+    if (!bulle.open) bulle.showModal();
+    corps.scrollTop = 0;
+  }
+  $("#bulle-fermer").addEventListener("click", () => bulle.close());
+  bulle.addEventListener("click", (e) => { if (e.target === bulle) bulle.close(); });
   $("#fermer").addEventListener("click", fermer);
   feuille.addEventListener("cancel", (e) => { e.preventDefault(); fermer(); });
   feuille.addEventListener("click", (e) => { if (e.target === feuille) fermer(); });
@@ -260,6 +325,7 @@
     const liens = [];
     (l.liens || []).forEach((x) => liens.push(`<a class="resa-lien" href="${x.url}" target="_blank" rel="noopener"><span class="ic">🎟</span>${esc(x.texte)}</a>`));
     [l.video, l.video2].filter(Boolean).forEach((v) => liens.push(`<a href="${v.url}" target="_blank" rel="noopener"><span class="ic">▶️</span>${esc(v.titre)}</a>`));
+    ((F.aLire || {})[id] || []).forEach((x) => liens.push(`<a href="${x.url}" target="_blank" rel="noopener"><span class="ic">📖</span>${esc(/^Wikipédia/.test(x.texte) ? "En savoir plus sur " + x.texte : x.texte)}</a>`));
     liens.push(`<a href="${aPied(l.maps || l.nom)}" target="_blank" rel="noopener"><span class="ic">🚶</span>Itinéraire à pied</a>`);
     liens.push(`<a href="${maps(l.maps || l.nom)}" target="_blank" rel="noopener"><span class="ic">📍</span>Ouvrir dans Google Maps</a>`);
     const g = l.guide;
@@ -288,6 +354,9 @@
 
   /* ---------------- Interactions ---------------- */
   document.addEventListener("click", (e) => {
+    const tm = e.target.closest("[data-terme]");
+    if (tm) { e.preventDefault(); ouvrirTerme(tm.dataset.terme); return; }
+    if (bulle.open && e.target.closest("#bulle [data-lieu]")) bulle.close();
     const t = e.target.closest("[data-lieu], [data-resto], .btn-pluie, .btn-detail, .route-resume, #btn-photos, [data-saut]");
     if (!t) return;
     if (t.matches(".btn-detail")) { majDetail(!document.body.classList.contains("detail")); return; }

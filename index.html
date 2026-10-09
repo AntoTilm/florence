@@ -158,6 +158,28 @@
   .liens a span.ic { font-size: 18px; }
   .liens a.resa-lien { border-color: var(--or); }
 
+  /* --- Lexique : mots cliquables et bulle --- */
+  .terme { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; display: inline; text-align: inherit; cursor: pointer; text-decoration: underline dotted var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; -webkit-tap-highlight-color: transparent; }
+  .terme:hover, .terme:focus-visible { color: var(--accent); }
+  .terme-demo { text-decoration: underline dotted var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  dialog.bulle { border: 0; padding: 0; margin: auto auto calc(12px + env(safe-area-inset-bottom)); width: calc(100% - 24px); max-width: 540px; max-height: 72vh; border-radius: 16px; background: var(--carte); color: var(--texte); box-shadow: 0 12px 40px rgba(20,14,10,.3); display: none; flex-direction: column; }
+  dialog.bulle[open] { display: flex; }
+  @media (min-width: 800px) { dialog.bulle { margin: auto; } }
+  dialog.bulle::backdrop { background: rgba(20,14,10,.3); }
+  .bulle-tete { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px 6px; }
+  .bulle-tete > div { flex: 1; }
+  .bulle-sous { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+  .bulle-tete h3 { margin: 2px 0 0; font-size: 21px; }
+  #bulle-corps { padding: 0 16px calc(16px + env(safe-area-inset-bottom)); overflow-y: auto; font-size: 15.5px; line-height: 1.55; }
+  #bulle-corps p { margin: 6px 0 0; }
+  .bulle-liens { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .bulle-liens a { font-size: 14px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--trait); background: var(--fond); color: var(--texte); text-decoration: none; }
+  .lexique .lexique-liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; padding: 6px 0 4px; }
+  .lex-item { font: inherit; text-align: left; padding: 9px 12px; border-radius: 12px; border: 1px solid var(--trait); background: var(--carte); color: var(--texte); cursor: pointer; }
+  .lex-item b { display: block; font-size: 15px; }
+  .lex-item small { color: var(--doux); font-size: 12.5px; }
+  details.lexique { margin-top: 18px; }
+
   footer { color: var(--doux); font-size: 13px; text-align: center; padding: 10px 16px 40px; }
   @media (min-width: 640px) { .options { grid-template-columns: 1fr 1fr; } .options .option:only-child { grid-column: 1 / -1; } }
 
@@ -342,7 +364,13 @@
   <div class="corps" id="feuille-corps"></div>
 </dialog>
 
+<dialog class="bulle" id="bulle" aria-labelledby="bulle-titre">
+  <div class="bulle-tete"><div><div class="bulle-sous" id="bulle-sous"></div><h3 id="bulle-titre"></h3></div><button class="fermer" id="bulle-fermer" aria-label="Fermer">×</button></div>
+  <div id="bulle-corps"></div>
+</dialog>
+
 <script src="donnees.js"></script>
+<script src="lexique.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
