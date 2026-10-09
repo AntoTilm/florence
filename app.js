@@ -7,6 +7,7 @@
   const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const enc = encodeURIComponent;
   const maps = (q) => "https://www.google.com/maps/search/?api=1&query=" + enc(q);
+  const pin = (q) => q ? ` <a class="pin" href="${maps(q)}" target="_blank" rel="noopener" aria-label="Ouvrir dans Google Maps" title="Google Maps">📍</a>` : "";
   const aPied = (q) => "https://www.google.com/maps/dir/?api=1&destination=" + enc(q) + "&travelmode=walking";
   const parcoursMaps = (c) => "https://www.google.com/maps/dir/?api=1&origin=" + enc(c.depart) + "&destination=" + enc(c.arrivee) +
     (c.etapes && c.etapes.length ? "&waypoints=" + c.etapes.slice(0, 3).map(enc).join("%7C") : "") + "&travelmode=walking";
@@ -198,7 +199,7 @@
     return `<details class="autres ${pluie ? "a-pluie" : ""}"><summary>${esc(titre || "Autres options")} (${liste.length})${pluie ? " · ☔" : ""}</summary><div class="options">${liste.map(carteAutre).join("")}</div></details>`;
   }
   function carteRegarder(r) {
-    return `<li class="regard ${r.img ? "avec-photo" : ""}">${r.img ? photo(r.img, r.titre, "vignette") : ""}<div><b>${esc(r.titre)}</b><p>${r.texte}</p></div></li>`;
+    return `<li class="regard ${r.img ? "avec-photo" : ""}">${r.img ? photo(r.img, r.titre, "vignette") : ""}<div><b>${esc(r.titre)}</b>${pin(r.maps)}<p>${r.texte}</p></div></li>`;
   }
   function choixRepas(c) {
     const r = restoParId[c.resto]; if (!r) return "";
@@ -219,7 +220,7 @@
       const enTete = mo && mo !== momentPrec ? `<div class="moment">${esc(mo)}</div>` : "";
       if (mo) momentPrec = mo;
       const a = e.aller;
-      const allerHtml = a ? `<div class="aller"><div class="aller-haut"><span>🚶 <b>${esc(a.duree)}</b></span><a class="bouton petit-btn" href="${aPied(a.vers)}" target="_blank" rel="noopener">Itinéraire à pied</a></div><div class="via">${esc(a.via)}</div></div>` : "";
+      const allerHtml = a ? `<div class="aller"><div class="aller-haut"><span>🚶 <b>${esc(a.duree)}</b></span><a class="bouton petit-btn" href="${aPied(a.vers)}" target="_blank" rel="noopener">Itinéraire à pied</a></div><div class="via">${esc(a.via)}</div><div class="via">➜ ${esc(a.vers.replace(/, Firenze$/, ""))}${pin(a.vers)}</div></div>` : "";
       const L = e.lieu && F.lieux[e.lieu];
       const carteGuide = L ? (L.guide
         ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}${INCONT[e.lieu] && INCONT[e.lieu].noms.length ? " · ⭐ " + INCONT[e.lieu].noms.length + " à ne pas manquer" : ""}</small></span><span class="cg-fl">›</span></button>`
@@ -231,7 +232,7 @@
       const listeChemin = rChemin.length ? `<ul class="regards">${rChemin.map(carteRegarder).join("")}</ul>` : "";
       const listePlace = rPlace.length ? `<ul class="regards">${rPlace.map(carteRegarder).join("")}</ul>` : "";
       const regarder = (listeChemin ? `<div class="sous-titre">🚶 En chemin</div>${listeChemin}` : "") + (listePlace ? `<div class="sous-titre">📍 Sur place</div>${listePlace}` : "");
-      const detours = e.detours && e.detours.length ? `<div class="sous-titre">↪ Petits détours</div><ul class="detours">${e.detours.map((d) => `<li><b>${esc(d.titre)}</b> <span class="duree">${esc(d.duree || "")}</span><p>${d.texte}</p>${d.lieu ? `<div class="actions">${btnLieu(d.lieu, F.lieux[d.lieu] && F.lieux[d.lieu].nom)}</div>` : ""}</li>`).join("")}</ul>` : "";
+      const detours = e.detours && e.detours.length ? `<div class="sous-titre">↪ Petits détours</div><ul class="detours">${e.detours.map((d) => `<li><b>${esc(d.titre)}</b>${pin(d.maps)} <span class="duree">${esc(d.duree || "")}</span><p>${d.texte}</p>${d.lieu ? `<div class="actions">${btnLieu(d.lieu, F.lieux[d.lieu] && F.lieux[d.lieu].nom)}</div>` : ""}</li>`).join("")}</ul>` : "";
       const repas = e.repas && e.repas.length ? `<div class="repas">${e.repas.map(choixRepas).join("")}</div>` : "";
       const nVoir = (e.regarder || []).length + (e.detours || []).length;
       const nChemin = rChemin.length + (e.detours || []).length;
