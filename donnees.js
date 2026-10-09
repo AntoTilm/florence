@@ -13,11 +13,11 @@
        autres    : les autres options du créneau (tags "pluie" = plan B s'il pleut)
    - lieux : fiches détaillées ; guide = visite guidée salle par salle (musées)
    - restos : carnet d'adresses par gamme de prix ; plats : que goûter
-   Vérifications web : 6–7 octobre 2026. Re-vérifier les horaires la veille.
+   Vérifications web : 6–9 octobre 2026. Re-vérifier les horaires la veille.
    ===================================================================== */
 
 window.FLO = {
-  maj: "7 octobre 2026",
+  maj: "9 octobre 2026",
 
   voyage: {
     titre: "Florence",
@@ -41,6 +41,7 @@ window.FLO = {
     "Hôte prévenu : arrivée vers 21h, valises gardées mardi jusqu'à 15h",
     "Deux cartes sans contact pour le tram (une validation par carte), ou tickets au distributeur",
     "Un peu de liquide (marché, Da Rocco, lampredotto : souvent cash)",
+    "Une tenue « église » pour lundi : épaules et genoux couverts (Santa Croce, cathédrale, baptistère)",
     "Météo de lundi et mardi regardée (plans pluie prêts)",
     "Photos du site téléchargées pour le hors-ligne (bouton plus bas, en Wi-Fi)",
     "Site ajouté à l'écran d'accueil du téléphone"
@@ -48,13 +49,13 @@ window.FLO = {
 
   reservations: [
     { statut: "ok", titre: "Galleria dell'Accademia — le David", quand: "Dim 11 · entrée 8h15", detail: "Arriver vers 8h05, via Ricasoli 58–60. 2 billets nominatifs, 48 €. Commande B-ticket n° 24288201 (billets dans l'e-mail « Stampa@Casa »). Non remboursable.", lieu: "accademia" },
-    { statut: "ok", titre: "Galerie des Offices", quand: "Dim 11 · entrée 13h45", detail: "Sortie vers 16h30. 2 billets, 58 €. Code CoopCulture 6R325YDT (PDF par e-mail). Si les PDF n'arrivent pas : etickets@coopculture.it.", lieu: "offices" },
-    { statut: "todo", titre: "Giotto Pass — campanile + baptistère + musée + crypte", quand: "Lun 12 · créneau tour 16h30–17h", detail: "20 €/pers. Le créneau de la tour est fixe et non modifiable. Réserver dès que la météo de lundi est claire. Tour en restauration (échafaudage) : terrasse ouverte, vue un peu réduite.", lien: "https://tickets.duomo.firenze.it/en/", lienTexte: "Billetterie officielle du Duomo", lieu: "campanile" },
+    { statut: "ok", titre: "Galerie des Offices", quand: "Dim 11 · entrée 13h45", detail: "Sortie vers 16h30. 2 billets, 58 €. Code CoopCulture 6R325YDT (PDF par e-mail) : avec les PDF, entrée directe par la <b>Porte 1</b>, 10–15 min avant l'heure (la Porte 3, en face, ne sert qu'à retirer des billets). Si les PDF n'arrivent pas : etickets@coopculture.it.", lieu: "offices" },
+    { statut: "todo", titre: "Giotto Pass — campanile + baptistère + musée + crypte", quand: "Lun 12 · créneau tour 16h30–17h", detail: "20 €/pers. Le créneau de la tour est fixe et non modifiable : à réserver dès ce soir, c'est la dernière réservation de visite. Le reste du pass (baptistère, musée, crypte) se visite sans créneau, pendant 3 jours. Tour en restauration (échafaudage) : terrasse ouverte, vue un peu réduite.", lien: "https://tickets.duomo.firenze.it/en/", lienTexte: "Billetterie officielle du Duomo", lieu: "campanile" },
     { statut: "todo", titre: "Bistecca — Osteria dell'Enoteca", quand: "Lun 12 · 20h", detail: "Via Romana 70r. Fermée le mardi. Compter 70–90 €/pers. avec vin. Plan B : Cammillo (+39 055 212427), puis I'Raddi (+39 055 211072).", tel: "+39 055 228 6018", lien: "http://www.osteriadellenoteca.com/", lienTexte: "Site du restaurant", resto: "enoteca" },
     { statut: "todo", titre: "Vineria Sonora (vins nature)", quand: "Dim 11 · ~18h45", detail: "Via degli Alfani 39r. Ouverte le dimanche dès 17h, fermée le lundi. Table pour l'apéritif.", tel: "+39 333 199 9093", resto: "sonora" },
     { statut: "todo", titre: "Dîner — Cibrèo Trattoria", quand: "Dim 11 · ~20h30", detail: "Via de' Macci 122r, 10 min à pied de la Vineria Sonora. Ouverte tous les jours, et elle prend maintenant les réservations (booking@cibreo.com).", tel: "+39 055 234 1100", resto: "cibreo" },
     { statut: "todo", titre: "Dîner d'arrivée — Vini e Vecchi Sapori", quand: "Sam 10 · ~21h30", detail: "Via dei Magazzini 3r, 3 min du logement. Cuisine jusqu'à 22h30 : préciser à la réservation que vous arrivez de l'aéroport. Plan B sans réservation : Fuori Porta (cuisine non-stop jusqu'à 23h30).", tel: "+39 055 293045", resto: "vinivecchisapori" },
-    { statut: "info", titre: "Gustarium (pizza al taglio)", quand: "Dim 11 · 12h00 pile", detail: "Pas de réservation. Ouvert du mardi au dimanche, le midi seulement (12h–15h30), et tout est souvent vendu vers 13h : être devant à l'ouverture.", resto: "gustarium" }
+    { statut: "info", titre: "Gustarium (pizza al taglio)", quand: "Dim 11 · 12h00 pile", detail: "Pas de réservation. Ouvert du mardi au dimanche, le midi seulement (12h–15h30), et tout est souvent vendu vers 13h : être devant à l'ouverture.", tel: "+39 055 283469", resto: "gustarium" }
   ],
 
   /* ------------------------------------------------------------------ */
@@ -77,13 +78,14 @@ window.FLO = {
           aller: { duree: "15–18 min avec les valises", via: "Piazza dell'Unità → via de' Panzani → via de' Cerretani → piazza San Giovanni → via de' Calzaiuoli → piazza della Signoria → via dei Leoni → via dei Neri", vers: "Via dei Neri 16, Firenze" },
           texte: "C'est la plus belle façon d'entrer dans Florence : la rue est étroite, ordinaire, puis au bout de la via de' Cerretani la coupole apparaît d'un coup, éclairée, énorme. Ensuite, c'est une ligne droite à travers 700 ans d'histoire jusqu'à chez vous.",
           regarder: [
-            { titre: "La Berta, une tête de pierre sur un clocher", maps: "Chiesa di Santa Maria Maggiore, Firenze", img: "smmaggiore", texte: "Via de' Cerretani, à gauche, l'église <b>Santa Maria Maggiore</b>. Levez les yeux vers le campanile : une tête de femme en marbre est encastrée dans le mur. Les Florentins l'appellent « la Berta ». Pour les uns, une marchande de légumes qui aurait donné toutes ses économies pour payer la cloche ; pour d'autres, une sorcière pétrifiée. En réalité, c'est un portrait romain récupéré au Moyen Âge et monté là comme une curiosité." },
+            { titre: "La Berta, une tête de pierre sur un clocher", maps: "Chiesa di Santa Maria Maggiore, Firenze", img: "smmaggiore", texte: "Via de' Cerretani, à gauche, l'église <b>Santa Maria Maggiore</b>. Levez les yeux vers le campanile : une tête de femme en marbre est encastrée dans le mur. Les Florentins l'appellent « la Berta ». Pour les uns, une marchande de légumes qui aurait donné toutes ses économies pour payer la cloche. Pour les autres, c'est une femme punie : en 1327, l'astrologue <b>Cecco d'Ascoli</b>, condamné pour hérésie, passait ici en route vers le bûcher et demanda à boire. Berta, à sa fenêtre, cria de ne rien lui donner : « S'il boit, il ne brûlera pas ! » Cecco lui lança : « Et toi, tu ne retireras plus jamais ta tête de là. » Elle fut aussitôt changée en pierre. En réalité, c'est un portrait de la fin de l'époque romaine, réemployé au Moyen Âge pour orner le clocher." },
             { titre: "La coupole de Brunelleschi", maps: "Cattedrale di Santa Maria del Fiore, Firenze", img: "duomo", texte: "45 m de diamètre, environ quatre millions de briques, et aucun échafaudage posé au sol : Brunelleschi l'a montée de 1420 à 1436 avec deux coques emboîtées et des briques en arête de poisson qui se tiennent seules pendant que le mortier sèche. Personne ne savait faire une telle portée depuis le Panthéon de Rome." },
             { titre: "La colonne de saint Zanobi", maps: "Colonna di San Zanobi, Piazza San Giovanni, Firenze", img: "zanobi", texte: "Côté nord du baptistère, une colonne isolée porte un arbre sculpté. En 429, quand on transporta le corps de l'évêque Zanobi, le cercueil aurait frôlé un orme mort qui se couvrit aussitôt de feuilles, en plein janvier. La colonne marque l'endroit, et chaque 26 janvier les Florentins y accrochent encore une couronne." },
             { titre: "La Loggia del Bigallo", maps: "Loggia del Bigallo, Firenze", img: "bigallo", texte: "La petite loggia gothique à l'angle de la via de' Calzaiuoli appartenait à une confrérie charitable. Les enfants perdus ou abandonnés y étaient montrés à la foule quelques jours, dans l'espoir qu'un parent les reconnaisse. Une fresque de 1386 (aujourd'hui à l'intérieur) montre des mères qui déposent leurs bébés et d'autres qui les récupèrent." },
             { titre: "La via de' Calzaiuoli", maps: "Via dei Calzaiuoli, Firenze", texte: "La « rue des chaussetiers » relie en ligne droite la cathédrale (le pouvoir de Dieu) à la piazza della Signoria (le pouvoir de la commune). Au XIXe siècle, on l'a élargie en rasant ses maisons-tours : c'est pour ça qu'elle paraît si régulière." },
-            { titre: "Orsanmichele, l'église-grenier", maps: "Orsanmichele, Firenze", img: "orsanmichele", texte: "Le gros cube de pierre à mi-chemin était un marché au grain. Une image de la Vierge peinte sur un pilier faisant des miracles, on l'a transformé en église et on a gardé le grain à l'étage. Chaque corporation (laine, soie, banquiers, médecins…) a payé la statue de son saint dans une niche extérieure : Donatello, Ghiberti, Verrocchio se sont fait concurrence en pleine rue." },
-            { titre: "Le disque de Savonarole", maps: "Piazza della Signoria, Firenze", img: "savonarole", texte: "Piazza della Signoria, devant la fontaine de Neptune, cherchez dans le pavé une plaque ronde en granit. Le 23 mai 1498, le moine Girolamo Savonarola, qui avait fait brûler ici miroirs, livres et tableaux dans son « bûcher des vanités », y fut pendu puis brûlé. Chaque 23 mai, on y dépose encore des pétales de rose." },
+            { titre: "Orsanmichele, l'église-grenier", maps: "Orsanmichele, Firenze", img: "orsanmichele", texte: "Le gros cube de pierre à mi-chemin était un marché au grain. Une image de la Vierge peinte sur un pilier faisant des miracles, on l'a transformé en église et on a gardé le grain à l'étage. Chaque corporation (laine, soie, banquiers, médecins…) a payé la statue de son saint dans une niche extérieure : Donatello, Ghiberti, Verrocchio se sont fait concurrence en pleine rue. Côté via de' Calzaiuoli, regardez le <b>Christ et saint Thomas</b> de Verrocchio : la niche avait été faite pour une seule statue, alors il a sorti Thomas à moitié dehors, un pied sur le rebord, comme s'il venait d'entrer dans la scène." },
+            { titre: "Le disque de Savonarole", maps: "Piazza della Signoria, Firenze", img: "savonarole", texte: "Piazza della Signoria, devant la fontaine de Neptune, cherchez dans le pavé une plaque ronde. Le 23 mai 1498, le moine Girolamo Savonarola, qui avait fait brûler ici miroirs, livres et tableaux dans son « bûcher des vanités », y fut pendu puis brûlé avec deux de ses frères ; leurs cendres furent jetées dans l'Arno pour qu'il n'en reste aucune relique. Chaque 23 mai, pour la « Fiorita », un cortège en costume pose une couronne sur la plaque, puis jette des pétales de rose dans l'Arno depuis le Ponte Vecchio." },
+            { titre: "La Vacca, la cloche qui meuglait", maps: "Palazzo Vecchio, Firenze", texte: "Levez les yeux vers la tour du Palazzo Vecchio. Sa grosse cloche, les Florentins l'appelaient « la Vacca », la vache, à cause de son son grave et traînant. Quand elle sonnait, tous les citoyens devaient accourir sur la place pour le « parlamento », l'assemblée du peuple, ou pour prendre les armes. La place elle-même est née d'une vengeance : on y a rasé les maisons-tours des <b>Uberti</b>, la grande famille gibeline chassée de la ville, et juré de ne jamais rebâtir sur leur terrain. Selon le chroniqueur Villani, c'est pour cela que le palais est un peu de travers : on a évité de poser une seule pierre sur le sol maudit des Uberti." },
             { titre: "Pourquoi « via dei Leoni »", maps: "Via dei Leoni, Firenze", texte: "Derrière le Palazzo Vecchio, la République gardait de <b>vrais lions</b> en cage, symbole vivant de la ville (le lion, le « Marzocco »). Une naissance de lionceau était un bon présage, une mort un mauvais. Cosme Ier les fera déménager au XVIe siècle, mais la rue a gardé leur nom." },
             { titre: "Les deux crues, en bas de chez vous", maps: "Via dei Neri 16, Firenze", texte: "Via dei Neri, à l'angle de la <b>via San Remigio</b> : deux petites plaques indiquent la hauteur de l'eau lors des crues de <b>1333</b> et du <b>4 novembre 1966</b>. La seconde est plus haute que vous : ce jour-là, l'Arno a recouvert le quartier de Santa Croce sous près de 5 m d'eau, de boue et de mazout." }
           ]
@@ -93,7 +95,7 @@ window.FLO = {
           texte: "Après le voyage, on mange à deux pas. Vini e Vecchi Sapori est l'adresse rêvée pour un premier soir, mais la cuisine ferme à 22h30 : réservez en précisant votre heure d'arrivée. Sans réservation, Fuori Porta sert jusqu'à 23h30.",
           repas: [
             { resto: "vinivecchisapori", reco: true, texte: "Minuscule osteria derrière le Palazzo Vecchio, pleine de Florentins. Prenez les <b>pappardelle au canard</b>, leur plat le plus célèbre, des crostini de foie, et le <b>tiramisu à la framboise</b>." },
-            { resto: "pizzaiuolo", texte: "La pizzeria napolitaine que les Florentins citent en premier, via de' Macci (10 min). Margherita ou diavola, et les fusilli à la ricotta pour commencer. Réserver le samedi, et s'attendre à attendre un peu." },
+            { resto: "pizzaiuolo", texte: "La pizzeria napolitaine que les Florentins citent en premier, via de' Macci (10 min), au feu de bois, ouverte jusqu'à 23h le samedi. Margherita ou diavola. Réserver le samedi, et s'attendre à attendre un peu." },
             { resto: "fuoriporta", texte: "Le plan B sans stress : l'enoteca de San Niccolò (12 min le long de l'Arno), cuisine non-stop jusqu'à 23h30. Crostoni chauds, planches, un verre parmi 600 vins. La balade de nuit se fait ensuite dans l'autre sens." }
           ]
         },
@@ -103,10 +105,11 @@ window.FLO = {
           texte: "La ville est presque vide, les boutiques du Ponte Vecchio sont fermées : c'est le moment. Cette boucle passe par un meurtre qui a coupé Florence en deux pendant un siècle, un pont repêché pierre par pierre dans le fleuve, et la plus belle vue sur le Ponte Vecchio.",
           regarder: [
             { titre: "La cour des Offices, la nuit", maps: "Piazzale degli Uffizi, Firenze", texte: "Le long couloir entre le Palazzo Vecchio et l'Arno est bordé de statues de Toscans illustres, posées au XIXe siècle : Dante, Pétrarque, Boccace, Machiavel, Léonard, Michel-Ange, Galilée, Amerigo Vespucci… Vide et éclairée, la cour ressemble à un décor de théâtre qui ouvre sur le fleuve." },
-            { titre: "Le couloir de Vasari, au-dessus de vos têtes", maps: "Corridoio Vasariano, Firenze", img: "corridor", texte: "Le passage couvert qui part des Offices et file sur le Ponte Vecchio a été construit en <b>cinq mois</b> en 1565 pour le mariage de François Ier de Médicis : la famille pouvait aller du palais du gouvernement à sa résidence du Palazzo Pitti sans jamais croiser le peuple." },
-            { titre: "Le Ponte Vecchio sans la foule", maps: "Ponte Vecchio, Firenze", img: "pontevecchiosoir", texte: "Jusqu'en 1593, le pont était occupé par des bouchers et des tanneurs qui jetaient leurs déchets dans l'Arno. Le grand-duc Ferdinand Ier, qui passait au-dessus par son couloir, n'en supportait plus l'odeur : il les remplaça par des orfèvres. Ils y sont toujours. En août 1944, c'est le seul pont de Florence que les Allemands n'ont pas fait sauter." },
+            { titre: "Le couloir de Vasari, au-dessus de vos têtes", maps: "Corridoio Vasariano, Firenze", img: "corridor", texte: "Le passage couvert qui part des Offices et file sur le Ponte Vecchio a été construit en <b>cinq mois</b> en 1565 pour le mariage de François Ier de Médicis : environ 750 m, du palais du gouvernement à la résidence du Palazzo Pitti, sans jamais croiser le peuple. Fermé pendant huit ans, il a rouvert en décembre 2024." },
+            { titre: "Le Ponte Vecchio sans la foule", maps: "Ponte Vecchio, Firenze", img: "pontevecchiosoir", texte: "« Vecchio », parce que c'est le plus vieux passage de l'Arno, au point où les Romains traversaient déjà. Le pont actuel date de 1345, après qu'une crue a emporté le précédent. Jusqu'en 1593, il était occupé par des bouchers et des tanneurs qui jetaient leurs déchets dans l'Arno. Le grand-duc Ferdinand Ier, qui passait au-dessus par son couloir, n'en supportait plus l'odeur : il les remplaça par des orfèvres. Ils y sont toujours. Regardez les arrière-boutiques suspendues au-dessus de l'eau sur des poutres : chacun a agrandi son atelier comme il pouvait." },
+            { titre: "Les grandes fenêtres d'Hitler", maps: "Ponte Vecchio, Firenze", texte: "Au milieu du pont, le couloir de Vasari s'ouvre d'un coup sur de grandes baies vitrées, très différentes des petites fenêtres du reste du passage. Elles ont été percées sur ordre de Mussolini pour qu'<b>Hitler</b>, en visite le 9 mai 1938, admire la vue sur l'Arno. Six ans plus tard, en août 1944, les Allemands en retraite font sauter tous les ponts de Florence… sauf celui-ci. On a longtemps raconté que c'était sur ordre personnel d'Hitler, qui s'en souvenait ; rien ne le prouve. Pour bloquer l'accès, ils ont dynamité à la place les maisons médiévales aux deux extrémités." },
             { titre: "Le buste de Cellini", maps: "Busto di Benvenuto Cellini, Ponte Vecchio, Firenze", img: "cellini", texte: "Au milieu du pont, le buste de Benvenuto Cellini, orfèvre, sculpteur du Persée, bagarreur et auteur de mémoires où il se vante de tout, y compris de meurtres. La grille autour était couverte de cadenas d'amoureux ; c'est désormais interdit, et puni d'une amende." },
-            { titre: "La tour des Amidei : le meurtre de Pâques 1216", maps: "Torre degli Amidei, Via Por Santa Maria, Firenze", img: "amidei", texte: "En sortant du pont, via Por Santa Maria, à droite, une tour médiévale ornée de deux têtes de lion. Le matin de Pâques 1216, le jeune Buondelmonte dei Buondelmonti, qui avait rompu ses fiançailles avec une fille Amidei pour épouser une Donati, passa le pont en habit blanc sur un cheval blanc. Les Amidei et leurs alliés l'attendaient là, au pied d'une statue de Mars, et le tuèrent. Les chroniqueurs (et Dante, dans l'Enfer) y voient le début de la guerre entre Guelfes et Gibelins, qui a déchiré Florence pendant plus d'un siècle." },
+            { titre: "La tour des Amidei : le meurtre de Pâques 1216", maps: "Torre degli Amidei, Via Por Santa Maria, Firenze", img: "amidei", texte: "En sortant du pont, quelques pas dans la via Por Santa Maria (au n° 9) : une tour médiévale ornée de deux têtes de lion, dont une, dit-on, serait étrusque. Le matin de Pâques 1216, le jeune Buondelmonte dei Buondelmonti, qui avait rompu ses fiançailles avec une fille Amidei pour épouser une Donati, passa le pont en habit blanc sur un cheval blanc. Les Amidei et leurs alliés l'attendaient là, au pied d'une statue de Mars, et le tuèrent. Les chroniqueurs (et Dante, dans l'Enfer) y voient le début de la guerre entre Guelfes et Gibelins, qui a déchiré Florence pendant plus d'un siècle." },
             { titre: "Santi Apostoli et les pierres de Jérusalem", maps: "Chiesa dei Santi Apostoli, Firenze", img: "santiapostoli", texte: "Prenez le borgo Santi Apostoli, puis la petite piazza del Limbo (ancien cimetière des enfants morts sans baptême). L'église Santi Apostoli garde des éclats de pierre du Saint-Sépulcre, rapportés de la première croisade par un certain Pazzino de' Pazzi. Chaque dimanche de Pâques, ils servent encore à allumer le feu qui fait « exploser » le char devant le Duomo (le Scoppio del Carro). Oui, les Pazzi : la même famille qui assassinera un Médicis en 1478." },
             { titre: "Ponte Santa Trinita : LA vue", maps: "Ponte Santa Trinita, Firenze", img: "santatrinitapont", texte: "Le plus élégant des ponts (1569, Ammannati, peut-être sur un dessin de Michel-Ange). Dynamité en 1944, il a été reconstruit en 1958 avec ses pierres d'origine <b>repêchées dans l'Arno</b>. La statue du Printemps, à un angle, a longtemps attendu sa tête : on ne l'a retrouvée dans le fleuve qu'en 1961. D'ici, la vue sur le Ponte Vecchio illuminé est la carte postale de Florence." }
           ],
@@ -139,7 +142,8 @@ window.FLO = {
           texte: "Arrivez à 8h05 avec les billets sur le téléphone. La stratégie : <b>filez directement au David</b> sans vous arrêter, pendant que la salle est presque vide, puis revenez sur vos pas pour les Prisonniers, les plâtres et les instruments. Compter 1h–1h15.",
           regarder: [
             { titre: "Le David, 5,17 m", img: "david", texte: "Pas le vainqueur : l'<b>instant d'avant</b> le combat. Sourcils froncés, fronde sur l'épaule gauche, pierre cachée dans la main droite. La tête et les mains sont volontairement trop grandes : la statue devait être hissée sur la cathédrale et vue d'en bas." },
-            { titre: "Les Prisonniers qui sortent du marbre", img: "atlas", texte: "Dans la galerie qui mène au David, quatre géants inachevés semblent se battre pour sortir de la pierre. Ils étaient prévus pour le tombeau du pape Jules II à Rome, qui ne fut jamais terminé." },
+            { titre: "Le nez du David", texte: "Vasari raconte que le gonfalonier Piero Soderini, venu voir la statue presque finie, trouva le nez trop gros. Michel-Ange monta sur l'échafaudage avec un ciseau et une poignée de poussière de marbre, fit semblant de tailler en laissant tomber la poussière, puis demanda : « Et maintenant ? » — « Maintenant, il est vivant ! » Il n'avait pas touché le nez." },
+            { titre: "Les Prisonniers qui sortent du marbre", img: "atlas", texte: "Dans la galerie qui mène au David, quatre géants inachevés semblent se battre pour sortir de la pierre. Ils étaient prévus pour le tombeau géant du pape Jules II à Rome : quarante statues au départ. Le monument finalement monté en 1545, à San Pietro in Vincoli autour du Moïse, est bien plus modeste, et ces quatre-là n'y ont jamais trouvé leur place." },
             { titre: "Un mariage florentin en 1450", img: "cassone", texte: "Dans la salle du Colosse, un coffre de mariage peint (le « cassone Adimari ») montre une noce devant le baptistère : robes à traîne, chapeaux extravagants, musiciens. Une photo de la mode florentine du Quattrocento, peinte par le frère de Masaccio." }
           ]
         },
@@ -148,12 +152,13 @@ window.FLO = {
           aller: { duree: "≈ 2h avec les arrêts (2 km)", via: "Piazza San Marco → via Cavour → Palazzo Medici Riccardi → San Lorenzo → piazza del Duomo → piazza della Repubblica → Mercato Nuovo → via dei Cimatori", vers: "Gustarium, Via dei Cimatori 24r, Firenze" },
           texte: "Une matinée sans billet : on suit la famille Médicis à la trace, de leur couvent préféré à leur palais, puis à leur église. Petit-déjeuner assis cette fois, dans un bar de la piazza San Marco ou de la via Cavour. Objectif : être devant Gustarium à <b>12h00</b>.",
           regarder: [
-            { titre: "San Marco, le couvent de Cosme… et de Savonarole", maps: "Museo di San Marco, Firenze", texte: "Le couvent au fond de la place a été reconstruit aux frais de <b>Cosme l'Ancien</b>, le banquier le plus riche d'Europe, qui s'y était réservé une cellule pour prier (et se faire pardonner l'usure). Soixante ans plus tard, son prieur était <b>Savonarole</b> : c'est ici que la foule assiégea le couvent et l'arrêta, le 8 avril 1498. À l'intérieur, les cellules sont peintes par Fra Angelico (musée, horaires du dimanche variables)." },
+            { titre: "San Marco, le couvent de Cosme… et de Savonarole", maps: "Museo di San Marco, Firenze", texte: "Le couvent au fond de la place a été reconstruit aux frais de <b>Cosme l'Ancien</b>, le banquier le plus riche d'Europe, qui s'y était réservé une cellule pour prier (et se faire pardonner l'usure). Soixante ans plus tard, son prieur était <b>Savonarole</b> : c'est ici que la foule assiégea le couvent et l'arrêta, le 8 avril 1498. À l'intérieur, chaque cellule est peinte par Fra Angelico (musée ouvert le dimanche 8h30–13h50, 11 € : c'est une visite de plus, à garder pour un autre voyage)." },
+            { titre: "Le jardin où Laurent a repéré Michel-Ange", maps: "Piazza San Marco, Firenze", texte: "Entre la place San Marco et la via Cavour, il ne reste rien du jardin de sculptures antiques de Laurent le Magnifique, une sorte d'école d'art. Vers 1489, un garçon de 14 ans y sculpte une tête de vieux faune grimaçant. Laurent s'amuse : « Les vieux n'ont jamais toutes leurs dents. » Dès que Laurent a le dos tourné, le jeune <b>Michel-Ange</b> fait sauter une dent et creuse la gencive. Laurent est conquis et l'installe dans son palais, à sa table, comme un fils." },
             { titre: "Le Palazzo Medici Riccardi", maps: "Palazzo Medici Riccardi, Firenze", img: "medicicriccardi", texte: "La maison de famille, via Cavour. Cosme avait demandé un projet à Brunelleschi, puis l'a refusé : trop somptueux, il aurait attiré l'envie. Il choisit Michelozzo et une façade de forteresse. C'est à une fenêtre de ce palais qu'en avril 1478 <b>Laurent le Magnifique</b>, blessé au cou, se montra à la foule pour prouver qu'il avait survécu à la conjuration des Pazzi. Au rez-de-chaussée, à l'angle, les « fenêtres agenouillées » ont été dessinées par Michel-Ange pour fermer l'ancienne loggia." },
             { titre: "San Lorenzo, la façade qui n'existe pas", maps: "Basilica di San Lorenzo, Firenze", img: "sanlorenzo", texte: "L'église paroissiale des Médicis a toujours sa façade de briques brutes. Le pape Léon X (un Médicis) l'avait commandée à Michel-Ange en 1516 ; il passa des années à faire extraire du marbre à Carrare, puis le contrat fut annulé. Cosme l'Ancien est enterré dans la crypte, juste sous le centre de l'église, avec le titre de « Pater Patriae », père de la patrie." },
             { titre: "Les portes du Paradis", maps: "Battistero di San Giovanni, Firenze", img: "paradis", texte: "En repassant devant le baptistère, côté cathédrale : les portes dorées de Ghiberti (copies ; les originales sont au musée de l'Opera, que vous verrez lundi). Dans le cadre, cherchez un petit crâne chauve qui vous regarde : c'est l'autoportrait de Ghiberti, très fier de lui." },
-            { titre: "Piazza della Repubblica, l'ancien forum", maps: "Piazza della Repubblica, Firenze", texte: "La colonne de l'Abondance marque le carrefour de la ville romaine, Florentia. Au XIXe siècle, quand Florence était capitale de l'Italie, on a rasé ici le vieux marché et le ghetto juif pour faire cette place « moderne ». L'inscription de l'arc se félicite d'avoir rendu le quartier « à une vie nouvelle » ; les Florentins de l'époque l'ont beaucoup moins aimée. Le café <b>Gilli</b> y sert depuis 1733." },
-            { titre: "Le sanglier du Mercato Nuovo", maps: "Fontana del Porcellino, Firenze", img: "porcellino", texte: "Frottez le museau du « Porcellino » et glissez une pièce dans sa gueule : si elle tombe dans la grille, vous reviendrez à Florence. Au centre de la loggia, une roue de marbre au sol, la « pierre du scandale » : les commerçants en faillite y étaient fessés en public, pantalon baissé." }
+            { titre: "Piazza della Repubblica, l'ancien forum", maps: "Piazza della Repubblica, Firenze", texte: "La colonne de l'Abondance marque le carrefour de la ville romaine, Florentia : ici se croisaient ses deux rues principales. De 1885 à 1895, juste après les années où Florence fut capitale de l'Italie (1865–1871), on a rasé le vieux marché, ses tours et le ghetto juif pour faire cette place « moderne ». L'inscription de l'arc se félicite d'avoir rendu le centre « à une vie nouvelle » après des siècles de misère ; les Florentins de l'époque l'ont beaucoup moins aimée. Le café <b>Gilli</b> est né en 1733 via de' Calzaiuoli et s'est installé sur la place dans les années 1920." },
+            { titre: "Le sanglier du Mercato Nuovo", maps: "Fontana del Porcellino, Firenze", img: "porcellino", texte: "Frottez le museau du « Porcellino » et glissez une pièce dans sa gueule : si elle tombe dans la grille, vous reviendrez à Florence. Au centre de la loggia, une roue de marbre au sol marque l'endroit où l'on garait le <i>carroccio</i>, le char de guerre de la ville. C'est aussi la « pierre du scandale » : les marchands en faillite devaient s'y frapper les fesses nues, en public, devant leurs créanciers." }
           ],
           detours: [
             { titre: "Les Chapelles Médicis", maps: "Cappelle Medicee, Firenze", duree: "+1h, 11 €", lieu: "cappellemedicee", texte: "Ouvertes le dimanche (fermées lundi). Le mausolée de marbre des grands-ducs et la Nouvelle Sacristie de Michel-Ange. Magnifique, mais ce serait la troisième visite de la journée : seulement si l'envie est forte. Sinon, mardi en cas de pluie." },
@@ -172,7 +177,7 @@ window.FLO = {
         {
           heure: "13h45", titre: "Botticelli, Michel-Ange, Léonard, Caravage", type: "visite", lieu: "offices",
           resa: "Offices · entrée 13h45 — réservé (CoopCulture 6R325YDT)",
-          texte: "Présentez-vous vers 13h30 à l'entrée des billets réservés, PDF sur le téléphone. Compter 2h30–3h. Depuis juin 2026, la <b>Naissance de Vénus</b> et le <b>Printemps</b> de Botticelli se font face pour la première fois, dans des salles rénovées. Le parcours salle par salle, avec les photos de ce qu'il faut voir, est dans le guide.",
+          texte: "Présentez-vous vers 13h30 à la <b>Porte 1</b> (entrée des billets réservés), PDF sur le téléphone ; la Porte 3, en face, ne sert qu'à retirer des billets. Compter 2h30–3h. Depuis le 16 juin 2026, la <b>Naissance de Vénus</b> et le <b>Printemps</b> de Botticelli se font face pour la première fois, dans des salles rénovées : les grandes parois vitrées ont disparu, les tableaux sont désormais dans des caissons étanches qui se font oublier. Le parcours salle par salle, avec les photos de ce qu'il faut voir, est dans le guide.",
           regarder: [
             { titre: "La Naissance de Vénus", img: "venus", texte: "Vénus arrive sur sa coquille, poussée par le souffle de Zéphyr. La tradition veut que son visage soit celui de Simonetta Vespucci, la beauté de Florence, morte à 22 ans." },
             { titre: "Le Tondo Doni de Michel-Ange", img: "doni", texte: "Sa seule peinture sur bois achevée, dans le cadre qu'il a dessiné lui-même. Le client a voulu marchander : il a fini par payer le double." },
@@ -195,11 +200,12 @@ window.FLO = {
             { titre: "La Badia et sa cloche", maps: "Badia Fiorentina, Firenze", img: "badia", texte: "Via del Proconsolo, le clocher pointu de la Badia Fiorentina, la plus ancienne abbaye de la ville. Sa cloche rythmait la journée de la Florence médiévale ; Dante, exilé, s'en souvient au chant XV du Paradis comme du temps où la ville vivait « sobre et pudique ». En face, le <b>Bargello</b>, l'ancienne prison : en 1479 on pendit à sa fenêtre l'assassin de Julien de Médicis, et Léonard de Vinci, dans la foule, dessina le pendu." },
             { titre: "La tour de la Châtaigne", maps: "Torre della Castagna, Firenze", img: "castagna", texte: "Via Dante Alighieri, une petite tour carrée : en 1282, avant que le Palazzo Vecchio existe, c'est ici que se réunissaient les Prieurs qui gouvernaient la ville. On y votait avec des <b>châtaignes</b> glissées dans un sac : d'où son nom, « Torre della Castagna »." },
             { titre: "La « maison de Dante »", maps: "Museo Casa di Dante, Firenze", texte: "Juste à côté, la Casa di Dante. Attention : c'est une reconstitution du début du XXe siècle, à l'endroit supposé de la maison des Alighieri. Le vrai trésor est trois pas plus loin." },
-            { titre: "Santa Margherita de' Cerchi, l'église de Dante", maps: "Chiesa di Santa Margherita de' Cerchi, Firenze", img: "smcerchi", texte: "Une minuscule église dans une ruelle. La tradition y place le mariage de Dante avec Gemma Donati et la sépulture de la famille Portinari, celle de <b>Béatrice</b>, l'amour de sa vie qu'il n'a presque jamais approchée. Près de la tombe, un panier recueille les lettres que des amoureux du monde entier écrivent à Béatrice." },
+            { titre: "Santa Margherita de' Cerchi, l'église de Dante", maps: "Chiesa di Santa Margherita de' Cerchi, Firenze", img: "smcerchi", texte: "Une minuscule église dans une ruelle. La tradition y place le mariage de Dante avec Gemma Donati et la sépulture de la famille Portinari, celle de <b>Béatrice</b>, l'amour de sa vie qu'il n'a presque jamais approchée. Près de la tombe, un panier recueille les lettres que des amoureux du monde entier écrivent à Béatrice. Ironie du quartier : l'église porte le nom des <b>Cerchi</b>, chefs des Guelfes blancs, le parti de Dante, et Dante y épouse une <b>Donati</b>, la famille de Corso Donati, chef des Noirs… ceux-là mêmes qui le feront condamner à l'exil en 1302." },
             { titre: "Le Duomo à la tombée du jour", maps: "Cattedrale di Santa Maria del Fiore, Firenze", img: "duomo", texte: "Le marbre blanc vient de Carrare, le vert de Prato, le rose de la Maremme. La façade que vous voyez date seulement de 1887 : pendant trois siècles, la cathédrale est restée avec une façade nue, l'ancienne ayant été démolie en 1587." },
             { titre: "La via dei Servi", maps: "Via dei Servi, Firenze", texte: "La rue qui part du chevet de la cathédrale vers le nord : retournez-vous au milieu, c'est la vue la plus célèbre de la coupole, cadrée entre les palais." },
             { titre: "Piazza Santissima Annunziata", maps: "Piazza della Santissima Annunziata, Firenze", img: "innocenti", texte: "L'<b>Ospedale degli Innocenti</b> de Brunelleschi (1419) est souvent présenté comme le premier bâtiment de la Renaissance. C'était un orphelinat : à gauche du portique, une petite fenêtre, la « ruota », permettait de déposer un nouveau-né anonymement. Beaucoup d'Italiens nommés Innocenti, Nocentini ou Degl'Innocenti descendent de ces enfants. Les médaillons bleus de della Robbia montrent des bébés emmaillotés." },
-            { titre: "Les abeilles de Ferdinand", maps: "Statua equestre di Ferdinando I, Piazza Santissima Annunziata, Firenze", img: "ferdinando", texte: "Sur le socle de la statue équestre de Ferdinand Ier, un essaim d'abeilles tourne autour de la reine, avec la devise « Maiestate tantum ». On dit qu'on n'arrive jamais à les compter du premier coup. Essayez." },
+            { titre: "Les abeilles de Ferdinand", maps: "Statua equestre di Ferdinando I, Piazza Santissima Annunziata, Firenze", img: "ferdinando", texte: "Sur le socle de la statue équestre de Ferdinand Ier, un essaim d'abeilles tourne autour de la reine, avec la devise « Maiestate tantum » : le prince gouverne par sa seule majesté, comme la reine des abeilles. On dit qu'on n'arrive jamais à les compter du premier coup. Essayez." },
+            { titre: "La Santissima Annunziata, l'église des ex-voto", maps: "Basilica della Santissima Annunziata, Firenze", texte: "Au fond de la place, la basilique garde une fresque de l'Annonciation que la légende dit achevée par un ange : le peintre, ne sachant comment rendre le visage de la Vierge, se serait endormi et l'aurait trouvé peint à son réveil. Pendant des siècles, les Florentins y ont accroché des ex-voto en cire grandeur nature. Selon Vasari, Laurent le Magnifique, après avoir survécu aux Pazzi, y fit placer son propre portrait en cire, habillé des vêtements qu'il portait le jour de l'attentat. Aujourd'hui encore, des jeunes mariées viennent y déposer leur bouquet." },
             { titre: "La Rotonda de Brunelleschi", maps: "Rotonda del Brunelleschi, Via degli Alfani, Firenze", img: "rotonda", texte: "Via degli Alfani, à l'angle de la via del Castellaccio : un octogone de pierre resté inachevé pendant cinq siècles. Brunelleschi l'a commencé en 1434 ; l'argent est parti dans une guerre contre Lucques et le chantier s'est arrêté. Il n'a été couvert qu'au XXe siècle. Un peu plus loin, au n° 78, l'<b>Opificio delle Pietre Dure</b>, l'atelier des marqueteries de pierre fondé par les Médicis, est devenu le grand laboratoire de restauration d'Italie." }
           ]
         },
@@ -246,12 +252,13 @@ window.FLO = {
         {
           heure: "9h30", titre: "Santa Croce, le panthéon de l'Italie", type: "visite", lieu: "santacroce",
           aller: { duree: "4 min", via: "Via dei Neri → via de' Benci → piazza Santa Croce", vers: "Basilica di Santa Croce, Firenze" },
-          texte: "Ouvre à 9h30, environ 10 €, compter 1h–1h15 avec la chapelle Pazzi et le musée. Entrée sur le côté gauche de la basilique. Michel-Ange, Galilée, Machiavel, Rossini, un cénotaphe de Dante, les fresques de Giotto, et le crucifix de Cimabue noyé par la crue de 1966. Le guide de visite est dans la fiche.",
+          texte: "Ouvre à 9h30, environ 10 €, compter 1h–1h15 avec la chapelle Pazzi et le musée. Entrée et billetterie sur le côté gauche (nord) de la basilique, largo Bargellini ; l'entrée se fait par créneaux, un lundi d'octobre à 9h30 il y a de la place. Épaules et genoux couverts. Michel-Ange, Galilée, Machiavel, Rossini, un cénotaphe de Dante, les fresques de Giotto de la chapelle Bardi, tout juste restaurées (septembre 2026), et le crucifix de Cimabue noyé par la crue de 1966. Le guide de visite est dans la fiche.",
           regarder: [
             { titre: "Sur la place : le disque de 1565", maps: "Piazza Santa Croce, Firenze", img: "antella", texte: "La façade peinte du Palazzo dell'Antella, côté droit de la place. Sous ses fenêtres, un disque de marbre de 1565 marque la ligne médiane du terrain du <b>calcio storico</b>, un mélange de football, de rugby et de lutte en costumes Renaissance qui se joue encore ici chaque mois de juin, entre les quatre quartiers de la ville." },
             { titre: "Dante, qui n'est pas enterré là", img: "dantestatue", texte: "La grande statue sur les marches (1865, pour les 600 ans de sa naissance) regarde la ville qui l'a exilé. Florence l'a condamné à mort en 1302 ; il est mort à Ravenne en 1321, et Ravenne refuse depuis 700 ans de rendre le corps. Dans l'église, son tombeau est vide." },
             { titre: "Michel-Ange face à Galilée", img: "tombemichelange", texte: "Le tombeau de Michel-Ange (par Vasari) est le premier à droite en entrant. Michel-Ange avait voulu être enterré ici pour, au Jugement dernier, voir en premier la coupole de Brunelleschi par la porte ouverte. Galilée lui fait face dans l'allée de gauche : il est né l'année de la mort de Michel-Ange, en 1564." },
-            { titre: "Le crucifix noyé de Cimabue", img: "cimabue", texte: "Au musée, le grand crucifix peint par Cimabue vers 1280. Le 4 novembre 1966, il a passé des heures sous l'eau boueuse et perdu une grande partie de sa peinture. Il est devenu le symbole des « anges de la boue », les volontaires du monde entier venus sauver les œuvres. Il est désormais accroché à un système qui peut le hisser en cas de nouvelle crue." }
+            { titre: "Le crucifix noyé de Cimabue", img: "cimabue", texte: "Au musée, le grand crucifix peint par Cimabue vers 1280. Le 4 novembre 1966, il a passé des heures sous l'eau boueuse et perdu une grande partie de sa peinture. Il est devenu le symbole des « anges de la boue », les volontaires du monde entier venus sauver les œuvres. Il est désormais accroché à un système qui peut le hisser en cas de nouvelle crue." },
+            { titre: "La dame à la lampe, dans le cloître", texte: "Dans le premier cloître, une statue de jeune femme tenant une lampe (1913) : <b>Florence Nightingale</b>, la fondatrice des soins infirmiers modernes. Elle était née ici, à Florence, en 1820, de parents anglais en voyage, qui lui ont donné le nom de la ville. La « dame à la lampe », c'était son surnom pendant la guerre de Crimée, quand elle faisait ses rondes la nuit auprès des blessés." }
           ]
         },
         {
@@ -259,23 +266,23 @@ window.FLO = {
           aller: { duree: "8 min", via: "Piazza Santa Croce → via di San Giuseppe → via de' Macci → piazza Ghiberti", vers: "Mercato di Sant'Ambrogio, Firenze" },
           texte: "On quitte la Florence des cartes postales pour le quartier où vivent les Florentins : boulangeries, artisans, le Cibrèo d'hier soir, et au bout le marché couvert.",
           regarder: [
-            { titre: "Le chariot de lampredotto", maps: "Mercato di Sant'Ambrogio, Firenze", texte: "À l'angle de la via de' Macci et du borgo La Croce, le chariot de la famille <b>Pollini</b> sert depuis près de 30 ans des panini de lampredotto, la caillette de bœuf mijotée. À goûter maintenant ou après le marché (voir l'onglet Manger)." },
+            { titre: "Le chariot de lampredotto", maps: "Mercato di Sant'Ambrogio, Firenze", texte: "À l'angle de la via de' Macci et du borgo La Croce, le chariot de <b>Sergio Pollini</b>, tenu aujourd'hui par son fils Pierpaolo, sert des panini de lampredotto, la caillette de bœuf mijotée, que le Gambero Rosso classe parmi les meilleurs de la ville. À goûter maintenant ou après le marché (voir l'onglet Manger)." },
             { titre: "Sant'Ambrogio et son miracle", maps: "Chiesa di Sant'Ambrogio, Firenze", texte: "La petite église de la place garde le souvenir d'un miracle de 1230 : un prêtre aurait laissé du vin dans le calice, et l'aurait retrouvé le lendemain changé en sang. Le sculpteur Verrocchio, maître de Léonard de Vinci, y est enterré." },
-            { titre: "La coupole verte de la synagogue", maps: "Sinagoga di Firenze, Via Luigi Carlo Farini, Firenze", img: "synagogue", texte: "En regardant vers le nord-est depuis le marché, une coupole de cuivre vert : le Tempio Maggiore, la grande synagogue construite en 1874–1882, quand les Juifs florentins sont enfin sortis du ghetto. Minée par les Allemands en 1944, elle a survécu." }
+            { titre: "La coupole verte de la synagogue", maps: "Sinagoga di Firenze, Via Luigi Carlo Farini, Firenze", img: "synagogue", texte: "En regardant vers le nord depuis le marché, une coupole de cuivre vert : le Tempio Maggiore, la grande synagogue construite en 1874–1882, quand les Juifs florentins sont enfin sortis du ghetto. Minée par les Allemands en 1944, elle a survécu." }
           ]
         },
         {
           heure: "11h15", titre: "Le marché de Sant'Ambrogio", type: "balade", lieu: "santambrogio",
           texte: "Le vrai marché des Florentins (lun–sam 7h–14h), sous une halle de fonte de 1873. Dehors, les maraîchers des environs ; dedans, bouchers, tripiers, fromagers. Règle d'or : on ne touche pas les fruits et légumes, on montre, le marchand choisit pour vous. Idéal pour rapporter un morceau de pecorino ou de finocchiona (le saucisson au fenouil).",
           regarder: [
-            { titre: "Le marché", maps: "Mercato di Sant'Ambrogio, Firenze", img: "santambrogio", texte: "Construit en 1873 par Giuseppe Mengoni, l'architecte de la galerie Victor-Emmanuel de Milan (il mourra en tombant d'un échafaudage de cette galerie, la veille de son inauguration). Le même homme a dessiné le Mercato Centrale." }
+            { titre: "Le marché", maps: "Mercato di Sant'Ambrogio, Firenze", img: "santambrogio", texte: "Construit en 1873 par Giuseppe Mengoni, l'architecte de la galerie Victor-Emmanuel de Milan. Il mourra en tombant d'un échafaudage de cette galerie le 30 décembre 1877, la veille de l'inauguration de son grand arc d'entrée. Le même homme a dessiné le Mercato Centrale." }
           ]
         },
         {
           heure: "12h00", titre: "Déjeuner au marché", type: "repas",
           texte: "Arrivez à midi pile chez Da Rocco, avant les employés du quartier : tables partagées, plats du jour, cash. C'est le déjeuner le plus honnête de Florence.",
           repas: [
-            { resto: "darocco", reco: true, texte: "Le comptoir à l'intérieur de la halle. Ribollita ou pappa al pomodoro, bollito, polpette, le plat du jour et un quart de vin de la maison : 15–20 € par personne." },
+            { resto: "darocco", reco: true, texte: "Le comptoir à l'intérieur de la halle. Ribollita ou pappa al pomodoro (≈ 10 €), puis trippa, peposo ou rosbif (≈ 13 €), un verre de vin de la maison (4 €) : 15–25 € par personne selon la faim." },
             { resto: "semel", texte: "Plus rapide : des panini d'auteur, debout sur la place. Le menu change chaque jour (âne braisé, hareng et pecorino…). Pas de modification." },
             { resto: "lortone", texte: "Pour s'asseoir plus confortablement : le bistrot que le guide Michelin recommande, face au marché. Pici à l'aglione, gnudi, tagliatelle au ragù de sanglier." }
           ]
@@ -283,13 +290,14 @@ window.FLO = {
         {
           heure: "13h45", titre: "La cathédrale (gratuite, avant 15h45)", type: "visite", lieu: "duomo",
           aller: { duree: "12 min", via: "Via Pietrapiana → borgo degli Albizi → via del Proconsolo → piazza del Duomo", vers: "Cattedrale di Santa Maria del Fiore, Firenze" },
-          texte: "Entrée gratuite (lun–sam 10h15–15h45), la file avance vite en début d'après-midi en semaine. Compter 30–45 min. L'intérieur est sobre, mais chargé d'histoires : un mercenaire anglais peint en statue, une horloge qui tourne à l'envers, Dante en exil, et le chœur où les Pazzi ont poignardé Julien de Médicis.",
+          texte: "Entrée gratuite (lun–sam 10h15–15h45), la file avance vite en début d'après-midi en semaine. Épaules et genoux couverts. Compter 30–45 min. L'intérieur est sobre, mais chargé d'histoires : un mercenaire anglais peint en statue, une horloge qui tourne à l'envers, Dante en exil, et le chœur où les Pazzi ont poignardé Julien de Médicis. Descendez aussi à la <b>crypte de Santa Reparata</b>, incluse dans le Giotto Pass : elle ferme à 16h, c'est donc maintenant ou jamais.",
           regarder: [
             { chemin: true, titre: "Le borgo degli Albizi", maps: "Borgo degli Albizi, Firenze", texte: "La plus belle rue de palais du quartier porte le nom des <b>Albizi</b>, la famille qui gouvernait Florence avant les Médicis. En 1433, ce sont eux qui firent arrêter et exiler Cosme l'Ancien ; un an plus tard, Cosme revenait et c'est Rinaldo degli Albizi qui partait en exil, pour toujours. Au n° 18, le Palazzo Valori est couvert de bustes d'illustres Florentins que les habitants ont surnommés « i Visacci », les vilaines têtes." },
+            { chemin: true, titre: "La tête de taureau", maps: "Porta della Mandorla, Firenze", texte: "Avant d'entrer, longez le flanc nord de la cathédrale (côté via Ricasoli) jusqu'à la Porta della Mandorla. Levez les yeux : une tête de taureau dépasse d'un chapiteau. Hommage aux bœufs qui ont tiré les matériaux du chantier, disent les sérieux. La légende préfère une autre histoire : un maître d'œuvre, amant de la femme d'un boulanger, aurait été dénoncé par le mari ; il se serait vengé en tournant les cornes de la bête vers la fenêtre du cocu." },
             { titre: "Le mercenaire de papier", img: "hawkwood", texte: "Mur de gauche : un chevalier sur son cheval, en trompe-l'œil vert. C'est <b>John Hawkwood</b>, condottiere anglais qui servit Florence. La ville lui avait promis un monument équestre en marbre ; elle lui a offert une fresque de Paolo Uccello (1436). Beaucoup moins cher." },
             { titre: "L'horloge qui tourne à l'envers", img: "horloge", texte: "Au revers de la façade, l'horloge d'Uccello (1443) n'a qu'une aiguille, tourne dans le sens inverse des nôtres et compte 24 heures : la journée commençait au coucher du soleil. Elle fonctionne toujours." },
             { titre: "Dante devant Florence", maps: "Cattedrale di Santa Maria del Fiore, Firenze", img: "dantemichelino", texte: "Le tableau de Domenico di Michelino (1465) : Dante, en dehors des murs de la ville qui l'a chassé, tient la Divine Comédie ouverte. Derrière lui, l'Enfer et la montagne du Purgatoire. La ville lui rendait hommage… sans jamais récupérer ses os." },
-            { titre: "Le chœur du 26 avril 1478", img: "medaillepazzi", texte: "Sous la coupole, à la messe de Pâques 1478, au signal de l'élévation, les conjurés de la famille Pazzi, soutenus par le pape, poignardent <b>Julien de Médicis</b> (19 coups). Son frère Laurent, blessé au cou, se réfugie dans la sacristie nord et ferme ses lourdes portes de bronze. La vengeance sera terrible : les conjurés pendus aux fenêtres du Palazzo Vecchio, l'archevêque de Pise compris. Cette médaille fut frappée pour l'occasion : Laurent en haut, Julien assassiné en bas." },
+            { titre: "Le chœur du 26 avril 1478", img: "medaillepazzi", texte: "Sous la coupole, pendant la grand-messe du dimanche 26 avril 1478 (et non à Pâques, comme on le lit souvent), les conjurés de la famille Pazzi, soutenus par le pape, poignardent <b>Julien de Médicis</b> (19 coups, dit-on). Le matin même, Francesco de' Pazzi était passé le chercher chez lui et l'avait pris dans ses bras en chemin, en plaisantant : il vérifiait qu'il ne portait pas de cotte de mailles. Son frère Laurent, blessé au cou, saute dans la sacristie nord et ferme ses lourdes portes de bronze. La vengeance sera terrible : les conjurés pendus aux fenêtres du Palazzo Vecchio, l'archevêque de Pise compris. Bertoldo, l'élève de Donatello, a frappé cette médaille pour l'occasion : sur une face, la tête de Laurent au-dessus de l'attaque dans le chœur ; sur l'autre, celle de Julien au-dessus de son assassinat." },
             { titre: "Le Jugement dernier, vu d'en bas", img: "jugement", texte: "L'intérieur de la coupole est peint d'un immense Jugement dernier (Vasari et Zuccari, 1572–1579), plus de 3 600 m². Cherchez les damnés et les diables vers le bas : c'est la partie la plus vivante." }
           ]
         },
@@ -299,6 +307,8 @@ window.FLO = {
           aller: { duree: "2 min", via: "Derrière la cathédrale, piazza del Duomo 9", vers: "Museo dell'Opera del Duomo, Firenze" },
           texte: "Le musée le plus sous-estimé de Florence, et il est compris dans votre pass. Les vraies portes du Paradis, une Pietà que Michel-Ange a voulu détruire, la Madeleine de Donatello, et les outils de Brunelleschi. Compter 1h15. Le guide est dans la fiche.",
           regarder: [
+            { chemin: true, titre: "Le disque de la boule tombée", maps: "Piazza del Duomo, Firenze", texte: "En contournant l'abside pour aller au musée, cherchez dans le pavé un disque de marbre blanc. Dans la nuit du 26 janvier 1601, la foudre frappa la lanterne de la coupole et fit tomber la boule de cuivre doré de Verrocchio (près de 2 tonnes) : le disque marque l'endroit où elle s'écrasa. Pour conjurer le sort, le grand-duc fit ensuite enfermer des reliques dans la croix du sommet. Ce n'était pas le premier coup de foudre : le 5 avril 1492, la lanterne avait été touchée, et la ville y vit un présage. Trois jours plus tard, Laurent le Magnifique mourait." },
+            { titre: "Le David est né ici", texte: "Le musée occupe l'ancien atelier de l'Opera del Duomo : c'est dans cette cour que Michel-Ange, enfermé derrière une palissade, a taillé le David de 1501 à 1504. Le « Géant » en est sorti en mai 1504, debout dans une cage de bois, pour rejoindre la piazza della Signoria." },
             { titre: "La Pietà Bandini", img: "pietabandini", texte: "Michel-Ange, près de 80 ans, la sculptait pour son propre tombeau. Le Nicodème qui soutient le Christ a son visage. Insatisfait, il l'a attaquée au marteau : il manque la jambe gauche du Christ." },
             { titre: "La Madeleine de Donatello", img: "madeleine", texte: "En bois, décharnée, couverte de ses seuls cheveux : une sainte qui a fait pénitence au désert. Une sculpture d'une modernité saisissante, vers 1455." },
             { titre: "Les originaux des portes du Paradis", img: "paradis", texte: "Restaurés, derrière une vitre, dans une grande salle qui reconstitue la place médiévale. 27 ans de travail de Ghiberti." }
@@ -309,7 +319,8 @@ window.FLO = {
           resa: "Giotto Pass · créneau 16h30–17h — À RÉSERVER", resaTodo: true,
           texte: "Présentez-vous 10 min avant votre créneau. 414 marches, trois paliers pour souffler, 45 min–1h aller-retour. Vous montez moins haut que dans la coupole, mais vous avez la coupole <b>dans la vue</b>, avec la lumière dorée de fin de journée. La tour est en restauration (échafaudage) : la terrasse est ouverte, la vue un peu réduite par endroits.",
           regarder: [
-            { titre: "Le campanile", maps: "Campanile di Giotto, Firenze", img: "campanile", texte: "Giotto, le peintre, nommé architecte de la ville à près de 70 ans, n'en a vu que le premier niveau : il meurt en 1337. Andrea Pisano puis Francesco Talenti achèvent la tour (84,7 m). En bas, les bas-reliefs racontent l'histoire de l'humanité par ses métiers : tissage, navigation, astronomie, et même Dédale qui vole." }
+            { titre: "Le campanile", maps: "Campanile di Giotto, Firenze", img: "campanile", texte: "Giotto, le peintre, nommé architecte de la ville à près de 70 ans, n'en a vu que le premier niveau : il meurt en 1337. Andrea Pisano puis Francesco Talenti achèvent la tour (84,7 m) en 1359. Sur un dessin attribué à Giotto, la tour devait finir en flèche pointue ; Talenti l'a coiffée d'une terrasse, celle où vous montez. En bas, les bas-reliefs racontent l'histoire de l'humanité par ses métiers : tissage, navigation, astronomie, et même Dédale qui vole." },
+            { titre: "En montant", texte: "Les fenêtres s'agrandissent à chaque étage : en bas, des murs presque pleins pour porter le poids ; en haut, de grandes baies gothiques pour l'alléger. Dans les derniers paliers, vous passez à côté des cloches. Les marbres de la façade (blanc de Carrare, vert de Prato, rouge de Cintoia, dans le Chianti) sont justement ceux que la restauration lancée en mars 2026 nettoie et consolide, de haut en bas, pour environ quatre ans." }
           ],
           autres: [
             { titre: "S'il pleut à verse", tags: ["pluie"], texte: "Le créneau n'est pas modifiable. Sous une petite pluie, montez quand même (escalier couvert, terrasse exposée). Sous l'orage, sacrifiez la tour et gardez le baptistère et le musée, inclus dans le même pass." }
@@ -318,9 +329,10 @@ window.FLO = {
         {
           heure: "17h30", titre: "Le baptistère Saint-Jean", type: "visite", lieu: "battistero",
           resa: "Inclus dans le Giotto Pass",
-          texte: "Le plus vieux bâtiment de la place, où Dante et presque tous les Florentins ont été baptisés pendant des siècles. Ouvert jusqu'au début de soirée. Compter 20–30 min. La coupole de mosaïques est en restauration : une partie est masquée.",
+          texte: "Le plus vieux bâtiment de la place, où Dante et presque tous les Florentins ont été baptisés pendant des siècles. Ouvert tous les jours 8h30–19h30. Compter 20–30 min. Depuis le 10 septembre, on entre par la <b>porte Sud</b>. Attention : la voûte de mosaïques est en restauration et n'est pas visible en ce moment ; on vient pour le bâtiment, le pavement, le tombeau de Donatello et les portes.",
           regarder: [
-            { titre: "Le baptistère", maps: "Battistero di San Giovanni, Firenze", img: "baptistere", texte: "À l'intérieur, le tombeau de l'antipape Jean XXIII (Baldassare Cossa), sculpté par Donatello et Michelozzo : un pape déposé, enterré ici grâce à son banquier… Giovanni de' Medici. Dans les mosaïques, cherchez le diable qui dévore les damnés : on dit qu'il a impressionné le jeune Dante." }
+            { titre: "La porte Sud, la plus ancienne", maps: "Battistero di San Giovanni, Firenze", texte: "Vous entrez par la porte d'Andrea Pisano (1330–1336), la première des trois : vingt-huit panneaux de bronze en quadrilobes gothiques, vingt pour la vie de saint Jean-Baptiste, le patron de la ville, et huit pour les Vertus. C'est en voyant son succès que la ville lança, en 1401, le concours de la porte nord, celui que Ghiberti gagna contre Brunelleschi." },
+            { titre: "Le baptistère", maps: "Battistero di San Giovanni, Firenze", img: "baptistere", texte: "Au Moyen Âge, les Florentins étaient persuadés que c'était un ancien temple romain dédié à Mars, leur premier protecteur ; il date en réalité du XIe siècle (consacré en 1059). À l'intérieur, le tombeau de l'antipape Jean XXIII (Baldassare Cossa), sculpté par Donatello et Michelozzo : un pape déposé, enterré ici grâce à son banquier… Giovanni de' Medici. Au sol, cherchez le zodiaque en marbre marqueté." }
           ]
         },
         {
@@ -328,7 +340,7 @@ window.FLO = {
           aller: { duree: "12 min", via: "Piazza del Duomo → via de' Calzaiuoli → via Por Santa Maria → Ponte Vecchio → piazza dei Rossi", vers: "Le Volpi e l'Uva, Piazza dei Rossi 1r, Firenze" },
           texte: "Le soleil se couche vers 18h40 : arrêtez-vous au milieu du Ponte Vecchio, côté aval, l'Arno devient doré entre le Ponte Santa Trinita et les collines.",
           regarder: [
-            { titre: "La tour qui a dit non aux Médicis", maps: "Torre dei Rossi-Cerchi, Piazza dei Rossi, Firenze", texte: "Au bout du pont, côté Oltrarno, la <b>Torre dei Mannelli</b>. En 1565, la famille refusa de la démolir pour laisser passer le couloir de Vasari. Même Cosme Ier n'a pas insisté : le couloir contourne la tour sur des consoles, et on le voit très bien depuis le pont." }
+            { titre: "La tour qui a dit non aux Médicis", maps: "Torre dei Mannelli, Firenze", texte: "Au bout du pont, côté Oltrarno, la <b>Torre dei Mannelli</b>. En 1565, la famille refusa de la démolir pour laisser passer le couloir de Vasari. Même Cosme Ier n'a pas insisté : le couloir contourne la tour sur des consoles, et on le voit très bien depuis le pont." }
           ]
         },
         {
@@ -343,16 +355,17 @@ window.FLO = {
           aller: { duree: "15 min", via: "Piazza dei Rossi → via Guicciardini → piazza Pitti → piazza San Felice → via Romana", vers: "Osteria dell'Enoteca, Via Romana 70r, Firenze" },
           texte: "La rue des grands-ducs : le couloir de Vasari au-dessus de vos têtes, puis le palais qui a ruiné son constructeur, un poète anglais, et un musée de cire anatomique.",
           regarder: [
-            { titre: "Santa Felicita et la loge secrète", maps: "Chiesa di Santa Felicita, Firenze", img: "santafelicita", texte: "La petite église à gauche, sur sa place. Le couloir de Vasari traverse sa façade : à l'intérieur, une loge grillagée permettait aux Médicis d'assister à la messe sans être vus. Vous y entrerez demain matin pour la Déposition de Pontormo." },
-            { titre: "Le Palazzo Pitti", maps: "Palazzo Pitti, Firenze", img: "pitti", texte: "Le banquier Luca Pitti voulait un palais plus grand que celui des Médicis, avec des fenêtres aussi larges que leurs portes. Il s'est ruiné. En 1549, Éléonore de Tolède, l'épouse de Cosme Ier, l'a racheté… et y a installé les Médicis. Ironie complète." },
+            { titre: "Santa Felicita et la loge secrète", maps: "Chiesa di Santa Felicita, Firenze", img: "santafelicita", texte: "La petite église à gauche, sur sa place. Le couloir de Vasari traverse sa façade : à l'intérieur, une loge grillagée permettait aux Médicis d'assister à la messe sans être vus. Vous y ferez un saut demain matin : sa célèbre Déposition de Pontormo est partie à Rome pour une exposition jusqu'en février, mais l'Annonciation du même Pontormo, une fresque, et la loge sont là." },
+            { titre: "La rue des deux penseurs", maps: "Palazzo Guicciardini, Via Guicciardini, Firenze", texte: "La via Guicciardini porte le nom de <b>Francesco Guicciardini</b>, le grand historien de l'Italie de la Renaissance, né en 1483 dans le palais familial, à mi-rue. Son ami et contradicteur <b>Machiavel</b> est mort en 1527 dans une maison de cette même rue, détruite pendant la Seconde Guerre mondiale. Les deux hommes ont passé leur vie à se demander comment gouverner Florence ; ils n'étaient presque jamais d'accord." },
+            { titre: "Le Palazzo Pitti", maps: "Palazzo Pitti, Firenze", img: "pitti", texte: "Le banquier Luca Pitti voulait un palais plus grand que celui des Médicis, avec des fenêtres aussi larges que leurs portes. Il s'est ruiné. En 1549, Éléonore de Tolède, l'épouse de Cosme Ier, l'a racheté… et y a installé les Médicis. Ironie complète. Le palais a ensuite servi à tous les maîtres de la Toscane : les Lorraine, Élisa Bonaparte, la sœur de Napoléon, puis le roi Victor-Emmanuel II quand Florence fut capitale de l'Italie (1865–1871)." },
             { titre: "Casa Guidi", maps: "Casa Guidi, Piazza San Felice 8, Firenze", img: "casaguidi", texte: "Piazza San Felice, à l'angle de la via Maggio : les poètes anglais <b>Elizabeth Barrett et Robert Browning</b>, enfuis ensemble contre l'avis du père d'Elizabeth, ont vécu ici de 1847 à sa mort en 1861. Une plaque, sur la façade, la remercie d'avoir fait de sa poésie « un anneau d'or entre l'Italie et l'Angleterre »." },
-            { titre: "La Specola", maps: "Museo La Specola, Via Romana 17, Firenze", img: "specola", texte: "Au n° 17 de la via Romana, l'un des plus anciens musées scientifiques ouverts au public (1775). Il abrite des centaines de modèles anatomiques en cire, d'un réalisme dérangeant, commandés par le grand-duc pour enseigner la médecine sans cadavres." }
+            { titre: "La Specola", maps: "Museo La Specola, Via Romana 17, Firenze", img: "specola", texte: "Au n° 17 de la via Romana, l'un des plus anciens musées scientifiques ouverts au public (1775). Son nom vient de l'observatoire (« specola ») installé sur le toit. Il abrite des centaines de modèles anatomiques en cire, d'un réalisme dérangeant, commandés par le grand-duc Pierre-Léopold pour enseigner la médecine sans cadavres. La plus célèbre est la « Vénus des médecins » de Clemente Susini (1782), une jeune femme allongée, coiffée de vraies tresses et parée de perles, qu'on peut démonter organe par organe." }
           ]
         },
         {
           heure: "20h00", titre: "LA bistecca alla fiorentina", type: "repas",
           resa: "Osteria dell'Enoteca · 20h — À RÉSERVER", resaTodo: true,
-          texte: "Le gros effort financier du voyage. La bistecca se commande <b>au poids</b> (compter 1–1,2 kg pour deux), coupée épaisse de deux doigts, avec l'os, et se mange <b>saignante</b> : ne demandez pas « bien cuite », on vous le refusera poliment. Juste du sel, de l'huile, et un Chianti Classico.",
+          texte: "Le gros effort financier du voyage. La bistecca se commande <b>au poids</b> (compter 1–1,2 kg pour deux), coupée épaisse de trois doigts, avec l'os, et se mange <b>saignante</b> : ne demandez pas « bien cuite », on vous le refusera poliment. Juste du sel, de l'huile, et un Chianti Classico.",
           repas: [
             { resto: "enoteca", reco: true, texte: "Viande toscane du Val di Chiana, grillée simplement. Avant : la <b>terrine de foies de volaille au vin santo</b>, ou la morue fondante sur polenta grillée ; les <b>tortelli aux fèves et pecorino</b> si vous avez encore faim. Après : tiramisu ou crème brûlée au café, et le <b>limoncello maison</b>. Les mêmes propriétaires tiennent l'Enoteca Pitti Gola e Cantina, en face du palais Pitti : la cave est sérieuse." },
             { resto: "cammillo", texte: "Plan B si l'Enoteca est complète : la trattoria de la même famille depuis 1945, borgo San Jacopo. Service à l'ancienne, bistecca solide." },
@@ -364,7 +377,7 @@ window.FLO = {
           aller: { duree: "20 min", via: "Via Romana → via Maggio → Ponte Santa Trinita → via Por Santa Maria → via Vacchereccia → piazza della Signoria → via dei Neri", vers: "Via dei Neri 16, Firenze" },
           texte: "La digestion par la rue des palais de l'Oltrarno, puis l'Arno de nuit.",
           regarder: [
-            { titre: "La maison de Bianca Cappello", maps: "Palazzo di Bianca Cappello, Via Maggio 26, Firenze", texte: "Via Maggio, au n° 26, une façade couverte de décors gravés (sgraffites). Elle fut offerte à Bianca Cappello, une Vénitienne en fuite devenue la maîtresse du grand-duc François Ier, puis sa femme. En octobre 1587, ils meurent tous les deux, à quelques heures d'intervalle, dans leur villa de Poggio a Caiano. Paludisme, disait-on ; empoisonnement, murmurait-on. Des analyses récentes ont penché pour l'arsenic." }
+            { titre: "La maison de Bianca Cappello", maps: "Palazzo di Bianca Cappello, Via Maggio 26, Firenze", texte: "Via Maggio, au n° 26, une façade couverte de décors gravés (sgraffites). Elle fut offerte à Bianca Cappello, une Vénitienne en fuite devenue la maîtresse du grand-duc François Ier, puis sa femme. En octobre 1587, ils meurent tous les deux, à quelques heures d'intervalle, dans leur villa de Poggio a Caiano, et c'est le frère de François, le cardinal Ferdinand, qui hérite du trône. Paludisme, disait-on ; empoisonnement, murmurait-on. Même la science se dispute encore : une étude de 2006 a trouvé de l'arsenic dans leurs restes, une autre en 2010 le parasite du paludisme." }
           ]
         }
       ]
@@ -372,7 +385,7 @@ window.FLO = {
     {
       id: "mar", court: "Mar 13", date: "2026-10-13",
       titre: "La campagne en pleine ville, jusqu'à San Miniato",
-      intro: "Check-out, valises confiées à l'hôte, et une dernière matinée à pied : une Déposition de Pontormo, une ruelle entre les murs et les oliviers, la plus belle église de Florence tout en haut, puis la descente vers San Niccolò pour un déjeuner au comptoir de Zeb. Départ du logement vers 15h10, en tram. S'il pleut, trois plans B au sec plus bas.",
+      intro: "Check-out, valises confiées à l'hôte, et une dernière matinée à pied : un coup d'œil à Santa Felicita (sa Déposition de Pontormo est prêtée à une exposition à Rome jusqu'en février), une ruelle entre les murs et les oliviers, la plus belle église de Florence tout en haut, puis la descente vers San Niccolò pour un déjeuner au comptoir de Zeb. Départ du logement vers 15h10, en tram. S'il pleut, trois plans B au sec plus bas.",
       carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Chiesa di Santa Felicita, Firenze", "Forte di Belvedere, Firenze", "Basilica di San Miniato al Monte, Firenze"], arrivee: "Zeb, Via San Miniato 2r, Firenze" },
       etapes: [
         {
@@ -380,12 +393,13 @@ window.FLO = {
           texte: "Demandez à l'hôte de garder les valises jusqu'à 15h. Sinon, des consignes à la journée existent dans le centre (Bounce, Radical Storage : réservation sur leur appli). Un dernier café au comptoir de la via dei Neri."
         },
         {
-          heure: "9h30", titre: "Santa Felicita et la Déposition de Pontormo", type: "visite", lieu: "santafelicita",
+          heure: "9h30", titre: "Un coup d'œil à Santa Felicita", type: "visite", lieu: "santafelicita",
           aller: { duree: "7 min", via: "Via dei Neri → piazza del Pesce → Ponte Vecchio → via Guicciardini → piazza Santa Felicita", vers: "Chiesa di Santa Felicita, Firenze" },
-          texte: "Gratuit, ouverte le matin (lun–sam 9h30–12h30). Un quart d'heure suffit, mais c'est l'un des tableaux les plus étranges de la Renaissance. Gardez quelques pièces : l'éclairage des chapelles est souvent payant.",
+          texte: "<b>Changement :</b> la Déposition de Pontormo, qui faisait tout l'intérêt de l'arrêt, est prêtée à la grande exposition Pontormo des Scuderie del Quirinale, à Rome, du 9 octobre 2026 au 7 février 2027. Elle ne sera pas là mardi. L'église reste sur votre chemin et gratuite (lun–sam 9h30–12h30) : cinq minutes pour l'Annonciation de Pontormo, peinte à fresque dans la même chapelle (une fresque ne voyage pas), et la loge secrète des Médicis. Si la porte est fermée, montez directement : la Costa San Giorgio commence juste à côté.",
           regarder: [
-            { titre: "La Déposition de Pontormo", img: "pontormo", texte: "Première chapelle à droite (chapelle Capponi, dessinée par Brunelleschi). Pas de croix, pas de paysage : des corps aux couleurs acidulées, rose, bleu ciel, vert d'eau, qui semblent flotter sans poids. Pontormo a travaillé trois ans (1525–1528) enfermé derrière une palissade, sans laisser entrer personne. Le personnage barbu à droite, qui vous regarde, serait son autoportrait." },
-            { titre: "La loge des Médicis", texte: "Levez les yeux vers la contre-façade : la fenêtre grillagée au-dessus de l'entrée appartient au couloir de Vasari. Les grands-ducs y suivaient la messe sans descendre parmi les fidèles." }
+            { titre: "La chapelle vide de Pontormo", img: "pontormo", texte: "Première chapelle à droite (chapelle Capponi, dessinée par Brunelleschi). C'est ici qu'est accrochée d'habitude la Déposition (photo) : pas de croix, pas de paysage, des corps aux couleurs acidulées, rose, bleu ciel, vert d'eau, qui semblent flotter sans poids. Pontormo a travaillé trois ans (1525–1528) enfermé derrière une palissade, sans laisser entrer personne, pas même le commanditaire. Sur le mur de droite de la chapelle, de part et d'autre de la fenêtre, son <b>Annonciation</b> : l'ange et la Vierge se répondent à travers le vide, avec les mêmes couleurs acides. Gardez quelques pièces : l'éclairage des chapelles est souvent payant." },
+            { titre: "La loge des Médicis", texte: "Levez les yeux vers la contre-façade : la fenêtre grillagée au-dessus de l'entrée appartient au couloir de Vasari. Les grands-ducs y suivaient la messe sans descendre parmi les fidèles." },
+            { titre: "Une église plus vieille que la ville médiévale", texte: "Santa Felicita est l'une des plus anciennes églises de Florence : elle a été bâtie sur un cimetière chrétien de la fin de l'Antiquité, hors des murs romains, le long de la route de Rome (l'actuelle via Guicciardini). Des pierres tombales paléochrétiennes y ont été retrouvées." }
           ]
         },
         {
@@ -394,18 +408,19 @@ window.FLO = {
           texte: "À dix minutes du Ponte Vecchio, la ville disparaît : une ruelle pavée qui grimpe entre de hauts murs, des villas, des oliviers, puis les remparts médiévaux qui dégringolent la colline. Ça monte, mais par paliers.",
           regarder: [
             { titre: "La maison de Galilée", maps: "Casa di Galileo, Costa San Giorgio 19, Firenze", texte: "Costa San Giorgio, au n° 19, une plaque : Galilée a vécu dans cette maison. Il venait de découvrir les lunes de Jupiter et les avait baptisées « astres médicéens » pour s'attirer la protection des Médicis. Ça a marché : en 1610, il s'installe à Florence comme mathématicien et philosophe du grand-duc." },
-            { titre: "La Porta San Giorgio", maps: "Porta San Giorgio, Firenze", texte: "La plus ancienne porte de la ville encore debout (1324). Côté campagne, un bas-relief de saint Georges terrassant le dragon. Elle n'a jamais été rabotée : vous voyez la vraie hauteur des portes médiévales." },
+            { titre: "La Porta San Giorgio", maps: "Porta San Giorgio, Firenze", texte: "Une petite porte de 1324, dans la dernière enceinte de la ville. Côté campagne, un saint Georges terrassant le dragon (copie ; l'original est au Palazzo Vecchio) ; côté ville, sous la voûte, une fresque de la Vierge entourée de saints. Au XVIe siècle, on l'a rabaissée, comme presque toutes les portes, sur le conseil de Michel-Ange, pour mieux résister aux boulets ; pendant le siège de 1529, il la fit même murer. Seule la Porta San Niccolò, que vous verrez en descendant, a gardé sa hauteur." },
             { titre: "Le Forte Belvedere", maps: "Forte di Belvedere, Firenze", img: "belvedere", texte: "La forteresse en étoile construite par Buontalenti en 1590. Officiellement, pour défendre la ville. En réalité, ses canons pouvaient aussi viser Florence elle-même et protéger le Palazzo Pitti, juste en dessous, si le peuple se soulevait contre les Médicis. On disait que le trésor des grands-ducs y était caché." },
             { titre: "La via di Belvedere", maps: "Via di Belvedere, Firenze", texte: "La route longe les remparts du XIVe siècle, crénelés, avec des oliviers de l'autre côté. C'est la Toscane des tableaux, sans quitter la ville. Au bout, la minuscule <b>Porta San Miniato</b>, puis la montée finale par la via del Monte alle Croci." }
           ]
         },
         {
           heure: "10h45", titre: "San Miniato al Monte", type: "visite", lieu: "sanminiato",
-          texte: "Gratuit, ouvert le matin. La plus belle église romane de Florence, et la plus belle vue, au-dessus de tout. La façade et son aigle doré viennent d'être restaurés (mai 2026). Compter 30–45 min avec la vue et le cimetière. Le guide est dans la fiche.",
+          texte: "Gratuit, ouvert le matin. La plus belle église romane de Florence, et la plus belle vue, au-dessus de tout. La façade, le clocher et la toiture sortent de dix-huit mois de restauration (inaugurée le 7 mai 2026) : les marbres n'ont jamais été aussi nets. Compter 30–45 min avec la vue et le cimetière. Le guide est dans la fiche.",
           regarder: [
-            { titre: "La façade", maps: "Basilica di San Miniato al Monte, Firenze", img: "sanminiato", texte: "Marbre blanc et vert en motifs géométriques, au sommet un aigle doré qui tient un ballot de laine : le symbole de la corporation des marchands de drap, l'Arte di Calimala, qui finançait l'église." },
+            { titre: "La façade", maps: "Basilica di San Miniato al Monte, Firenze", img: "sanminiato", texte: "Marbre blanc et vert de Prato en motifs géométriques, une mosaïque dorée du XIIIe siècle (le Christ entre la Vierge et saint Minias), et au sommet un aigle de cuivre doré qui serre dans ses serres un ballot de drap : le symbole de la corporation des marchands de drap, l'Arte di Calimala, qui finançait l'église." },
             { titre: "Le sol de 1207", texte: "Au milieu de la nef, un tapis de marbre marqueté avec les signes du zodiaque, des lions et des colombes. Il a plus de 800 ans : regardez où vous marchez." },
-            { titre: "La boutique des moines", maps: "Basilica di San Miniato al Monte, Firenze", texte: "Les moines olivétains, qui chantent encore les offices en grégorien, vendent leur miel, leurs liqueurs et leurs tisanes. Un souvenir qui a du sens." }
+            { titre: "Le cimetière des Porte Sante", texte: "Autour de l'église, un cimetière monumental plein de chapelles et d'anges de marbre. Y reposent Carlo Collodi, l'auteur de Pinocchio, le réalisateur Franco Zeffirelli, le peintre Pietro Annigoni, et <b>Pellegrino Artusi</b>, l'auteur de « La science en cuisine et l'art de bien manger » (1891), le livre de recettes qui a fait la cuisine italienne. Ses recettes sont toujours rééditées ; la Gelateria della Passera a même un parfum à son nom." },
+            { titre: "La boutique des moines", maps: "Basilica di San Miniato al Monte, Firenze", texte: "Les moines olivétains, ici depuis 1373, chantent encore les vêpres en grégorien en fin d'après-midi, et vendent leur miel, leurs liqueurs et leurs tisanes. Un souvenir qui a du sens." }
           ]
         },
         {
@@ -413,7 +428,7 @@ window.FLO = {
           aller: { duree: "25 min", via: "San Miniato → escalier vers le viale Galileo → Piazzale Michelangelo → rampes du Poggi → Porta San Niccolò → via di San Niccolò", vers: "Zeb, Via San Miniato 2r, Firenze" },
           texte: "On redescend par le grand balcon de la ville, puis par les escaliers et les grottes artificielles des rampes, jusqu'au petit quartier de San Niccolò.",
           regarder: [
-            { titre: "Le Piazzale Michelangelo", maps: "Piazzale Michelangelo, Firenze", img: "piazzale", texte: "Créé en 1869 par l'architecte Giuseppe Poggi, quand Florence était capitale de l'Italie et se donnait des airs de Paris. Il devait accueillir un musée Michel-Ange, jamais fait. De gauche à droite : Santa Croce, le Palazzo Vecchio, la coupole, le campanile, et Fiesole sur sa colline au fond." },
+            { titre: "Le Piazzale Michelangelo", maps: "Piazzale Michelangelo, Firenze", img: "piazzale", texte: "Créé en 1869 par l'architecte Giuseppe Poggi, quand Florence était capitale de l'Italie et se donnait des airs de Paris. Il devait accueillir un musée Michel-Ange, jamais fait. Le David de bronze au centre est une copie, montée ici en 1873 tirée par des attelages de bœufs. Face à la ville, de gauche à droite : le Ponte Vecchio, la tour du Palazzo Vecchio, le campanile et la coupole, Santa Croce, et au fond à droite Fiesole sur sa colline." },
             { titre: "La Porta San Niccolò", maps: "Porta San Niccolò, Firenze", img: "portasanniccolo", texte: "La seule porte de la ville qui a gardé sa hauteur d'origine (1324). Au XVIe siècle, on a rabaissé toutes les autres pour que les canons puissent tirer par-dessus ; celle-ci, protégée par la colline, a été épargnée." }
           ]
         },
@@ -462,10 +477,11 @@ window.FLO = {
         etapes: [
           { salle: "Tribune (au fond)", titre: "Le David", oeuvres: [
             { nom: "David", auteur: "Michel-Ange", date: "1501–1504", img: "david", texte: "Le bloc, surnommé « le Géant », avait été entamé puis abandonné par deux sculpteurs ; il traînait depuis près de 40 ans dans la cour de l'Opera del Duomo. Michel-Ange, 26 ans, l'obtient en 1501 et en tire le David en trois ans. Ce n'est pas le vainqueur avec la tête de Goliath : c'est <b>l'instant d'avant</b>, le regard qui jauge l'ennemi. Pour la République florentine, qui venait de chasser les Médicis, c'était un manifeste : le petit peuple libre qui tient tête aux tyrans. Installé devant le Palazzo Vecchio en 1504, il y est resté jusqu'en 1873 (une copie l'a remplacé), et cette tribune a été construite exprès pour lui." },
-            { nom: "À regarder de près", texte: "Les veines gonflées de la main droite, qui tient la pierre. La fronde qui passe dans le dos (faites le tour). La jambe d'appui, tendue, et le tronc d'arbre qui la soutient discrètement. La tête et les mains, trop grandes : la statue devait être vue d'en bas, hissée sur un contrefort de la cathédrale. En 1991, un homme a frappé le pied gauche au marteau et cassé un orteil : regardez bien, la restauration est invisible." }
+            { nom: "À regarder de près", texte: "Les veines gonflées de la main droite, qui tient la pierre. La fronde qui passe dans le dos (faites le tour). La jambe d'appui, tendue, et le tronc d'arbre qui la soutient discrètement. La tête et les mains, trop grandes : la statue devait être vue d'en bas, hissée sur un contrefort de la cathédrale. En 1991, un homme a frappé le pied gauche au marteau et cassé un orteil : regardez bien, la restauration est invisible." },
+            { nom: "Où mettre le Géant ?", texte: "Le 25 janvier 1504, la ville réunit une commission pour décider où placer la statue : on y trouve Léonard de Vinci, Botticelli, Filippino Lippi, le Pérugin… Léonard propose de l'abriter sous la Loggia dei Lanzi ; c'est finalement devant le Palazzo Vecchio qu'on l'installe, face au pouvoir. Pour la pudeur, on lui ceint d'abord les reins d'une guirlande de feuilles de cuivre. Aujourd'hui, ses chevilles, qui portent cinq tonnes et demie, sont surveillées de près : elles présentent de fines fissures." }
           ] },
           { salle: "Galerie des Prisonniers", titre: "Les corps qui sortent de la pierre", oeuvres: [
-            { nom: "Les quatre Prisonniers (ou Esclaves)", auteur: "Michel-Ange", date: "vers 1520–1530", img: "atlas", texte: "Prévus pour le tombeau géant du pape Jules II à Rome, réduit puis jamais achevé. Le neveu de Michel-Ange les a donnés à Cosme Ier, qui les a placés dans la grotte de Boboli jusqu'en 1909. Michel-Ange disait que la statue est déjà dans le bloc : le sculpteur ne fait qu'enlever le superflu. Ici, on voit le travail s'arrêter en chemin : un dos poli, une épaule encore brute, un visage pas encore sorti (l'« Atlas » n'a pas de tête, seulement un bloc)." },
+            { nom: "Les quatre Prisonniers (ou Esclaves)", auteur: "Michel-Ange", date: "vers 1520–1530", img: "atlas", texte: "Prévus pour le tombeau géant du pape Jules II à Rome, un projet sans cesse réduit pendant quarante ans : le monument monté en 1545 à San Pietro in Vincoli, autour du Moïse, ne les a jamais accueillis. Le neveu de Michel-Ange les a donnés à Cosme Ier, qui les a placés dans la grotte de Boboli jusqu'en 1909. Michel-Ange disait que la statue est déjà dans le bloc : le sculpteur ne fait qu'enlever le superflu. Ici, on voit le travail s'arrêter en chemin : un dos poli, une épaule encore brute, un visage pas encore sorti (l'« Atlas » n'a pas de tête, seulement un bloc)." },
             { nom: "Le Prisonnier qui s'éveille", auteur: "Michel-Ange", img: "eveil", texte: "Le plus saisissant : un corps qui s'arrache à la pierre comme d'un sommeil. On voit les traces de la gradine, le ciseau à dents, sur toute la surface." },
             { nom: "Le Jeune Prisonnier", auteur: "Michel-Ange", img: "prisonnierjeune", texte: "Le bras replié sur le visage, comme pour se protéger. Le corps est presque fini, la tête encore prisonnière." },
             { nom: "Saint Matthieu", auteur: "Michel-Ange", date: "1503", img: "saintmatthieu", texte: "Le seul commencé d'une série de douze apôtres commandée pour la cathédrale. Michel-Ange est parti à Rome pour Jules II, et Matthieu est resté à mi-chemin." }
@@ -478,13 +494,15 @@ window.FLO = {
             { nom: "Le cassone Adimari", auteur: "Lo Scheggia (le frère de Masaccio)", date: "vers 1450", img: "cassone", texte: "Un panneau de coffre de mariage : un cortège de noce devant le baptistère, sous un dais rouge. Robes à traîne, coiffures extravagantes, musiciens qui soufflent dans leurs trompettes. La mode florentine du Quattrocento, prise sur le vif." }
           ] },
           { salle: "Musée des instruments de musique", titre: "Stradivarius et l'inventeur du piano", oeuvres: [
-            { nom: "Les instruments des Médicis", texte: "Une quarantaine d'instruments des collections des grands-ducs, dont un alto de <b>Stradivari</b> fait pour les Médicis, et un épinette ovale de <b>Bartolomeo Cristofori</b>, le facteur de la cour qui a inventé le piano-forte vers 1700, à Florence." }
+            { nom: "Les instruments des Médicis", texte: "Une quarantaine d'instruments des collections des grands-ducs, dont un alto de <b>Stradivari</b> fait pour les Médicis, et une épinette ovale de <b>Bartolomeo Cristofori</b>, le facteur de la cour qui a inventé le piano-forte vers 1700, à Florence." }
           ] }
         ]
       },
       histoires: [
         "Le David a été transporté de l'atelier à la piazza della Signoria en 1504 dans une cage de bois roulant sur des rondins : 4 jours pour quelques centaines de mètres, et des jets de pierres de partisans des Médicis la nuit.",
-        "En 1527, pendant une émeute contre les Médicis, un banc jeté d'une fenêtre du Palazzo Vecchio lui a cassé le bras gauche en trois morceaux. Le jeune Giorgio Vasari et un ami ont ramassé les morceaux."
+        "En 1527, pendant une émeute contre les Médicis, un banc jeté d'une fenêtre du Palazzo Vecchio lui a cassé le bras gauche en trois morceaux. Le jeune Giorgio Vasari et un ami ont ramassé les morceaux.",
+        "Selon Vasari, le gonfalonier Soderini trouva le nez trop gros. Michel-Ange grimpa, fit semblant de tailler en laissant tomber de la poussière de marbre cachée dans sa main, et redescendit : « Maintenant, il est vivant ! » s'écria Soderini. Le nez n'avait pas bougé.",
+        "Le bloc venait des carrières de Carrare et il était médiocre : étroit, haut de plus de 5 m, déjà entamé, plein de petites cavités. C'est pour cela que le David est si plat, vu de profil : Michel-Ange a dû loger tout le corps dans une tranche de marbre."
       ],
       pratique: { horaires: "Mar–dim 8h15–18h50, fermé le lundi", prix: "24 € (réservé)", duree: "1h–1h15", moment: "Votre créneau : dim 8h15", resa: "✅ Réservé — B-ticket n° 24288201" },
       video: { url: "https://www.youtube.com/watch?v=QdlP8ai8trw", titre: "Le David et la République florentine (Smarthistory, EN)" },
@@ -510,16 +528,17 @@ window.FLO = {
           ] },
           { salle: "Salles 7–8", titre: "Une bataille, un duc sans nez et une nonne enlevée", oeuvres: [
             { nom: "La Bataille de San Romano", auteur: "Paolo Uccello", date: "vers 1438", img: "sanromano", texte: "Un des trois panneaux (les autres sont à Londres et au Louvre) qui décoraient la chambre de <b>Laurent le Magnifique</b> : il les avait obtenus, plus ou moins de force, de la famille qui les avait commandés. Uccello était obsédé par la perspective : lances brisées au sol alignées vers le point de fuite, chevaux comme des jouets." },
-            { nom: "Le Duc et la Duchesse d'Urbino", auteur: "Piero della Francesca", date: "vers 1473–1475", img: "ducsurbino", texte: "Federico da Montefeltro est toujours peint de profil gauche : il avait perdu l'œil droit et l'arête du nez dans un tournoi. Son épouse, Battista Sforza, est très pâle : elle est morte à 26 ans en donnant naissance à l'héritier, et le portrait est posthume. Ils se regardent pour l'éternité." },
+            { nom: "Le Duc et la Duchesse d'Urbino", auteur: "Piero della Francesca", date: "vers 1473–1475", img: "ducsurbino", texte: "Federico da Montefeltro est toujours peint de profil gauche : il avait perdu l'œil droit et l'arête du nez dans un tournoi. Son épouse, Battista Sforza, est très pâle : après une série de filles, elle avait enfin donné un fils au duc, et elle est morte quelques mois plus tard, à 26 ans ; le portrait est posthume. Ils se regardent pour l'éternité. Retournez le panneau : au dos, les deux époux défilent sur des chars de triomphe." },
             { nom: "La Vierge à l'Enfant avec deux anges (la « Lippina »)", auteur: "Filippo Lippi", date: "vers 1465", img: "lippina", texte: "Le modèle serait Lucrezia Buti, une jeune religieuse que le moine-peintre Filippo Lippi a enlevée de son couvent. Le scandale fut énorme, Cosme de Médicis s'en mêla, le pape finit par les relever de leurs vœux. Leur fils, Filippino, deviendra peintre et élève de… Botticelli, lui-même élève de Filippo." }
           ] },
           { salle: "Salles Botticelli (rénovées en juin 2026)", titre: "Vénus et le Printemps, face à face", oeuvres: [
-            { nom: "La Naissance de Vénus", auteur: "Botticelli", date: "vers 1485", img: "venus", texte: "Vénus, née de l'écume, arrive sur une coquille. À gauche, Zéphyr et une nymphe soufflent ; à droite, une Heure lui tend un manteau brodé de fleurs. Le cou trop long, l'épaule qui tombe, la pose impossible : Botticelli se moque du réalisme, il veut la grâce. La tradition veut que le visage soit celui de Simonetta Vespucci, la plus belle femme de Florence, aimée (platoniquement ?) de Julien de Médicis, morte de tuberculose à 22 ans. Botticelli a demandé à être enterré à ses pieds, à l'église d'Ognissanti. Il l'est." },
+            { nom: "L'Adoration des Mages (au début du parcours)", auteur: "Botticelli", date: "vers 1475", texte: "Le nouvel accrochage s'ouvre sur ce petit tableau qui est un portrait de famille déguisé : le vieux roi agenouillé aux pieds de l'Enfant, c'est Cosme l'Ancien ; ses fils Pierre et Jean sont les deux autres mages ; Laurent et Julien se tiennent dans la foule. Et tout à droite, drapé dans un manteau jaune, un homme regarde droit vers vous : c'est <b>Botticelli lui-même</b>, l'un des rares autoportraits du peintre." },
+            { nom: "La Naissance de Vénus", auteur: "Botticelli", date: "vers 1485", img: "venus", texte: "Vénus, née de l'écume, arrive sur une coquille. À gauche, Zéphyr et une nymphe soufflent ; à droite, une Heure lui tend un manteau brodé de fleurs. Le cou trop long, l'épaule qui tombe, la pose impossible : Botticelli se moque du réalisme, il veut la grâce. La tradition veut que le visage soit celui de Simonetta Vespucci, la plus belle femme de Florence, aimée (platoniquement ?) de Julien de Médicis, morte de tuberculose à 22 ans. Botticelli repose, comme elle, à l'église d'Ognissanti, celle des Vespucci ; la légende veut qu'il ait demandé à être enterré à ses pieds." },
             { nom: "Le Printemps (Primavera)", auteur: "Botticelli", date: "vers 1480", img: "primavera", texte: "Lisez-le de droite à gauche : Zéphyr, bleu, attrape la nymphe Chloris, qui se transforme en Flora, la robe couverte de fleurs. Au centre, Vénus ; au-dessus, Cupidon tire à l'aveugle sur les trois Grâces qui dansent. À gauche, Mercure chasse les nuages avec son caducée. Le sol est un tapis de plusieurs centaines de plantes, presque toutes identifiables. Peint pour un cousin de Laurent le Magnifique, probablement pour un mariage." },
-            { nom: "Les Madones de Botticelli", auteur: "Botticelli", texte: "Autour des deux chefs-d'œuvre, les Madones rondes (le Magnificat, la Grenade) : le même visage que Vénus. Le nouvel accrochage les rapproche exprès. Plus tard, Botticelli tombera sous l'influence de Savonarole, et selon Vasari il aurait jeté certaines de ses toiles « païennes » au bûcher des vanités." }
+            { nom: "Les Madones de Botticelli", auteur: "Botticelli", texte: "De part et d'autre de Vénus, le nouvel accrochage a placé les deux grandes Madones rondes, celle du <b>Magnificat</b> et celle de <b>la Grenade</b> : le même visage que la déesse. C'est voulu : pour les philosophes de l'entourage de Laurent, comme Marsile Ficin, la beauté païenne et la beauté chrétienne disaient la même chose. Plus tard, Botticelli devient un fidèle de Savonarole et sa peinture s'assombrit ; on raconte qu'il aurait jeté certaines de ses toiles « païennes » au bûcher des vanités, mais aucun document ne le prouve. Le parcours se termine par sa <b>Calomnie</b> (1495), tourmentée, à l'opposé de Vénus." }
           ] },
           { salle: "Salle 35 — Léonard", titre: "Léonard à 20 ans", oeuvres: [
-            { nom: "Le Baptême du Christ", auteur: "Verrocchio et Léonard", date: "1470–1475", img: "bapteme", texte: "Le tableau de l'atelier de Verrocchio, où Léonard était apprenti. L'ange de gauche, de profil, c'est lui. Selon Vasari, en voyant cet ange, Verrocchio aurait décidé de ne plus jamais toucher un pinceau, humilié par son élève." },
+            { nom: "Le Baptême du Christ", auteur: "Verrocchio et Léonard", date: "1470–1475", img: "bapteme", texte: "Le tableau de l'atelier de Verrocchio, où Léonard était apprenti. L'ange de gauche, de profil, est de sa main, avec ses cheveux bouclés et son regard rêveur. Selon Vasari, en voyant cet ange, Verrocchio aurait décidé de ne plus jamais toucher un pinceau, humilié par son élève." },
             { nom: "L'Annonciation", auteur: "Léonard de Vinci", date: "vers 1472–1476", img: "annonciationleo", texte: "Léonard a une vingtaine d'années. Les ailes de l'ange sont étudiées sur de vrais oiseaux (on les a d'ailleurs allongées plus tard, maladroitement). Au fond, les montagnes bleuissent dans la brume : la perspective atmosphérique, son invention. Dans la même salle, son <b>Adoration des Mages</b> inachevée, un chaos génial resté à l'état de dessin." }
           ] },
           { salle: "La Tribune (salle 18)", titre: "Le coffre à bijoux des Médicis", oeuvres: [
@@ -529,7 +548,7 @@ window.FLO = {
             { nom: "La vue", texte: "Au bout du couloir, la fenêtre donne sur le Ponte Vecchio et le couloir de Vasari, qui part juste sous vos pieds et file au-dessus des boutiques. Prenez cinq minutes." }
           ] },
           { salle: "Salle 41 — Michel-Ange et Raphaël", titre: "Les deux génies dans la même salle", oeuvres: [
-            { nom: "Le Tondo Doni", auteur: "Michel-Ange", date: "1505–1506", img: "doni", texte: "Sa seule peinture sur bois achevée, faite pour le mariage du riche marchand Agnolo Doni, dans un cadre que Michel-Ange a dessiné. La Vierge, musclée comme un athlète, se tord pour passer l'Enfant à Joseph : on reconnaît le futur peintre de la chapelle Sixtine. Selon Vasari, Doni a voulu payer 40 ducats au lieu de 70 ; Michel-Ange a renvoyé le tableau et exigé 140. Doni a payé." },
+            { nom: "Le Tondo Doni", auteur: "Michel-Ange", date: "1505–1506", img: "doni", texte: "Sa seule peinture sur bois achevée, faite pour le mariage du riche marchand Agnolo Doni, dans un cadre que Michel-Ange a dessiné. La Vierge, musclée comme un athlète, se tord pour passer l'Enfant à Joseph : on reconnaît le futur peintre de la chapelle Sixtine. Selon Vasari, Michel-Ange en demandait 70 ducats ; Doni, marchand avisé, n'en envoya que 40. Michel-Ange renvoya l'argent et exigea 100 ou le tableau. Doni proposa alors les 70 du début… et Michel-Ange en voulut le double, 140. Doni a payé." },
             { nom: "La Madone au chardonneret", auteur: "Raphaël", date: "vers 1505", img: "cardellino", texte: "Un cadeau de mariage, lui aussi. En 1547, la maison du propriétaire s'est effondrée dans un glissement de terrain et le tableau s'est brisé en 17 morceaux ; on l'a recollé, puis restauré pendant dix ans (2008). Dans la même salle, Raphaël a peint les portraits… d'Agnolo et Maddalena Doni, les clients de Michel-Ange." }
           ] },
           { salle: "1er étage — Titien et le maniérisme", titre: "La Vénus qui choqua Mark Twain", oeuvres: [
@@ -544,12 +563,12 @@ window.FLO = {
         ]
       },
       histoires: [
-        "« Uffizi » veut dire « bureaux » : Vasari a construit le bâtiment en 1560 pour les administrations de Cosme Ier. Les collections ont pris l'étage du dessus.",
+        "« Uffizi » veut dire « bureaux » : Vasari a construit le bâtiment en 1560 pour les administrations de Cosme Ier, une manière de garder les magistrats sous l'œil du duc. Les collections ont pris l'étage du dessus. Depuis l'arche côté Arno, la longue cour encadre exactement la tour du Palazzo Vecchio : une perspective voulue par Vasari.",
         "En 1737 meurt le dernier Médicis. Sa sœur, Anna Maria Luisa, signe le « Pacte de famille » : toutes les œuvres resteront à Florence, pour toujours, « pour l'ornement de l'État et l'utilité du public ». Sans elle, la collection aurait fini à Vienne.",
         "Le 27 mai 1993, la bombe de la via dei Georgofili, juste derrière, a soufflé des salles entières. Plusieurs tableaux ont été détruits ou criblés d'éclats ; certains sont exposés avec leurs blessures."
       ],
-      pratique: { horaires: "Mar–dim 8h15–18h30, fermé le lundi", prix: "29 € en prévente (réservé)", duree: "2h30–3h", moment: "Votre créneau : dim 13h45", resa: "✅ Réservé — code 6R325YDT" },
-      video: { url: "https://www.youtube.com/watch?v=XBrAu6cBTN0", titre: "La Naissance de Vénus aux Offices (Smarthistory, EN)" },
+      pratique: { horaires: "Mar–dim 8h15–18h30, fermé le lundi", prix: "29 € en prévente (réservé)", duree: "2h30–3h", moment: "Votre créneau : dim 13h45, Porte 1, 10–15 min avant", resa: "✅ Réservé — code 6R325YDT" },
+      video: { url: "https://www.youtube.com/watch?v=XBrAu6cBTN0", titre: "Les secrets de la Naissance de Vénus (Sara, Slowculture in Tuscany, EN)" },
       maps: "Galleria degli Uffizi, Firenze"
     },
 
@@ -592,7 +611,6 @@ window.FLO = {
       pratique: { horaires: "Tous les jours 9h–19h, jeudi 9h–14h. Tour 9h–17h (fermée s'il pleut).", prix: "Musée 18 €, tour 20 € (tarifs 2026)", duree: "1h30 (+45 min la tour)", moment: "Mardi matin s'il pleut", resa: "Non obligatoire. Visites « parcours secrets » sur réservation." },
       liens: [{ url: "https://ticketsmuseums.comune.fi.it/", texte: "Billetterie des musées civiques" }],
       video: { url: "https://www.youtube.com/watch?v=n5Xb9Ivcco0", titre: "Palazzo Vecchio : pourquoi c'est à voir (EN)" },
-      video2: { url: "https://www.youtube.com/watch?v=TW5RMNY0Q7U", titre: "Les passages secrets du Palazzo Vecchio (EN)" },
       maps: "Palazzo Vecchio, Firenze"
     },
 
@@ -612,8 +630,8 @@ window.FLO = {
             { nom: "Dante et la Divine Comédie", auteur: "Domenico di Michelino", date: "1465", img: "dantemichelino", texte: "Dante devant les murs de Florence, la ville qui l'a exilé, avec le livre ouvert qui l'éclaire. À gauche, la porte de l'Enfer ; derrière, la montagne du Purgatoire. Un hommage tardif : Florence n'a jamais récupéré son corps." }
           ] },
           { salle: "Sous la coupole", titre: "Le 26 avril 1478", oeuvres: [
-            { nom: "La conjuration des Pazzi", img: "medaillepazzi", texte: "À la messe de Pâques, au moment de l'élévation, Bernardo Baroncelli et Francesco de' Pazzi poignardent Julien de Médicis (19 coups). Laurent, blessé au cou, saute par-dessus la balustrade du chœur et s'enferme dans la sacristie nord derrière ses portes de bronze (de Luca della Robbia). La médaille de Bertoldo montre les deux scènes : Laurent en haut, Julien assassiné en bas." },
-            { nom: "Le Jugement dernier", auteur: "Vasari et Zuccari", date: "1572–1579", img: "jugement", texte: "Plus de 3 600 m² peints à 90 m de haut. Brunelleschi voulait une coupole couverte d'or et de mosaïques ; les Florentins de l'époque ont trouvé cette fresque trop chargée et ont proposé de la gratter. Elle est restée." },
+            { nom: "La conjuration des Pazzi", img: "medaillepazzi", texte: "Pendant la grand-messe du dimanche 26 avril 1478 (pas à Pâques, contrairement à ce qu'on lit souvent), au signal convenu, Bernardo Baroncelli et Francesco de' Pazzi poignardent Julien de Médicis (19 coups, dit-on). Laurent, blessé au cou, saute par-dessus la balustrade du chœur et s'enferme dans la sacristie nord derrière ses portes de bronze (de Luca della Robbia). La médaille de Bertoldo montre les deux scènes : sur une face, Laurent au-dessus de l'attaque qu'il esquive ; sur l'autre, Julien au-dessus de son assassinat." },
+            { nom: "Le Jugement dernier", auteur: "Vasari et Zuccari", date: "1572–1579", img: "jugement", texte: "Plus de 3 600 m² peints à 90 m de haut. Vasari est mort en 1574 après avoir peint le haut ; Federico Zuccari a fini le reste, dans un style très différent (cherchez la limite). Dès l'époque, le poète Lasca s'en moquait dans des vers cruels, et certains ont même proposé, plus tard, de l'effacer pour retrouver la coupole nue de Brunelleschi. Elle est restée." },
             { nom: "Le soleil sur le sol", texte: "Dans la lanterne de la coupole, un petit trou installé en 1475 par l'astronome Toscanelli projette un rayon de soleil sur une plaque de marbre au sol, au solstice d'été : la cathédrale servait aussi de gigantesque cadran solaire." }
           ] },
           { salle: "Crypte de Santa Reparata (pass)", titre: "Sous la cathédrale, une autre cathédrale", oeuvres: [
@@ -623,9 +641,11 @@ window.FLO = {
       },
       histoires: [
         "Commencée en 1296, la cathédrale est restée avec un trou de 45 m au-dessus du chœur pendant des décennies : personne ne savait couvrir une telle portée. Brunelleschi, orfèvre de formation, gagna le concours de 1418. Selon Vasari, il défia ses rivaux de faire tenir un œuf debout ; personne n'y arrivant, il cassa la pointe et le posa. « On aurait pu le faire ! » — « Oui, et vous auriez su construire la coupole si je vous avais montré mon plan. »",
-        "Sa coupole tient sans cintre en bois grâce à deux coques emboîtées et des briques posées en arête de poisson, qui se bloquent mutuellement pendant que le mortier sèche. Il a aussi inventé les machines de levage pour monter les matériaux, tirées par des bœufs qui n'avaient jamais besoin de faire demi-tour."
+        "Sa coupole tient sans cintre en bois grâce à deux coques emboîtées et des briques posées en arête de poisson, qui se bloquent mutuellement pendant que le mortier sèche. Il a aussi inventé les machines de levage pour monter les matériaux, tirées par des bœufs qui n'avaient jamais besoin de faire demi-tour.",
+        "En 1471, l'atelier de Verrocchio hisse au sommet la boule de cuivre doré ; parmi les apprentis, le jeune Léonard de Vinci, qui dessinera toute sa vie les machines de Brunelleschi. Le 5 avril 1492, la foudre frappe la lanterne : trois jours plus tard, Laurent le Magnifique meurt. En 1601, un autre éclair fait tomber la boule ; un disque de marbre blanc, derrière l'abside, marque l'endroit où elle s'écrasa.",
+        "Sur le flanc nord, près de la Porta della Mandorla, une tête de taureau dépasse d'un chapiteau. Hommage aux bœufs du chantier… ou, selon la légende, vengeance d'un maître d'œuvre qui aurait tourné les cornes vers la maison d'un boulanger cocu."
       ],
-      pratique: { horaires: "Lun–sam 10h15–15h45. Dimanche : messes seulement.", prix: "Gratuit (crypte avec le Giotto Pass)", duree: "30–45 min", moment: "Lundi 13h45", resa: "Non" },
+      pratique: { horaires: "Lun–sam 10h15–15h45. Dimanche : messes seulement. Crypte de Santa Reparata lun–sam 10h15–16h.", prix: "Gratuit (crypte avec le Giotto Pass)", duree: "30–45 min", moment: "Lundi 13h45 (épaules et genoux couverts)", resa: "Non" },
       video: { url: "https://www.youtube.com/watch?v=_IOPlGPQPuM", titre: "Comment un amateur a construit la plus grande coupole du monde (EN)" },
       video2: { url: "https://www.youtube.com/watch?v=FNxa97pJzbk", titre: "L'assassinat de Julien de Médicis, 1478 (EN)" },
       maps: "Cattedrale di Santa Maria del Fiore, Firenze"
@@ -640,6 +660,7 @@ window.FLO = {
         conseil: "Commencez par la grande salle du Paradis (rez-de-chaussée), puis montez : Michel-Ange, Donatello, les cantorie, Brunelleschi. Finissez par la terrasse, avec la coupole à portée de main.",
         etapes: [
           { salle: "Salle du Paradis", titre: "La place médiévale reconstituée", oeuvres: [
+            { nom: "Le lieu", texte: "Le musée occupe l'ancien atelier de l'Opera : c'est dans cette cour que Michel-Ange a taillé le David, de 1501 à 1504, à l'abri d'une palissade." },
             { nom: "La façade d'Arnolfo", texte: "Une salle immense reconstitue la façade médiévale de la cathédrale, démolie en 1587, avec ses statues d'origine. En face, les portes originales du baptistère." },
             { nom: "Les portes du Paradis (originaux)", auteur: "Ghiberti", date: "1425–1452", img: "paradis", texte: "Dix panneaux de bronze doré, de l'Ancien Testament. Ghiberti y abandonne les cadres gothiques pour de vraies scènes en perspective, avec des dizaines de personnages. Michel-Ange les aurait trouvées dignes d'être les portes du Paradis. La crue de 1966 en avait arraché plusieurs panneaux ; la restauration a duré plus de vingt ans." }
           ] },
@@ -666,9 +687,10 @@ window.FLO = {
       histoires: [
         "Giotto, le peintre, nommé architecte de la ville à près de 70 ans, n'a vu que le premier niveau : il meurt en 1337. Andrea Pisano puis Francesco Talenti achèvent la tour, qui monte à 84,7 m.",
         "Les bas-reliefs du bas racontent l'histoire de l'humanité par les métiers : le tissage, la navigation, l'astronomie… et Dédale qui vole. Ce sont des copies : les originaux sont au musée de l'Opera.",
-        "Depuis mars 2026, la tour subit sa première restauration complète en 700 ans (environ 4 ans), de haut en bas."
+        "Depuis le 9 mars 2026, la tour subit sa première restauration complète (environ quatre ans, plus de 7 millions d'euros) : jusque-là, on n'avait jamais restauré que des morceaux. L'échafaudage descend par étapes, du haut vers le bas ; l'escalier et la terrasse restent ouverts.",
+        "Giotto l'avait imaginée coiffée d'une flèche pointue (un dessin qui lui est attribué est conservé à Sienne). Talenti a préféré une terrasse : c'est elle qui vous accueille au sommet."
       ],
-      regarder: ["Les marbres blanc (Carrare), vert (Prato) et rose (Maremme).", "Au sommet, la vue à hauteur du tambour de la coupole, et les gens minuscules sur sa terrasse."],
+      regarder: ["Les marbres blanc (Carrare), vert (Prato) et rouge de Cintoia (Chianti).", "Les fenêtres qui s'agrandissent à chaque étage : la tour s'allège en montant.", "Au sommet, la coupole juste en face, et les gens minuscules sur sa terrasse."],
       pratique: { horaires: "Tous les jours, créneaux jusqu'à ~18h45", prix: "Giotto Pass 20 € (tour + baptistère + musée + crypte)", duree: "45 min–1h", moment: "Lun 12 vers 16h30–17h", resa: "🟡 À réserver — créneau fixe" },
       liens: [{ url: "https://tickets.duomo.firenze.it/en/", texte: "Réserver le Giotto Pass (officiel)" }],
       maps: "Campanile di Giotto, Firenze"
@@ -677,14 +699,15 @@ window.FLO = {
     battistero: {
       nom: "Baptistère Saint-Jean", theme: "Duomo", zone: "Duomo", img: "baptistere",
       resume: "Les portes du Paradis, le concours qui a lancé la Renaissance, et un pape déchu.",
-      pourquoi: "Le plus vieux bâtiment de la place. Inclus dans le Giotto Pass. Les portes se regardent dehors, gratuitement, à toute heure.",
+      pourquoi: "Le plus vieux bâtiment de la place. Inclus dans le Giotto Pass. Les portes se regardent dehors, gratuitement, à toute heure. En ce moment, la voûte de mosaïques est cachée par sa restauration : l'intérieur vaut surtout pour son architecture, son pavement et le tombeau de Donatello.",
       histoires: [
-        "Dante y a été baptisé et l'appelle « mon beau Saint-Jean ». Presque tous les Florentins l'ont été pendant des siècles.",
+        "Dante y a été baptisé et l'appelle « mon beau Saint-Jean ». Presque tous les Florentins l'ont été pendant des siècles. Pour compter les naissances, on déposait une fève noire pour un garçon, une blanche pour une fille.",
+        "Au Moyen Âge, les Florentins étaient persuadés que c'était un temple romain de Mars, leur premier dieu protecteur, transformé en église. En réalité, il a été consacré en 1059.",
         "En 1401, concours pour les portes nord : Ghiberti, 23 ans, bat Brunelleschi. Vexé, Brunelleschi part à Rome étudier les ruines antiques… et en revient avec ce qu'il faut pour construire la coupole. Les deux panneaux du concours sont au Bargello, côte à côte.",
         "À l'intérieur, le tombeau de l'antipape Jean XXIII (Baldassare Cossa, déposé en 1415), sculpté par Donatello et Michelozzo. Il avait pour banquier et ami Giovanni de' Medici, le père de Cosme, qui a obtenu cette place d'honneur. Le pape régnant a protesté contre l'inscription « autrefois pape » ; Florence ne l'a pas changée."
       ],
-      regarder: ["Dans le cadre des portes du Paradis (côté cathédrale), Ghiberti a glissé son autoportrait : un petit crâne chauve qui vous regarde.", "Dans la coupole de mosaïques, le grand Christ du Jugement et, en dessous, Satan qui dévore les damnés (en partie masqué par la restauration).", "Le sol en marqueterie avec un zodiaque."],
-      pratique: { horaires: "Tous les jours jusqu'en début de soirée", prix: "Inclus dans le Giotto Pass", duree: "20–30 min", moment: "Lundi 17h30, après le campanile", resa: "Avec le pass" },
+      regarder: ["Dans le cadre des portes du Paradis (côté cathédrale), Ghiberti a glissé son autoportrait : un petit crâne chauve qui vous regarde.", "La porte Sud d'Andrea Pisano (1330–1336), la plus ancienne, par laquelle on entre en ce moment.", "La voûte de mosaïques (le grand Christ du Jugement, Satan qui dévore les damnés) : cachée par la restauration en cours, elle n'est pas visible cet automne.", "Le sol en marqueterie avec un zodiaque."],
+      pratique: { horaires: "Tous les jours 8h30–19h30 (entrée par la porte Sud depuis le 10 septembre)", prix: "Inclus dans le Giotto Pass", duree: "20–30 min", moment: "Lundi 17h30, après le campanile", resa: "Avec le pass" },
       video: { url: "https://www.youtube.com/watch?v=fWkewBPMKEk", titre: "Ghiberti, les portes du Paradis (Smarthistory, EN)" },
       maps: "Battistero di San Giovanni, Firenze"
     },
@@ -704,11 +727,11 @@ window.FLO = {
             { nom: "L'Annonciation Cavalcanti", auteur: "Donatello", date: "vers 1435", img: "cavalcanti", texte: "En pierre dorée, juste après Machiavel. Marie, surprise, se retourne à moitié pour fuir puis s'arrête. Un des plus beaux moments de Donatello, souvent ignoré." }
           ] },
           { salle: "Transept et chœur", titre: "Giotto", oeuvres: [
-            { nom: "Les chapelles Bardi et Peruzzi", auteur: "Giotto", date: "vers 1320–1325", texte: "À droite du chœur, deux chapelles peintes par Giotto, la vie de saint François (Bardi) et des deux saints Jean (Peruzzi). La chapelle Bardi sort d'une restauration de quatre ans : le cycle est de nouveau entièrement visible. Regardez la Mort de saint François : les frères qui se penchent sur le corps, chacun avec sa douleur." },
+            { nom: "Les chapelles Bardi et Peruzzi", auteur: "Giotto", date: "vers 1320–1325", texte: "À droite du chœur, deux chapelles peintes par Giotto, la vie de saint François (Bardi) et des deux saints Jean (Peruzzi). La chapelle Bardi sort d'une restauration de quatre ans, présentée le 11 septembre 2026 : sous une couche grise, on a retrouvé les Vertus franciscaines de la voûte, et dans la scène du chapitre d'Arles, l'analyse aux rayons X a fait réapparaître un crucifix devenu invisible à l'œil nu. Regardez la Mort de saint François : les frères qui se penchent sur le corps, chacun avec sa douleur." },
             { nom: "La chapelle Baroncelli", auteur: "Taddeo Gaddi", texte: "Dans le transept droit : l'Annonciation aux bergers, une des premières scènes de nuit de la peinture occidentale, avec l'ange qui éclaire les bergers éblouis." }
           ] },
           { salle: "Allée de gauche", titre: "Galilée, enfin", oeuvres: [
-            { nom: "Le tombeau de Galilée", date: "1737", img: "tombegalilee", texte: "Condamné par l'Église en 1633, Galilée n'eut d'abord pas droit à un tombeau : son corps a attendu près d'un siècle dans un réduit près du clocher. Lors du transfert ici, en 1737, des admirateurs lui ont prélevé trois doigts et une dent. Son majeur est au Museo Galileo, à 2 min de chez vous." },
+            { nom: "Le tombeau de Galilée", date: "1737", img: "tombegalilee", texte: "Condamné par l'Église en 1633, Galilée n'eut d'abord pas droit à un tombeau : son corps a attendu près d'un siècle dans un réduit près du clocher. Lors du transfert ici, en 1737, des admirateurs lui ont prélevé trois doigts et une dent. Son majeur est au Museo Galileo, à 2 min de chez vous ; le pouce, l'index et la dent, perdus de vue pendant deux siècles, ont refait surface dans une vente aux enchères en 2009 et l'ont rejoint." },
             { nom: "Le crucifix du « paysan »", auteur: "Donatello", texte: "Dans une chapelle du transept gauche, un Christ en bois très réaliste. Selon Vasari, son ami Brunelleschi lui dit qu'il avait mis un paysan sur la croix. Vexé, Donatello le mit au défi de faire mieux ; quand il vit le crucifix de Brunelleschi (à Santa Maria Novella), il en lâcha les œufs qu'il portait dans son tablier." }
           ] },
           { salle: "Cloître", titre: "La chapelle des Pazzi", oeuvres: [
@@ -716,15 +739,16 @@ window.FLO = {
           ] },
           { salle: "Musée (ancien réfectoire)", titre: "La crue de 1966", oeuvres: [
             { nom: "Le crucifix de Cimabue", auteur: "Cimabue", date: "vers 1280", img: "cimabue", texte: "Le 4 novembre 1966, l'eau monte ici à près de 5 m. Le crucifix, gorgé de boue, perd une grande partie de sa peinture (la photo le montre avant). Il est devenu le symbole de la crue et des « anges de la boue ». Cherchez aussi, sur un mur, la ligne qui marque la hauteur de l'eau." },
-            { nom: "La Cène", auteur: "Taddeo Gaddi", texte: "Sur tout le mur du fond de l'ancien réfectoire : les moines mangeaient sous le regard des apôtres." }
+            { nom: "La Cène", auteur: "Taddeo Gaddi", texte: "Sur tout le mur du fond de l'ancien réfectoire : les moines mangeaient sous le regard des apôtres." },
+            { nom: "Florence Nightingale", auteur: "Francis William Sargant", date: "1913", texte: "Dans le premier cloître, la jeune femme à la lampe : la fondatrice des soins infirmiers modernes, née à Florence en 1820 et baptisée du nom de la ville par ses parents anglais." }
           ] }
         ]
       },
       histoires: [
-        "En 1817, Stendhal sort de Santa Croce le cœur battant, au bord de l'évanouissement devant tant de beauté : c'est l'origine du « syndrome de Stendhal ».",
+        "En janvier 1811, Stendhal sort de Santa Croce le cœur battant, au bord de l'évanouissement devant tant de beauté ; il le raconte en 1817 dans « Rome, Naples et Florence ». En 1979, une psychiatre florentine, Graziella Magherini, a donné son nom au « syndrome de Stendhal », ce malaise qu'elle observait chez des touristes submergés par les chefs-d'œuvre.",
         "La façade néogothique ne date que de 1863. Son architecte, Niccolò Matas, y aurait placé une étoile de David et, juif, aurait été enterré sous les marches plutôt que dans l'église. Les historiens discutent encore de la part de légende."
       ],
-      pratique: { horaires: "Lun–sam 9h30–17h30, dim 12h30–17h45", prix: "≈ 10 €", duree: "1h–1h15", moment: "Lundi 9h30", resa: "Non (billetterie en ligne possible)" },
+      pratique: { horaires: "Lun–sam dès 9h30, dim l'après-midi ; dernière entrée 17h, fermeture 17h20", prix: "≈ 10–11 €", duree: "1h–1h15", moment: "Lundi 9h30 (épaules et genoux couverts)", resa: "Entrée par créneaux : pas nécessaire un lundi matin d'octobre, billetterie en ligne possible" },
       liens: [{ url: "https://www.santacroceopera.it/en/", texte: "Site officiel" }],
       video: { url: "https://www.youtube.com/watch?v=cpcM38xnX_E", titre: "Les tombeaux de Santa Croce (EN)" },
       maps: "Basilica di Santa Croce, Firenze"
@@ -792,7 +816,7 @@ window.FLO = {
     sanminiato: {
       nom: "San Miniato al Monte", theme: "Jardins et vues", zone: "Oltrarno", img: "sanminiato",
       resume: "La plus belle église, et la plus belle vue, au-dessus de tout.",
-      pourquoi: "Plus calme que le Piazzale Michelangelo juste en dessous, avec une vue plus large. L'intérieur, roman, est l'un des plus beaux de Florence. Gratuit. Façade fraîchement restaurée (mai 2026). Mardi matin.",
+      pourquoi: "Plus calme que le Piazzale Michelangelo juste en dessous, avec une vue plus large. L'intérieur, roman, est l'un des plus beaux de Florence. Gratuit. Façade, clocher et toiture fraîchement restaurés (inauguration le 7 mai 2026, après 18 mois de chantier). Mardi matin.",
       guide: {
         duree: "30–45 min",
         conseil: "Entrez, avancez sur le pavement, descendez à la crypte, remontez au chœur surélevé par les escaliers latéraux, finissez par la sacristie et la chapelle du cardinal du Portugal (à gauche en entrant).",
@@ -807,7 +831,7 @@ window.FLO = {
             { nom: "La sacristie", auteur: "Spinello Aretino", date: "1387", texte: "La vie de saint Benoît en fresques aux couleurs encore vives." }
           ] },
           { salle: "Dehors", titre: "Le cimetière et la vue", oeuvres: [
-            { nom: "Les Porte Sante", texte: "Le cimetière monumental autour de l'église. Carlo Collodi, l'auteur de Pinocchio, y est enterré." },
+            { nom: "Les Porte Sante", texte: "Le cimetière monumental autour de l'église. Y reposent Carlo Collodi, l'auteur de Pinocchio, Pellegrino Artusi, dont le livre « La science en cuisine et l'art de bien manger » (1891) a fondé la cuisine italienne familiale, le peintre Pietro Annigoni et le réalisateur Franco Zeffirelli." },
             { nom: "Le campanile et les matelas", texte: "En 1529, pendant le siège de Florence, Michel-Ange dirigeait les fortifications. Le campanile servait de poste d'artillerie : pour le protéger des boulets, il le fit envelopper de matelas de laine." }
           ] }
         ]
@@ -819,14 +843,15 @@ window.FLO = {
 
     santafelicita: {
       nom: "Santa Felicita", theme: "Églises", zone: "Oltrarno", img: "santafelicita",
-      resume: "Une Déposition irréelle, et la loge secrète des Médicis.",
-      pourquoi: "Gratuit, 15 minutes, juste après le Ponte Vecchio. L'un des tableaux les plus étranges de la Renaissance, et le couloir de Vasari qui traverse l'église. Mardi 9h30.",
+      resume: "La loge secrète des Médicis, et l'Annonciation de Pontormo (sa Déposition est à Rome jusqu'au 7 février 2027).",
+      pourquoi: "Gratuit, 5 à 10 minutes, juste après le Ponte Vecchio, sur votre chemin mardi. ⚠️ La célèbre Déposition de Pontormo est prêtée à l'exposition Pontormo des Scuderie del Quirinale, à Rome (9 octobre 2026 – 7 février 2027) : elle ne sera pas là. Restent l'Annonciation du même Pontormo, peinte à fresque dans la chapelle, et le couloir de Vasari qui traverse l'église.",
       histoires: [
-        "Pontormo a peint la Déposition (1525–1528) enfermé derrière une palissade pendant trois ans, sans laisser entrer personne, pas même le commanditaire, Ludovico Capponi.",
-        "Le couloir de Vasari passe sur le portique de l'église : une loge grillagée, à l'intérieur, permettait aux grands-ducs de suivre la messe sans être vus."
+        "Pontormo a peint la Déposition (1525–1528) enfermé derrière une palissade pendant trois ans, sans laisser entrer personne, pas même le commanditaire, Ludovico Capponi. Cet automne, elle a quitté sa chapelle pour l'exposition de Rome.",
+        "Le couloir de Vasari passe sur le portique de l'église : une loge grillagée, à l'intérieur, permettait aux grands-ducs de suivre la messe sans être vus.",
+        "L'une des plus anciennes églises de Florence, bâtie sur un cimetière chrétien de la fin de l'Antiquité, le long de la route de Rome."
       ],
-      regarder: ["La Déposition de Pontormo, première chapelle à droite : les couleurs acidulées, les corps sans poids, et le barbu à droite qui serait l'autoportrait du peintre.", "En face, l'Annonciation du même Pontormo, de part et d'autre de la fenêtre.", "La fenêtre grillagée de la loge des Médicis, au-dessus de l'entrée."],
-      pratique: { horaires: "Lun–sam 9h30–12h30, 15h30–17h30, fermé le dimanche", prix: "Gratuit", duree: "15 min", moment: "Mardi 9h30", resa: "Non" },
+      regarder: ["Première chapelle à droite (chapelle Capponi, de Brunelleschi) : la place vide de la Déposition (partie à Rome), et sur le mur de droite, de part et d'autre de la fenêtre, l'Annonciation de Pontormo.", "La fenêtre grillagée de la loge des Médicis, au-dessus de l'entrée."],
+      pratique: { horaires: "Lun–sam 9h30–12h30, 15h30–17h30, fermé le dimanche (horaires de 2025, à vérifier sur place)", prix: "Gratuit", duree: "5–10 min", moment: "Mardi 9h30, en passant", resa: "Non" },
       maps: "Chiesa di Santa Felicita, Firenze"
     },
 
@@ -835,12 +860,14 @@ window.FLO = {
       resume: "Le pont aux bijoutiers, et le passage secret des Médicis au-dessus.",
       pourquoi: "Le symbole de Florence, et le seul pont épargné en 1944. Bondé en journée : traversez-le de nuit (samedi) ou au coucher du soleil (lundi), et regardez-le surtout depuis le Ponte Santa Trinita.",
       histoires: [
-        "Jusqu'en 1593, le pont était occupé par des bouchers et des tanneurs qui jetaient leurs déchets dans l'Arno. Le grand-duc Ferdinand Ier, qui passait au-dessus par son couloir privé, n'en supportait plus l'odeur : il les a expulsés et remplacés par des orfèvres. Ils y sont toujours.",
+        "Le pont actuel date de 1345 : la crue de 1333 avait emporté le précédent. Jusqu'en 1593, il était occupé par des bouchers et des tanneurs qui jetaient leurs déchets dans l'Arno. Le grand-duc Ferdinand Ier, qui passait au-dessus par son couloir privé, n'en supportait plus l'odeur : il les a expulsés et remplacés par des orfèvres. Ils y sont toujours.",
+        "On raconte que le mot « banqueroute » vient d'ici : quand un changeur ne pouvait plus payer, on brisait son banc, le « banco rotto ». L'étymologie est vraie (banca rotta), mais rien ne prouve que c'était sur ce pont.",
         "Le couloir de Vasari, au-dessus des boutiques, a été construit en cinq mois en 1565 pour le mariage de François Ier : les Médicis pouvaient aller du Palazzo Vecchio au Palazzo Pitti sans jamais se mêler au peuple. Côté Oltrarno, la famille Mannelli a refusé de démolir sa tour : le couloir la contourne sur des consoles.",
+        "Au milieu du pont, les grandes baies vitrées du couloir ont été percées sur ordre de Mussolini pour la visite d'Hitler, le 9 mai 1938.",
         "Le matin de Pâques 1216, à l'entrée du pont côté ville, le jeune Buondelmonte fut assassiné par les Amidei pour avoir rompu ses fiançailles. Pour les chroniqueurs, c'est le début de la guerre entre Guelfes et Gibelins.",
         "Août 1944 : les Allemands en retraite font sauter tous les ponts de Florence, sauf celui-ci. À la place, ils dynamitent les maisons médiévales des deux côtés pour bloquer l'accès."
       ],
-      regarder: ["Au milieu, le buste de Benvenuto Cellini, le plus célèbre orfèvre de la ville.", "Les petites fenêtres rondes du couloir, au-dessus des boutiques.", "Les boutiques en encorbellement, soutenues par des poutres au-dessus de l'eau.", "Via Por Santa Maria, la tour des Amidei et ses deux têtes de lion."],
+      regarder: ["Au milieu, le buste de Benvenuto Cellini, le plus célèbre orfèvre de la ville.", "Les petites fenêtres du couloir au-dessus des boutiques, et au centre, les grandes baies percées pour Hitler.", "Les boutiques en encorbellement, soutenues par des poutres au-dessus de l'eau.", "Côté Oltrarno, la tour des Mannelli que le couloir contourne.", "Via Por Santa Maria, la tour des Amidei et ses deux têtes de lion."],
       pratique: { horaires: "Toujours accessible", prix: "Gratuit", duree: "10 min", moment: "La nuit, ou au coucher du soleil", resa: "Non" },
       video: { url: "https://www.youtube.com/watch?v=yRc_YbhejXk", titre: "Pourquoi les Médicis ont transformé ce pont (EN)" },
       video2: { url: "https://www.youtube.com/watch?v=QNSh4V1MhYU", titre: "Les passages secrets du couloir de Vasari (EN)" },
@@ -864,10 +891,12 @@ window.FLO = {
       resume: "La place du pouvoir, un musée de sculptures en plein air.",
       pourquoi: "Tout s'est joué ici : les assemblées du peuple, les bûchers, les révoltes contre les Médicis. On y passe plusieurs fois par jour depuis votre logement.",
       histoires: [
-        "Le 23 mai 1498, le moine Savonarole, qui avait fait brûler ici les « vanités » (miroirs, livres, tableaux) un an plus tôt, y est pendu puis brûlé. Une plaque ronde dans le pavé, devant la fontaine de Neptune, marque l'endroit.",
+        "Le 23 mai 1498, le moine Savonarole, qui avait fait brûler ici les « vanités » (miroirs, livres, tableaux) un an plus tôt, y est pendu puis brûlé avec deux de ses frères. Une plaque ronde dans le pavé, devant la fontaine de Neptune, marque l'endroit ; chaque 23 mai, on y pose une couronne de fleurs.",
+        "La Loggia dei Lanzi doit son nom aux « Lanzichenecchi », les lansquenets, les mercenaires allemands de la garde de Cosme Ier, qui y avaient leur poste. Construite au XIVe siècle pour les cérémonies officielles, elle est devenue, à force de chefs-d'œuvre, un musée de sculpture en plein air.",
         "Le David de Michel-Ange se dressait ici, devant le palais, de 1504 à 1873 (c'est une copie aujourd'hui). En 1527, pendant une émeute, un banc jeté d'une fenêtre lui a cassé le bras en trois.",
         "Le Neptune d'Ammannati déplut tellement que les Florentins le surnommèrent « il Biancone » (le gros blanc) et chantaient : « Ammannato, Ammannato, che bel marmo hai rovinato ! » (quel beau marbre tu as gâché).",
-        "Sous la Loggia, le Persée de Cellini (1554). Pendant la fonte, le métal figeait : Cellini, fiévreux, a jeté dans le four toute la vaisselle d'étain de sa maison. La statue est sortie entière."
+        "Sous la Loggia, le Persée de Cellini (1554). Pendant la fonte, le métal figeait : Cellini, fiévreux, a jeté dans le four toute la vaisselle d'étain de sa maison, quelque deux cents plats et écuelles. La statue est sortie entière, à part les orteils d'un pied, qu'il a refondus ensuite.",
+        "La grosse cloche de la tour, « la Vacca », mugissait pour appeler le peuple au « parlamento », l'assemblée de tous les citoyens sur la place, ou aux armes."
       ],
       regarder: [
         "Sur la façade du Palazzo Vecchio, à droite de la porte, à l'angle avec la via della Ninna : un profil d'homme gravé dans la pierre, « l'Importuno di Michelangelo ». La légende dit que Michel-Ange l'a gravé dans son dos, sans regarder, pour se débarrasser d'un bavard.",
@@ -886,9 +915,10 @@ window.FLO = {
       pourquoi: "Sur votre chemin entre la Signoria et le Duomo. Une minute de détour pour les niches extérieures.",
       histoires: [
         "Au départ, c'était le marché aux grains. Une image de la Vierge peinte sur un pilier faisant des miracles, on en a fait une église, et on a stocké le grain à l'étage. Dans les piliers, on voit encore les goulottes par lesquelles le blé descendait.",
-        "Chaque corporation (laine, soie, banquiers, médecins…) devait orner une niche extérieure de la statue de son saint. Elles se sont fait concurrence en payant Donatello, Ghiberti, Verrocchio : une compétition artistique en plein air. Les originaux sont au musée, à l'étage, ou au Bargello."
+        "Chaque corporation (laine, soie, banquiers, médecins…) devait orner une niche extérieure de la statue de son saint. Elles se sont fait concurrence en payant Donatello, Ghiberti, Verrocchio : une compétition artistique en plein air. Les originaux sont au musée, à l'étage, ou au Bargello.",
+        "Le Christ et saint Thomas de Verrocchio occupe une niche prévue pour une seule statue : Verrocchio a placé Thomas à moitié dehors, un pied sur le rebord, comme s'il entrait dans la scène."
       ],
-      regarder: ["Les armoiries des corporations en céramique de della Robbia au-dessus des niches.", "Saint Georges de Donatello (copie ; l'original est au Bargello)."],
+      regarder: ["Les armoiries des corporations en céramique de della Robbia au-dessus des niches.", "Saint Georges de Donatello (copie ; l'original est au Bargello).", "Côté via de' Calzaiuoli, le Christ et saint Thomas de Verrocchio, Thomas débordant de sa niche."],
       pratique: { horaires: "Extérieur toujours visible ; intérieur horaires variables", prix: "Gratuit", duree: "10 min", moment: "En passant", resa: "Non" },
       maps: "Orsanmichele, Firenze"
     },
@@ -898,7 +928,7 @@ window.FLO = {
       pourquoi: "Touristique, mais 5 minutes suffisent, et le chariot de lampredotto à côté est une vraie adresse.",
       histoires: [
         "Frottez le museau du Porcellino (le sanglier de bronze, copie de l'original de Pietro Tacca) et glissez une pièce dans sa gueule : si elle tombe dans la grille, vous reviendrez à Florence.",
-        "Au centre de la loggia, une roue de marbre : la « pietra dello scandalo ». Les commerçants en faillite y étaient fessés, pantalons baissés, devant tout le monde. D'où l'expression italienne « rimanere in braghe di tela » (rester en caleçon)."
+        "Au centre de la loggia, une roue de marbre marque l'endroit où l'on plaçait le carroccio, le char de guerre de la ville. C'est aussi la « pietra dello scandalo » : les marchands en faillite devaient s'y frapper les fesses nues, en public, devant leurs créanciers. On y rattache l'expression italienne « rimanere in braghe di tela » (rester en caleçon, c'est-à-dire ruiné)."
       ],
       regarder: ["Le museau du sanglier, doré par des millions de mains.", "La roue de marbre au sol."],
       pratique: { horaires: "Toujours (stands en journée)", prix: "Gratuit", duree: "10 min", moment: "En passant", resa: "Non" },
@@ -912,7 +942,8 @@ window.FLO = {
         "Dante Alighieri naît ici en 1265. Prieur de la ville en 1300, il est exilé en 1302 par la faction adverse et condamné au bûcher s'il revient. Il ne reverra jamais Florence et meurt à Ravenne en 1321, après avoir écrit la Divine Comédie, où il place plusieurs de ses ennemis florentins en Enfer.",
         "La cloche de la Badia rythmait la vie de la Florence médiévale. Dante s'en souvient avec nostalgie au chant XV du Paradis. En 1373, Boccace donna tout près les premières lectures publiques de la Comédie.",
         "La Torre della Castagna fut le premier siège des Prieurs (1282). On y votait avec des châtaignes.",
-        "À Santa Margherita de' Cerchi, la tradition place le mariage de Dante avec Gemma Donati, et la tombe des Portinari, la famille de Béatrice. Un panier recueille les lettres des amoureux à Béatrice."
+        "À Santa Margherita de' Cerchi, la tradition place le mariage de Dante avec Gemma Donati, et la tombe des Portinari, la famille de Béatrice. Un panier recueille les lettres des amoureux à Béatrice.",
+        "Le quartier était le terrain de la guerre des clans : les Cerchi, chefs des Guelfes blancs (le parti de Dante), et les Donati, chefs des Noirs, vivaient porte à porte. Dante a épousé une Donati… et c'est le parti de Corso Donati, les Noirs, qui le fera condamner à l'exil en 1302."
       ],
       regarder: ["Le clocher pointu de la Badia, via del Proconsolo.", "La petite tour carrée de la Castagna.", "La Casa di Dante : une reconstitution du XXe siècle, pas la vraie maison.", "Le panier de lettres à Béatrice, près de la tombe des Portinari."],
       photos: ["badia", "castagna", "smcerchi"],
@@ -925,11 +956,12 @@ window.FLO = {
       pourquoi: "À 2 minutes du logement, sur les quais. Le musée des instruments scientifiques des Médicis : globes, astrolabes, les deux seules lunettes de Galilée conservées. Plan B pluie, ou fin de journée.",
       histoires: [
         "En 1737, lors du transfert du corps de Galilée dans son tombeau de Santa Croce, des admirateurs lui ont prélevé trois doigts et une dent. Le majeur de la main droite est exposé ici, sous une cloche de verre, pointé vers le ciel.",
-        "Galilée avait baptisé les lunes de Jupiter « astres médicéens » pour obtenir la protection des Médicis. Les instruments exposés viennent de leur collection."
+        "Galilée avait baptisé les lunes de Jupiter « astres médicéens » pour obtenir la protection des Médicis. Les instruments exposés viennent de leur collection.",
+        "Le pouce, l'index et une dent prélevés en même temps, perdus de vue pendant deux siècles, sont réapparus dans une vente aux enchères en 2009 : ils sont aujourd'hui exposés ici, à côté du majeur."
       ],
       regarder: ["Les deux lunettes de Galilée.", "L'objectif fêlé avec lequel il a découvert les lunes de Jupiter.", "Le doigt, dans son reliquaire."],
       photos: ["museogalileo", "doigtgalilee"],
-      pratique: { horaires: "Mar–dim 9h30–18h, lundi 9h30–13h", prix: "14 €", duree: "1h", moment: "Dim 16h30 ou s'il pleut", resa: "Non" },
+      pratique: { horaires: "Lun et mer–dim 9h30–18h, mardi 9h30–13h", prix: "14 €", duree: "1h", moment: "Dim 16h30 ou s'il pleut", resa: "Non" },
       maps: "Museo Galileo, Piazza dei Giudici 1, Firenze"
     },
     annunziata: {
@@ -937,9 +969,10 @@ window.FLO = {
       resume: "La place la plus harmonieuse, et la roue des enfants abandonnés.",
       pourquoi: "Calme, élégante, presque sans touristes. Sur le chemin du dimanche soir.",
       histoires: [
-        "L'Ospedale degli Innocenti de Brunelleschi (1419) est considéré comme le premier bâtiment de la Renaissance. C'était un orphelinat : à gauche du portique, une petite fenêtre, la « ruota », permettait de déposer un nouveau-né anonymement. Beaucoup d'Italiens nommés Innocenti ou Esposito descendent de ces enfants.",
+        "L'Ospedale degli Innocenti de Brunelleschi (1419) est considéré comme le premier bâtiment de la Renaissance. C'était un orphelinat : à gauche du portique, une petite fenêtre, la « ruota », permettait de déposer un nouveau-né anonymement. Beaucoup de Florentins nommés Innocenti, Nocentini ou Degl'Innocenti descendent de ces enfants.",
         "Les médaillons bleus d'Andrea della Robbia représentent des bébés emmaillotés.",
-        "Sur le socle de la statue de Ferdinand Ier, un essaim d'abeilles en cercle autour de la reine. On dit qu'on n'arrive jamais à les compter du premier coup."
+        "Sur le socle de la statue de Ferdinand Ier, un essaim d'abeilles en cercle autour de la reine. On dit qu'on n'arrive jamais à les compter du premier coup.",
+        "Dans la basilique, une Annonciation que la légende dit achevée par un ange pendant que le peintre dormait. Pendant des siècles, les Florentins y ont suspendu des ex-voto de cire grandeur nature ; selon Vasari, Laurent le Magnifique y fit placer son portrait en cire, habillé comme le jour de l'attentat des Pazzi. Les jeunes mariées y déposent encore leur bouquet."
       ],
       regarder: ["La ruota, à l'extrémité gauche du portique.", "Les abeilles du socle de la statue équestre.", "Les deux fontaines de Pietro Tacca, avec leurs monstres marins."],
       photos: ["innocenti", "ferdinando", "annunziata"],
@@ -969,7 +1002,7 @@ window.FLO = {
         "Cosme l'Ancien est enterré dans la crypte, juste sous le centre de l'église, avec l'inscription « Pater Patriae », père de la patrie."
       ],
       regarder: ["La façade de briques brutes.", "Les étals de cuir autour : beaucoup de qualité médiocre, à regarder plus qu'à acheter."],
-      pratique: { horaires: "Basilique lun–sam 10h–17h30, fermée aux visites le dimanche", prix: "Payant (quelques euros)", duree: "Passage", moment: "Dimanche matin (extérieur)", resa: "Non" },
+      pratique: { horaires: "Basilique lun–sam 10h–17h30 (dernière entrée 16h30), fermée aux visites le dimanche", prix: "9 €", duree: "Passage", moment: "Dimanche matin (extérieur)", resa: "Non" },
       maps: "Basilica di San Lorenzo, Firenze"
     },
     mercatocentrale: {
@@ -977,7 +1010,7 @@ window.FLO = {
       resume: "Une halle de fer et de verre : marché en bas, comptoirs en haut.",
       pourquoi: "Le rez-de-chaussée reste un vrai marché (lun–sam) avec Da Nerbone, depuis 1872. L'étage est un food court pratique, ouvert tous les jours. Pour l'ambiance locale, Sant'Ambrogio est mieux.",
       histoires: [
-        "Construite en 1874 par Giuseppe Mengoni, l'architecte de la galerie Victor-Emmanuel de Milan, quand Florence était capitale de l'Italie. Mengoni est mort en tombant de l'échafaudage de sa galerie milanaise, la veille de l'inauguration."
+        "Construite de 1870 à 1874 par Giuseppe Mengoni, l'architecte de la galerie Victor-Emmanuel de Milan : un projet lancé quand Florence était encore capitale de l'Italie (1865–1871), pour remplacer le vieux marché du centre qu'on s'apprêtait à raser. Mengoni est mort en tombant d'un échafaudage de sa galerie milanaise, le 30 décembre 1877, la veille de l'inauguration de l'arc d'entrée."
       ],
       regarder: ["Au rez-de-chaussée, le comptoir de Da Nerbone et son panino al bollito « bagnato »."],
       pratique: { horaires: "Étage : tous les jours. Rez-de-chaussée : lun–sam en journée", prix: "10–20 €", duree: "30 min", moment: "Midi", resa: "Non" },
@@ -1002,7 +1035,7 @@ window.FLO = {
       histoires: [
         "Au n° 19 de la Costa San Giorgio, une plaque : la maison de Galilée.",
         "Le Forte Belvedere (1590) a officiellement été construit pour défendre la ville. En réalité, ses canons visaient aussi Florence elle-même, au cas où le peuple se soulèverait contre les Médicis. On dit que le trésor des grands-ducs y était caché.",
-        "La Porta San Giorgio (1324) est la plus ancienne porte de la ville encore debout, avec son saint Georges terrassant le dragon."
+        "La Porta San Giorgio (1324), avec son saint Georges terrassant le dragon, a été rabaissée au XVIe siècle sur le conseil de Michel-Ange, comme presque toutes les portes, pour mieux résister aux boulets ; pendant le siège de 1529, il la fit murer. Seule la Porta San Niccolò a gardé sa hauteur d'origine."
       ],
       regarder: ["La plaque de Galilée.", "La Porta San Giorgio et son bas-relief.", "Les remparts crénelés le long de la via di Belvedere."],
       pratique: { horaires: "Rues toujours ouvertes (le fort a des ouvertures variables)", prix: "Gratuit", duree: "45 min jusqu'à San Miniato", moment: "Matin", resa: "Non" },
@@ -1014,9 +1047,9 @@ window.FLO = {
       pourquoi: "La vue est spectaculaire, mais le parvis est bondé au coucher du soleil. Mardi en fin de matinée, en descendant de San Miniato, c'est plus calme.",
       histoires: [
         "Créé en 1869 par Giuseppe Poggi, quand Florence était la capitale de l'Italie et se donnait des airs de Paris. Il devait accueillir un musée Michel-Ange, jamais fait : le bâtiment est devenu une loggia-restaurant.",
-        "Le David de bronze au centre est une copie, posée en 1873."
+        "Le David de bronze au centre est une copie, hissée sur la colline en 1873 par des attelages de bœufs."
       ],
-      regarder: ["De gauche à droite : Santa Croce, le Palazzo Vecchio, la coupole, le campanile, et derrière, Fiesole sur sa colline."],
+      regarder: ["Face à la ville, de gauche à droite : le Ponte Vecchio, la tour du Palazzo Vecchio, le campanile et la coupole, Santa Croce, et au fond à droite, Fiesole sur sa colline."],
       pratique: { horaires: "Toujours", prix: "Gratuit", duree: "20 min", moment: "Mardi vers 11h45", resa: "Non" },
       maps: "Piazzale Michelangelo, Firenze"
     },
@@ -1052,7 +1085,7 @@ window.FLO = {
       pourquoi: "Le meilleur endroit pour un verre local, des gens assis sur les marches. Et une église de Brunelleschi avec un Michel-Ange de jeunesse.",
       histoires: [
         "La basilique Santo Spirito est le dernier projet de Brunelleschi. Sa façade est restée nue et plate : comme beaucoup d'églises de Florence, l'argent a manqué.",
-        "À l'intérieur, un crucifix en bois sculpté par Michel-Ange à 17 ans. En remerciement, le prieur l'autorisait à étudier les cadavres de l'hôpital du couvent, de nuit. C'est là qu'il a appris l'anatomie."
+        "À l'intérieur, un crucifix en bois sculpté par Michel-Ange vers 17 ans. Le prieur l'autorisait à étudier, la nuit, les corps des morts de l'hôpital du couvent : c'est là qu'il a appris l'anatomie, et ce Christ fut son cadeau de remerciement."
       ],
       regarder: ["La façade nue, magnifique au coucher du soleil.", "Via Maggio : les palais des grandes familles, dont celui de Bianca Cappello."],
       pratique: { horaires: "Place toujours accessible", prix: "Gratuit", duree: "—", moment: "Fin d'après-midi et soir", resa: "Non" },
@@ -1061,7 +1094,7 @@ window.FLO = {
     brancacci: {
       nom: "Cappella Brancacci", theme: "Églises", zone: "Oltrarno", img: "expulsion",
       resume: "Les fresques où la peinture de la Renaissance est née.",
-      pourquoi: "Hors programme, pour les curieux : Masaccio y invente la perspective et le poids des corps en 1425. Petit, intense, 30 minutes. Réservation obligatoire, fermée le mardi.",
+      pourquoi: "Hors programme, pour les curieux : vers 1425, Masaccio y applique la perspective toute neuve de Brunelleschi et donne pour la première fois aux corps un poids et une ombre. Petit, intense, 30 minutes. Réservation obligatoire, fermée le mardi.",
       histoires: [
         "Masaccio meurt à 26 ans sans finir le cycle. Puis les Brancacci, ennemis des Médicis, sont exilés : les fresques restent inachevées 50 ans, et c'est Filippino Lippi qui les termine.",
         "Son Adam et Ève chassés du Paradis : Ève hurle, Adam cache son visage. Aucun peintre n'avait montré une telle douleur. Michel-Ange venait les copier jeune… et c'est ici qu'un rival, Torrigiano, lui a cassé le nez d'un coup de poing."
@@ -1078,7 +1111,7 @@ window.FLO = {
       resume: "Des petites fenêtres en arc dans les façades, pour vendre le vin.",
       pourquoi: "Un détail à guetter partout en vous promenant (il en reste plus de 150), et quelques-unes servent encore un verre.",
       histoires: [
-        "En 1559, Cosme Ier autorise les familles nobles à vendre le vin de leurs domaines directement depuis leur palais, sans taxe. On frappait au guichet, un serviteur prenait la fiasque vide et l'argent, et la rendait pleine.",
+        "En 1559, Cosme Ier autorise les familles nobles à vendre le vin de leurs domaines directement depuis leur palais, sans passer par les tavernes. On frappait au guichet, un serviteur prenait la fiasque vide et l'argent, et la rendait pleine.",
         "Pendant la peste de 1630, c'était le commerce sans contact : l'argent était passé dans du vinaigre. En 2020, avec le Covid, plusieurs ont rouvert pour servir des cafés, des glaces et des spritz."
       ],
       regarder: ["Babae (via Santo Spirito 21r) sert encore un verre par sa fenêtre en début de soirée.", "En marchant, guettez les petites arcades de pierre à hauteur de poitrine, souvent murées, près des portes des palais."],
@@ -1115,14 +1148,14 @@ window.FLO = {
   restos: [
     /* ---------- € ---------- */
     { id: "gustarium", gamme: 1, prio: true, prog: true, nom: "Gustarium", zone: "Centre", type: "Pizza al taglio", prix: "8–15 €", quand: "Dim 11 · 12h00",
-      horaires: "Mar–dim 12h–15h30 (jusqu'à épuisement, souvent vers 13h) · fermé lundi", adresse: "Via dei Cimatori 24r",
+      horaires: "Mar–dim 12h–15h30 (jusqu'à épuisement, souvent vers 13h) · fermé lundi", adresse: "Via dei Cimatori 24r", tel: "+39 055 283469",
       pourquoi: "Votre trouvaille, et les avis sont unanimes : une pâte légère, alvéolée, qui « fond en bouche », des farines choisies, des garnitures de saison. Le patron explique chaque pizza avec passion et ferme quand tout est vendu.",
       commander: ["3–4 petites parts différentes, au poids, à partager", "Une pizza à la farine complète si elle est proposée", "Un verre de vin"],
       astuce: "Être devant à 12h00 pile. Peu de places assises." },
-    { id: "darocco", gamme: 1, prog: true, nom: "Da Rocco", zone: "Santa Croce", type: "Comptoir du marché (midi)", prix: "15–20 €", quand: "Lun 12 · 12h00",
-      horaires: "Lun–sam ~11h–14h30 · fermé dimanche", adresse: "Marché de Sant'Ambrogio (dans la halle)",
+    { id: "darocco", gamme: 1, prog: true, nom: "Da Rocco", zone: "Santa Croce", type: "Comptoir du marché (midi)", prix: "15–25 €", quand: "Lun 12 · 12h00",
+      horaires: "Lun–sam 11h30–14h30 · fermé dimanche", adresse: "Marché de Sant'Ambrogio (dans la halle)",
       pourquoi: "Le repas le plus honnête de Florence : la cantine des marchands et des employés du quartier, tables partagées, plats du jour écrits à la main.",
-      commander: ["Ribollita ou pappa al pomodoro", "Bollito (bouilli) ou polpette", "Un quart de vin de la maison"],
+      commander: ["Ribollita ou pappa al pomodoro (≈ 10 €)", "Trippa, peposo ou rosbif (≈ 13 €)", "Un verre de vin de la maison (4 €)"],
       astuce: "Arriver à midi, payer en liquide." },
     { id: "nerbone", gamme: 1, nom: "Da Nerbone", zone: "San Lorenzo", type: "Comptoir du marché", prix: "5–12 €", quand: "Mar 13 midi (si Chapelles Médicis)",
       horaires: "Lun–sam 8h–15h · fermé dimanche", adresse: "Mercato Centrale, rez-de-chaussée",
@@ -1130,19 +1163,19 @@ window.FLO = {
       commander: ["Panino al lampredotto « bagnato », salsa verde e piccante", "Ou panino al bollito", "Un verre de rouge au comptoir"],
       astuce: "La file avance vite. Commander d'abord, puis chercher une place au comptoir d'en face." },
     { id: "pollini", gamme: 1, nom: "Lampredotto Pollini (chariot)", zone: "Santa Croce", type: "Street food", prix: "~5 €", quand: "Lun 12 · en allant au marché",
-      horaires: "En journée, en semaine (horaires de chariot, variables)", adresse: "Via de' Macci, angle borgo La Croce",
-      pourquoi: "Un chariot tenu par la même famille depuis près de 30 ans, cité par le Gambero Rosso parmi les meilleurs de la ville.",
+      horaires: "Lun–sam ~9h30–16h · fermé dimanche", adresse: "Via de' Macci, angle borgo La Croce",
+      pourquoi: "Le chariot de Sergio Pollini, tenu aujourd'hui par son fils Pierpaolo, cité par le Gambero Rosso parmi les meilleurs lampredotti de la ville. 4–5 € le panino.",
       commander: ["Lampredotto « bagnato » (pain trempé dans le bouillon)", "Avec salsa verde et un peu de piccante"] },
     { id: "semel", gamme: 1, nom: "Semel", zone: "Sant'Ambrogio", type: "Panini d'auteur", prix: "5–8 €", quand: "Lun 12 · option midi",
-      horaires: "Lun–sam 11h30–14h30 · fermé dimanche", adresse: "Piazza Lorenzo Ghiberti 44r",
+      horaires: "Lun–sam 11h30–15h · fermé dimanche", adresse: "Piazza Lorenzo Ghiberti 44r",
       pourquoi: "Un comptoir minuscule face au marché, où Marco compose chaque jour une poignée de panini avec des produits de grande qualité. On mange debout sur la place, avec un petit verre de vin.",
       commander: ["Le panino du jour, tel quel (il refuse les modifications)", "S'il y en a : l'âne braisé (stracotto di ciuco), ou hareng et pecorino"] },
-    { id: "trippaioporcellino", gamme: 1, nom: "Il Trippaio del Porcellino", zone: "Centre", type: "Street food", prix: "~5 €", quand: "Dim 11 · en passant",
-      horaires: "En journée", adresse: "Loggia del Mercato Nuovo",
-      pourquoi: "Un chariot historique au pied du sanglier : tripes et lampredotto, avec un verre de vin de la maison.",
+    { id: "trippaioporcellino", gamme: 1, nom: "Il Trippaio del Porcellino", zone: "Centre", type: "Street food", prix: "~5 €", quand: "Lun ou mar, en passant (fermé le dimanche)",
+      horaires: "Lun–sam 9h–18h · fermé dimanche", adresse: "Loggia del Mercato Nuovo",
+      pourquoi: "Un chariot historique au pied du sanglier, né à la fin du XIXe siècle : tripes et lampredotto préparés à l'ancienne, avec un verre de vin de la maison.",
       commander: ["Panino al lampredotto", "Trippa alla fiorentina en barquette"] },
     { id: "ino", gamme: 1, nom: "'Ino", zone: "Centre", type: "Panini gourmets", prix: "8–12 €", quand: "Dim 11 · plan B de Gustarium",
-      horaires: "Tous les jours, en journée (~11h–17h, à vérifier)", adresse: "Via de' Georgofili 3r",
+      horaires: "Tous les jours 12h–15h", adresse: "Via de' Georgofili 3r", tel: "+39 348 784 9980",
       pourquoi: "Des panini de schiacciata garnis uniquement de produits d'artisans toscans (charcuteries, fromages, sauces). À 2 min des Offices.",
       commander: ["Le panino du jour", "Un verre de vin"] },
     { id: "fratellini", gamme: 1, nom: "I Fratellini", zone: "Centre", type: "Panini + verre", prix: "5–10 €", quand: "Lun ou mar, en passant",
@@ -1156,7 +1189,7 @@ window.FLO = {
     { id: "pizzaiuolo", gamme: 1, nom: "Il Pizzaiuolo", zone: "Santa Croce", type: "Pizzeria napolitaine", prix: "12–20 €", quand: "Sam 10 · option dîner",
       horaires: "Lun–sam midi et soir · fermé dimanche", adresse: "Via de' Macci 113r", tel: "+39 055 241171",
       pourquoi: "La pizzeria tenue par un Napolitain que beaucoup de Florentins citent en premier. Pâte au feu de bois, ambiance de quartier.",
-      commander: ["Fusilli c'a ricotta pour commencer", "Margherita ou diavola", "Babà ou pastiera en dessert"],
+      commander: ["Une entrée napolitaine du jour pour commencer", "Margherita ou diavola", "Un babà s'il y en a"],
       astuce: "Réserver le samedi, et prévoir un peu d'attente." },
     { id: "gustapizza", gamme: 1, nom: "Gusta Pizza", zone: "Oltrarno", type: "Pizzeria", prix: "8–15 €", quand: "Option, Oltrarno",
       horaires: "Mar–dim midi et soir · fermé lundi", adresse: "Via Maggio 46r", tel: "+39 055 285068",
@@ -1178,16 +1211,16 @@ window.FLO = {
     /* ---------- €€ ---------- */
     { id: "vinivecchisapori", gamme: 2, prog: true, nom: "Vini e Vecchi Sapori", zone: "Centre", type: "Osteria", prix: "25–40 €", quand: "Sam 10 · ~21h30",
       horaires: "Lun–sam 12h–14h30, 19h–22h30 · fermé dimanche", adresse: "Via dei Magazzini 3r", tel: "+39 055 293045",
-      pourquoi: "Minuscule, bondée d'Italiens, à 3 min du logement, derrière le Palazzo Vecchio. Une cuisine de saison simple et parfaite ; une cheffe étoilée de la ville y recommande les pâtes au canard.",
+      pourquoi: "Minuscule, bondée d'Italiens, à 3 min du logement, derrière le Palazzo Vecchio. Une cuisine de saison simple et parfaite, avec une ardoise du jour (pici au ragù, crostini de foies, poulet frit) ; les pappardelle au canard et le tiramisu à la framboise sont ses best-sellers.",
       commander: ["Pappardelle au canard (leur plat le plus célèbre)", "Crostini de foies de volaille", "Haricots cuits « al fiasco »", "Tiramisu à la framboise"],
       astuce: "Pas de pizza, pas de cappuccino. Réserver." },
     { id: "cibreo", gamme: 2, prog: true, nom: "Cibrèo Trattoria (« il Cibreino »)", zone: "Sant'Ambrogio", type: "Trattoria", prix: "30–45 €", quand: "Dim 11 · ~20h30",
       horaires: "Tous les jours 12h30–14h30, 19h–22h30", adresse: "Via de' Macci 122r", tel: "+39 055 234 1100",
-      pourquoi: "Le côté simple de la maison fondée en 1979 par Fabio Picchi, aujourd'hui tenue par son fils. Recommandée par le guide Michelin et le Gambero Rosso. Cuisine florentine de famille, pain sec et soupes, abats.",
+      pourquoi: "Le côté simple de la maison fondée en 1979 par Fabio Picchi, figure de la cuisine florentine disparue en 2022. Bib Gourmand au guide Michelin 2026, dont l'inspecteur écrit que c'est là qu'il mangerait s'il était en vacances à Florence. Cuisine florentine de famille, pain sec et soupes, abats.",
       commander: ["Pappa al pomodoro", "Pâté du Cibrèo (foies de volaille)", "Lampredotto in umido", "Gâteau au fromage et marmelade d'oranges amères"],
       astuce: "Réservations possibles maintenant (booking@cibreo.com) : la salle est petite." },
     { id: "zeb", gamme: 2, prog: true, nom: "Zeb", zone: "San Niccolò", type: "Comptoir de cuisine toscane", prix: "25–40 €", quand: "Mar 13 · 12h30",
-      horaires: "Midi tous les jours sauf mercredi (12h30–15h) · pas de réservation le midi", adresse: "Via San Miniato 2r",
+      horaires: "Midi tous les jours sauf mercredi (12h30–15h) · pas de réservation le midi", adresse: "Via San Miniato 2r", tel: "+39 055 234 2864",
       pourquoi: "Une adresse familiale (une mère et son fils) que le guide Michelin classe parmi les meilleures tables abordables de Florence. On s'assoit sur des tabourets autour d'un long comptoir, comme dans un bar à sushis, face à la cuisine. Ardoise qui change chaque jour.",
       commander: ["Pici (pâtes roulées à la main)", "Peposo ou trippa", "Ribollita s'il fait frais", "Gâteau aux pommes, amandes et pignons"] },
     { id: "sonora", gamme: 2, prio: true, prog: true, nom: "Vineria Sonora", zone: "San Marco", type: "Bar à vins nature + vinyles", prix: "20–35 €", quand: "Dim 11 · ~18h45",
@@ -1195,7 +1228,7 @@ window.FLO = {
       pourquoi: "Votre incontournable : le bar à vins nature du quartier universitaire, avec une vraie collection de vinyles et une petite cave à emporter. Les guides locaux la décrivent comme un « temple » du vin nature.",
       commander: ["Un pét-nat toscan pour commencer", "Un vin orange ou un rouge de petit vigneron (laissez-les choisir)", "Charcuteries et fromages"] },
     { id: "volpi", gamme: 2, prog: true, nom: "Le Volpi e l'Uva", zone: "Oltrarno", type: "Bar à vin", prix: "20–40 €", quand: "Lun 12 · 18h45",
-      horaires: "Lun–sam 11h–21h · fermé dimanche", adresse: "Piazza dei Rossi 1r", tel: "+39 055 239 8132",
+      horaires: "Vers 12h–21h, ouvert le lundi (le dimanche, les sources divergent)", adresse: "Piazza dei Rossi 1r", tel: "+39 055 239 8132",
       pourquoi: "Depuis 1992, un pionnier : uniquement de petits producteurs, souvent bio. Une quarantaine de vins au verre, un lieu de pèlerinage pour les sommeliers, caché derrière le Ponte Vecchio.",
       commander: ["Crostino chaud à la saucisse truffée", "Asiago fondu au jambon", "Les fromages français du patron"] },
     { id: "fuoriporta", gamme: 2, nom: "Enoteca Fuori Porta", zone: "San Niccolò", type: "Bar à vin + cuisine", prix: "25–40 €", quand: "Sam 10 (plan B) · Mar 13 midi",
@@ -1203,8 +1236,8 @@ window.FLO = {
       pourquoi: "L'enoteca de San Niccolò depuis plus de 30 ans : environ 600 vins, terrasse face à la porte médiévale, là où les Florentins aiment finir le week-end.",
       commander: ["Crostoni chauds (6–10 €)", "Pici au sanglier", "Planche de fromages"] },
     { id: "lortone", gamme: 2, nom: "L'Ortone", zone: "Sant'Ambrogio", type: "Trattoria contemporaine", prix: "35–50 €", quand: "Lun 12 · option midi",
-      horaires: "Midi tous les jours (12h15–14h30), aussi le soir", adresse: "Piazza Lorenzo Ghiberti 87r", tel: "+39 055 234 0804",
-      pourquoi: "Face au marché de Sant'Ambrogio, une trattoria moderne recommandée par le Michelin et le Gambero Rosso : les classiques toscans avec un peu de technique.",
+      horaires: "Midi (12h15–14h30) et soir, en principe tous les jours : appeler pour confirmer le lundi", adresse: "Piazza Lorenzo Ghiberti 87r", tel: "+39 055 234 0804",
+      pourquoi: "Face au marché de Sant'Ambrogio, une trattoria moderne, Bib Gourmand au guide Michelin 2026 : les classiques toscans avec un peu de technique (le pigeon, selon la saison, est leur plat signature).",
       commander: ["Pici all'aglione", "Gnudi", "Tagliatelle au ragù de sanglier", "Coccoli (beignets) au jambon et stracchino"] },
     { id: "delfagioli", gamme: 2, nom: "Del Fagioli", zone: "Santa Croce", type: "Trattoria familiale", prix: "25–40 €", quand: "Mar 13 midi s'il pleut",
       horaires: "Lun–ven 12h30–14h30, 19h30–22h30 · fermé le week-end", adresse: "Corso dei Tintori 47r", tel: "+39 055 244285",
@@ -1224,7 +1257,7 @@ window.FLO = {
       commander: ["Pollo al burro (poulet au beurre)", "Tortino de carciofi (omelette soufflée aux artichauts)", "Tortellini in brodo", "Gâteau meringué"],
       astuce: "Réserver, toujours complet." },
     { id: "iraddi", gamme: 2, nom: "Trattoria I'Raddi", zone: "Oltrarno", type: "Trattoria", prix: "30–55 €", quand: "Lun 12 · plan B bistecca",
-      horaires: "Midi et soir", adresse: "Via d'Ardiglione 47", tel: "+39 055 211072",
+      horaires: "Tous les jours 12h30–14h30, et le soir 19h30–23h sauf le dimanche", adresse: "Via d'Ardiglione 47", tel: "+39 055 211072",
       pourquoi: "Trattoria de quartier dans une rue calme, poutres et nappes. Le plan B moins cher pour la bistecca.",
       commander: ["Bistecca", "Peposo", "Tagliolini maison"] },
     { id: "santobevitore", gamme: 2, nom: "Il Santo Bevitore & Il Santino", zone: "Oltrarno", type: "Trattoria + bar à vin", prix: "35–50 €", quand: "Option, Santo Spirito",
@@ -1232,14 +1265,14 @@ window.FLO = {
       pourquoi: "Recommandés par le Michelin et le Gambero Rosso. Le Santo Bevitore pour un vrai repas toscan ; son petit frère Il Santino pour un verre et une planche, sans réservation.",
       commander: ["Terrine de foies de volaille", "Ribollita", "Pigeon rôti", "Cantucci et vin santo"] },
     { id: "pittigola", gamme: 2, nom: "Enoteca Pitti Gola e Cantina", zone: "Oltrarno", type: "Bar à vin", prix: "30–50 €", quand: "Option, en face du Palazzo Pitti",
-      horaires: "Mer–lun 13h–23h · fermé mardi", adresse: "Piazza de' Pitti 16", tel: "+39 055 212704",
+      horaires: "Tous les jours 12h–23h", adresse: "Piazza de' Pitti 16", tel: "+39 055 212704",
       pourquoi: "Le bar à vin des propriétaires de l'Osteria dell'Enoteca, installé dans une ancienne librairie face au palais Pitti. Spécialistes des vieux Sangiovese et Brunello.",
       commander: ["Un Brunello ou un vieux Chianti Classico au verre", "Charcuteries et fromages"] },
 
     /* ---------- €€€ ---------- */
     { id: "enoteca", gamme: 3, prio: true, prog: true, nom: "Osteria dell'Enoteca", zone: "Oltrarno", type: "Osteria · bistecca", prix: "70–90 €", quand: "Lun 12 · 20h",
-      horaires: "Midi 12h–14h30, soir 19h–23h · fermé mardi", adresse: "Via Romana 70r", tel: "+39 055 228 6018",
-      pourquoi: "Votre choix pour la bistecca. Quatre amis passionnés de vin (ceux de Pitti Gola e Cantina) ont ouvert « l'endroit où ils aimeraient manger ». Viande du Val di Chiana, grillée simplement, service attentionné, cave de petits producteurs.",
+      horaires: "Mer–lun 12h–14h30, 19h–22h30 · fermé mardi", adresse: "Via Romana 70r", tel: "+39 055 228 6018",
+      pourquoi: "Votre choix pour la bistecca. L'équipe de Pitti Gola e Cantina (Edoardo et Zeno Fioravanti, Manuele Giovanelli, Lorenzo Ricci) a ouvert ici, en 2017, « l'endroit où ils aimeraient manger, où ils enverraient leurs amis ». Viande du Val di Chiana, grillée simplement, service attentionné, cave de petits producteurs. Le limoncello maison vient de la recette d'un grand-père de la famille.",
       commander: ["Bistecca alla fiorentina (≈ 1–1,2 kg pour deux, saignante)", "Terrine de foies de volaille, réduction de vin santo", "Morue fondante sur polenta grillée", "Tortelli aux fèves et pecorino", "Tiramisu ou crème brûlée au café", "Le limoncello maison"],
       astuce: "Réserver maintenant. Demandez au sommelier un Chianti Classico de petit domaine." },
     { id: "cammillo", gamme: 3, nom: "Trattoria Cammillo", zone: "Oltrarno", type: "Trattoria historique", prix: "50–70 €", quand: "Lun 12 · plan B bistecca",
@@ -1250,9 +1283,9 @@ window.FLO = {
       horaires: "Le soir (à vérifier)", adresse: "Via del Trebbio 1r",
       pourquoi: "Depuis 1880 dans les caves voûtées du palais Antinori, murs couverts d'affiches de voyage. Bistecca de bœuf marchigiano maturé 21 jours, épaisse de 4–5 cm, grillée au charbon de bois d'olivier.",
       commander: ["Bistecca alla fiorentina", "Haricots à l'huile d'olive"] },
-    { id: "oradaria", gamme: 3, nom: "Ora d'Aria", zone: "Centre", type: "Gastronomique (1 étoile Michelin)", prix: "180–200 €", quand: "La folie, à 2 min",
+    { id: "oradaria", gamme: 3, nom: "Ora d'Aria", zone: "Centre", type: "Gastronomique (guide Michelin)", prix: "180–200 €", quand: "La folie, à 2 min",
       horaires: "À vérifier · réservation indispensable", adresse: "Via dei Georgofili 11r", tel: "+39 055 200 1699",
-      pourquoi: "Pour mémoire : la table étoilée de Marco Stabile, juste derrière les Offices. Cuisine toscane réinventée, menus dégustation. Hors budget de ce voyage, mais c'est la référence du quartier.",
+      pourquoi: "Pour mémoire : la table gastronomique de Marco Stabile, longtemps étoilée au guide Michelin, juste derrière les Offices. Cuisine toscane réinventée, menus dégustation. Hors budget de ce voyage, mais c'est la référence du quartier.",
       commander: ["Un menu dégustation"] },
 
     /* ---------- Glaces & cafés ---------- */
@@ -1282,7 +1315,7 @@ window.FLO = {
       commander: ["Un cappuccino", "Un filtre (V60) si vous aimez le café"] },
     { id: "gilli", gamme: 0, nom: "Caffè Gilli", zone: "Centre", type: "Café historique", prix: "1,50 € au comptoir, beaucoup plus assis", quand: "Dim 11 · en passant",
       horaires: "Journée et soirée", adresse: "Piazza della Repubblica",
-      pourquoi: "Ouvert en 1733, boiseries et lustres. Le décor vaut le café ; restez au comptoir, la terrasse est très chère.",
+      pourquoi: "Né en 1733 via de' Calzaiuoli, sous le nom de « Bottega dei Pani Dolci », tenu par une famille suisse, les Gilli ; installé sur la place dans les années 1920. Boiseries et lustres : le décor vaut le café ; restez au comptoir, la terrasse est très chère.",
       commander: ["Un espresso au comptoir", "Un chocolat chaud épais en saison"] }
   ],
 

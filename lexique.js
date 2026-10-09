@@ -36,7 +36,7 @@
     },
     julien: {
       titre: "Julien de Médicis", sous: "1453–1478", mots: ["Julien de Médicis"],
-      texte: "Le frère cadet de Laurent, beau, adulé, champion des tournois. Le 26 avril 1478, pendant la messe de Pâques à la cathédrale, il est poignardé de 19 coups par les conjurés Pazzi. Un mois plus tard naît son fils naturel, Jules, élevé par Laurent : il deviendra le pape Clément VII.",
+      texte: "Le frère cadet de Laurent, beau, adulé, champion des tournois. Le dimanche 26 avril 1478, pendant la grand-messe à la cathédrale, il est poignardé de 19 coups (dit-on) par les conjurés Pazzi. Un mois plus tard naît son fils naturel, Jules, élevé par Laurent : il deviendra le pape Clément VII.",
       liens: [W("Julien_de_Médicis_(1453-1478)")]
     },
     cosme1: {
@@ -46,7 +46,7 @@
     },
     francois: {
       titre: "François Ier de Médicis", sous: "1541–1587 · grand-duc", mots: ["François Ier"],
-      texte: "Le fils de Cosme Ier, à ne pas confondre avec le roi de France. Taciturne, passionné d'alchimie et de sciences, il passe ses nuits dans son studiolo du Palazzo Vecchio et crée la Tribune des Offices. Il épouse en secondes noces sa maîtresse vénitienne, Bianca Cappello. Tous deux meurent à un jour d'intervalle en octobre 1587 : empoisonnés par son frère Ferdinand selon la légende, de la malaria selon les analyses récentes.",
+      texte: "Le fils de Cosme Ier, à ne pas confondre avec le roi de France. Taciturne, passionné d'alchimie et de sciences, il passe ses nuits dans son studiolo du Palazzo Vecchio et crée la Tribune des Offices. Il épouse en secondes noces sa maîtresse vénitienne, Bianca Cappello. Tous deux meurent à un jour d'intervalle en octobre 1587 : empoisonnés par son frère Ferdinand selon la légende ; la science hésite encore (arsenic pour une étude de 2006, paludisme pour une autre de 2010).",
       liens: [W("François_Ier_de_Médicis")]
     },
     bianca: {
@@ -56,7 +56,7 @@
     },
     ferdinand: {
       titre: "Ferdinand Ier de Médicis", sous: "1549–1609 · grand-duc", mots: ["Ferdinand Ier"],
-      texte: "Cardinal à Rome, il renonce à la pourpre en 1587 pour succéder à son frère François Ier, mort subitement. Bon gestionnaire : il développe le port de Livourne, fonde l'atelier des pierres dures (<i>pietre dure</i>) et chasse en 1593 les bouchers du Ponte Vecchio pour y installer les orfèvres. Sa statue équestre trône sur la piazza Santissima Annunziata.",
+      texte: "Cardinal à Rome, il succède en 1587 à son frère François Ier, mort subitement, puis renonce à la pourpre (1588) pour épouser Christine de Lorraine. Bon gestionnaire : il développe le port de Livourne, fonde l'atelier des pierres dures (<i>pietre dure</i>) et chasse en 1593 les bouchers du Ponte Vecchio pour y installer les orfèvres. Sa statue équestre trône sur la piazza Santissima Annunziata.",
       liens: [W("Ferdinand_Ier_de_Médicis")]
     },
     annamaria: {
@@ -66,7 +66,7 @@
     },
     pazzi: {
       titre: "La conjuration des Pazzi", sous: "26 avril 1478", mots: ["conjuration des Pazzi", "Pazzi"],
-      texte: "Les Pazzi, banquiers rivaux des Médicis, montent un complot avec le soutien du pape Sixte IV et de l'archevêque de Pise, Francesco Salviati. Signal : l'élévation de l'hostie pendant la messe de Pâques, dans la cathédrale. Julien de Médicis est tué ; Laurent, blessé au cou, se barricade dans la sacristie. La ville se soulève pour les Médicis : Salviati est pendu le soir même à une fenêtre du Palazzo Vecchio, en habits d'archevêque. La famille Pazzi est bannie, ses armoiries effacées… sauf sur la chapelle qu'elle avait commandée à Santa Croce.",
+      texte: "Les Pazzi, banquiers rivaux des Médicis, montent un complot avec le soutien du pape Sixte IV et de l'archevêque de Pise, Francesco Salviati. Le coup est porté pendant la grand-messe du dimanche 26 avril 1478 dans la cathédrale (et non à Pâques, comme on le lit souvent). Julien de Médicis est tué ; Laurent, blessé au cou, se barricade dans la sacristie. La ville se soulève pour les Médicis : Salviati est pendu le soir même à une fenêtre du Palazzo Vecchio, en habits d'archevêque. La famille Pazzi est bannie, ses armoiries effacées… sauf sur la chapelle qu'elle avait commandée à Santa Croce.",
       liens: [W("Conjuration_des_Pazzi")]
     },
 
@@ -78,7 +78,7 @@
     },
     vanites: {
       titre: "Le bûcher des vanités", sous: "1497 et 1498", mots: ["bûcher des vanités", "bûchers des vanités", "Bûcher des vanités"],
-      texte: "Pendant le carnaval de 1497, les jeunes partisans de Savonarole font du porte-à-porte pour collecter miroirs, fards, parfums, cartes à jouer, instruments de musique, livres et tableaux « impudiques ». Le tout est entassé en pyramide sur la piazza della Signoria et brûlé. Selon Vasari, Botticelli y aurait jeté lui-même certaines de ses toiles. Un an plus tard, c'est Savonarole qui brûlait au même endroit.",
+      texte: "Pendant le carnaval de 1497, les jeunes partisans de Savonarole font du porte-à-porte pour collecter miroirs, fards, parfums, cartes à jouer, instruments de musique, livres et tableaux « impudiques ». Le tout est entassé en pyramide sur la piazza della Signoria et brûlé. Selon Vasari, le peintre Fra Bartolomeo y apporta lui-même ses dessins de nus ; on raconte aussi que Botticelli y aurait jeté certaines de ses toiles, mais aucun document ne le prouve. Un an plus tard, c'est Savonarole qui brûlait au même endroit.",
       liens: [W("Bûcher_des_Vanités")]
     },
     guelfes: {
@@ -155,7 +155,7 @@
     },
     corridor: {
       titre: "Le corridor de Vasari", sous: "1565", mots: ["corridor de Vasari", "couloir de Vasari", "Corridor de Vasari", "Couloir de Vasari", "corridor vasarien"],
-      texte: "Un passage couvert d'un kilomètre, du Palazzo Vecchio au palais Pitti, par les Offices et au-dessus du Ponte Vecchio. Construit par Vasari en cinq mois pour le mariage de François Ier de Médicis : les Médicis pouvaient traverser la ville sans croiser leurs sujets. Au-dessus du pont, ils ne supportaient pas l'odeur des bouchers : Ferdinand Ier les remplace par des orfèvres en 1593.",
+      texte: "Un passage couvert d'environ 750 m, du Palazzo Vecchio au palais Pitti, par les Offices et au-dessus du Ponte Vecchio, rouvert en décembre 2024 après huit ans de fermeture. Construit par Vasari en cinq mois pour le mariage de François Ier de Médicis : les Médicis pouvaient traverser la ville sans croiser leurs sujets. Au-dessus du pont, ils ne supportaient pas l'odeur des bouchers : Ferdinand Ier les remplace par des orfèvres en 1593.",
       liens: [W("Corridor_de_Vasari")]
     },
     divinecomedie: {
@@ -227,7 +227,7 @@
     },
     botticelli: {
       titre: "Sandro Botticelli", sous: "vers 1445–1510", mots: ["Botticelli"],
-      texte: "Élève de Filippo Lippi, peintre favori du cercle de Laurent le Magnifique : la Naissance de Vénus, le Printemps. Puis vient Savonarole, et sa peinture devient sombre et tourmentée. Il meurt pauvre et oublié ; on ne l'a redécouvert qu'au XIXe siècle. Il est enterré à Ognissanti, au pied de Simonetta Vespucci.",
+      texte: "Élève de Filippo Lippi, peintre favori du cercle de Laurent le Magnifique : la Naissance de Vénus, le Printemps. Puis vient Savonarole, et sa peinture devient sombre et tourmentée. Il meurt pauvre et oublié ; on ne l'a redécouvert qu'au XIXe siècle. Il est enterré à Ognissanti, l'église des Vespucci ; la légende dit qu'il voulait reposer aux pieds de Simonetta.",
       liens: [W("Sandro_Botticelli")]
     },
     simonetta: {
@@ -237,7 +237,7 @@
     },
     leonard: {
       titre: "Léonard de Vinci", sous: "1452–1519", mots: ["Léonard de Vinci", "Léonard"],
-      texte: "Né à Vinci, à une quarantaine de kilomètres de Florence, fils illégitime d'un notaire. Apprenti chez Verrocchio, il peint à Florence l'Annonciation et l'Adoration des Mages (Offices). Puis il part à Milan (1482). Revenu en 1503, il commence la Bataille d'Anghiari dans la salle des Cinq-Cents, face à Michel-Ange qui devait peindre le mur d'en face. Aucun des deux n'a terminé. Il meurt en France, à Amboise.",
+      texte: "Né à Vinci, à une quarantaine de kilomètres de Florence, fils illégitime d'un notaire. Apprenti chez Verrocchio, il peint à Florence l'Annonciation et l'Adoration des Mages (Offices). Puis il part à Milan (1482). Revenu à Florence en 1500, il commence en 1503 la Bataille d'Anghiari dans la salle des Cinq-Cents, face à Michel-Ange qui devait peindre le mur d'en face. Aucun des deux n'a terminé. Il meurt en France, à Amboise.",
       liens: [W("Léonard_de_Vinci")]
     },
     raphael: {
