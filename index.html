@@ -158,6 +158,51 @@
   .liens a span.ic { font-size: 18px; }
   .liens a.resa-lien { border-color: var(--or); }
 
+
+  /* --- Tout est repliable --- */
+  details.bloc.repli { padding: 0 16px; }
+  details.bloc.repli > summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 10px; padding: 14px 0; }
+  details.bloc.repli > summary::-webkit-details-marker { display: none; }
+  details.bloc.repli > summary h2 { margin: 0; font-size: 19px; flex: 1; }
+  details.bloc.repli > summary small { color: var(--doux); font-size: 13px; text-align: right; }
+  details.bloc.repli > summary::after { content: "▸"; color: var(--accent); }
+  details.bloc.repli[open] > summary::after { content: "▾"; }
+  details.bloc.repli[open] { padding-bottom: 16px; }
+  details.bloc.repli.credits > summary { font-size: inherit; }
+  details.intro-repli { margin: 0 0 14px; }
+  details.intro-repli .intro { margin: 0; font-size: 15px; }
+  .page > .outils:first-of-type, .page > .outils { margin-bottom: 12px; }
+  .btn-tout[aria-pressed="true"] { background: var(--accent-doux); border-color: var(--accent); }
+  /* Étapes principales : titre visible, détail au clic */
+  .etape-ouvrir { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; width: 100%; text-align: left; font: inherit; background: transparent; border: 1.5px dashed var(--trait); border-radius: 12px; padding: 8px 12px; cursor: pointer; color: var(--texte); }
+  .etape-ouvrir .eo-fl { color: var(--accent); font-weight: 600; font-size: 14px; }
+  .etape-ouvrir small { color: var(--doux); font-size: 13px; }
+  .etape.principale.ouvert > .etape-ouvrir { border-style: solid; border-color: var(--accent); background: var(--accent-doux); }
+  .etape.principale:not(.ouvert) > .etape-corps { display: none; }
+  .etape.principale.ouvert > .etape-corps { margin-top: 12px; animation: deplier .25s ease-out; }
+  .etape.principale:not(.ouvert) { margin-bottom: 22px; }
+  /* Restos repliés */
+  details.repli-resto > summary { list-style: none; cursor: pointer; position: relative; padding-right: 22px; }
+  details.repli-resto > summary::-webkit-details-marker { display: none; }
+  details.repli-resto > summary::after { content: "▸"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 18px; }
+  details.repli-resto[open] > summary::after { content: "▾"; }
+  details.repli-resto[open] > summary { margin-bottom: 4px; }
+  .plats details.plat { margin-top: 0; }
+  .plats { gap: 8px; }
+  /* Guide : salles repliées */
+  details.salle { display: block; margin: 8px 0; border: 1px solid var(--trait); border-radius: 12px; background: var(--carte); }
+  details.salle > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+  details.salle > summary::-webkit-details-marker { display: none; }
+  details.salle .salle-num { flex: none; }
+  details.salle .salle-titre { flex: 1; display: block; }
+  details.salle .salle-nom { display: block; }
+  details.salle .salle-h { display: block; font: 600 17px/1.2 Fraunces, Georgia, serif; margin-top: 2px; }
+  details.salle .salle-fl { color: var(--accent); }
+  details.salle[open] .salle-fl { transform: rotate(90deg); }
+  details.salle > .salle-corps { padding: 0 12px 12px; }
+  details.bloc-repli.conseil { margin-bottom: 4px; }
+  details.bloc-repli.conseil .astuce { margin: 0; }
+
   /* --- Lexique : mots cliquables et bulle --- */
   .terme { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; display: inline; text-align: inherit; cursor: pointer; text-decoration: underline dotted var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; -webkit-tap-highlight-color: transparent; }
   .terme:hover, .terme:focus-visible { color: var(--accent); }
@@ -322,6 +367,11 @@
   .gamme-carte small { color: var(--doux); font-size: 13.5px; }
   .gamme-carte .tops { font-size: 13px; color: var(--accent); font-weight: 600; margin-top: 4px; }
   .gamme-carte .gamme { align-self: flex-start; }
+  /* Gammes compactes : une ligne de trois boutons, le détail est dans les restos */
+  .gammes { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .gamme-carte { padding: 10px; align-items: flex-start; }
+  .gamme-carte b { font-size: 15px; }
+  .gamme-carte small, .gamme-carte .tops { display: none; }
   .gamme-carte[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-doux); }
   .resto .quand { color: var(--accent); font-weight: 600; }
   .resto h3 { margin: 6px 0 2px; }

@@ -18,6 +18,7 @@
   const MOMENTS = [[11 * 60 + 30, "Matin"], [13 * 60 + 30, "Midi"], [18 * 60 + 30, "Après-midi"], [99 * 60, "Soir"]];
   const moment = (h) => { const m = minutes(h); return m === null ? null : MOMENTS.find((x) => m < x[0])[1]; };
   const restoParId = Object.fromEntries(F.restos.map((r) => [r.id, r]));
+  const BTN_TOUT = '<button class="bouton btn-tout" aria-pressed="false">↕ Tout déplier</button>';
 
   /* ---------------- Lexique (lexique.js) : mots cliquables dans les textes ---------------- */
   const LEX = F.lexique || {};
@@ -108,6 +109,10 @@
   }
   function btnLieu(id, texte) { return F.lieux[id] ? `<button class="lien-fiche ${F.lieux[id].guide ? "guide" : ""}" data-lieu="${id}">${esc(texte || (F.lieux[id].guide ? "Guide de visite" : F.lieux[id].nom))}</button>` : ""; }
   function btnResto(id, texte) { return restoParId[id] ? `<button class="lien-fiche resto" data-resto="${id}">${esc(texte || restoParId[id].nom)}</button>` : ""; }
+  /* Bloc repliable (fermé par défaut) : titre toujours visible, contenu au clic. */
+  function repli(titre, contenu, info, cls) {
+    return `<details class="bloc-repli ${cls || ""}"><summary><span>${titre}</span>${info ? `<small>${info}</small>` : ""}</summary>${contenu}</details>`;
+  }
   function tel(t) { return t ? `<a class="bouton" href="tel:${t.replace(/\s/g, "")}">📞 Appeler</a>` : ""; }
 
   function pageAccueil() {
@@ -135,29 +140,30 @@
       <p class="surtitre">${esc(v.voyageurs)}</p>
       <h1>Quatre jours à Florence</h1>
       ${bandeau}
-      <p class="intro">Chaque jour est un <b>parcours à pied</b>, étape par étape : ce qu'il y a à voir en chemin (🚶), les détails à repérer et leurs histoires (👀), un guide salle par salle pour chaque musée (🎧), et pour chaque repas trois choix simples par gamme de prix (€ · €€ · €€€). « Itinéraire à pied » ouvre Google Maps depuis l'endroit où vous êtes.</p>
-      <div class="bloc"><h2>Le voyage</h2>
+      <div class="outils">${BTN_TOUT}</div>
+      <details class="bloc-repli intro-repli"><summary><span>ℹ️ Comment utiliser ce site</span></summary><p class="intro">Chaque jour est un <b>parcours à pied</b>, étape par étape : ce qu'il y a à voir en chemin (🚶), les détails à repérer et leurs histoires (👀), un guide salle par salle pour chaque musée (🎧), et pour chaque repas trois choix simples par gamme de prix (€ · €€ · €€€). « Itinéraire à pied » ouvre Google Maps depuis l'endroit où vous êtes. Tout est replié : touchez un titre pour le déplier, ou « Tout déplier » en haut de chaque page. Les mots soulignés en pointillé ouvrent une explication.</p></details>
+      <details class="bloc repli"><summary><h2>🧳 Le voyage</h2><small>vols, logement, tram</small></summary>
         <div class="info"><span class="ic">🛫</span><div>${esc(v.aller)}<small>Tram T2 jusqu'à Unità (~20 min), puis 15 min à pied</small></div></div>
         <div class="info"><span class="ic">🏠</span><div><a href="${maps(v.logement.adresse)}" target="_blank" rel="noopener">${esc(v.logement.adresse)}</a><small>${esc(v.logement.note)}</small></div></div>
         <div class="info"><span class="ic">🚋</span><div>Le tram, pas de taxi<small>${esc(v.tram)}</small></div></div>
         <div class="info"><span class="ic">🛬</span><div>${esc(v.retour)}<small>Tram T2 depuis Unità, aéroport vers 16h</small></div></div>
         <div class="info"><span class="ic">🌤</span><div><a href="${v.meteo}" target="_blank" rel="noopener">Météo de Florence (3bmeteo)</a><small>${esc(v.soleil)} · Lundi : musées d'État fermés</small></div></div>
-      </div>
-      <div class="bloc"><h2>Réservations</h2>${resas}</div>
-      <div class="bloc"><h2>Les jours en un coup d'œil</h2>
+      </details>
+      <details class="bloc repli"><summary><h2>🎟 Réservations</h2><small>${F.reservations.filter((r) => r.statut === "ok").length} faites · ${F.reservations.filter((r) => r.statut === "todo").length} à faire</small></summary>${resas}</details>
+      <details class="bloc repli"><summary><h2>📅 Les jours en un coup d'œil</h2><small>${F.jours.length} jours</small></summary>
         ${F.jours.map((j) => `<a class="jour-lien" href="#${j.id}"><b>${esc(j.court)}</b><span>${esc(j.titre)}</span><small>${j.etapes.filter(estPrincipale).length} temps forts</small></a>`).join("")}
-      </div>
-      <div class="bloc"><h2>Check-list de la veille</h2><div class="checks">${check}</div></div>
-      <div class="bloc"><h2>Hors ligne</h2>
+      </details>
+      <details class="bloc repli"><summary><h2>✅ Check-list de la veille</h2><small>${F.checklist.length} points</small></summary><div class="checks">${check}</div></details>
+      <details class="bloc repli"><summary><h2>📥 Hors ligne</h2><small>photos à télécharger</small></summary>
         <p class="petit">Le site reste consultable sans réseau une fois ouvert. Pour avoir aussi les ${Object.keys(F.photos).length} photos hors ligne, téléchargez-les une fois, en Wi-Fi (≈ 10 Mo).</p>
         <button class="bouton" id="btn-photos">📥 Télécharger les photos</button> <span class="petit" id="statut-photos">${memo.lire("photosOK", null) ? "Déjà fait une fois sur ce téléphone." : ""}</span>
-      </div>
-      <div class="bloc"><h2>Budget estimé</h2>
+      </details>
+      <details class="bloc repli"><summary><h2>💶 Budget estimé</h2></summary>
         <table class="budget">${b.lignes.map((l) => `<tr><td>${esc(l[0])}</td><td>${esc(l[1])}</td></tr>`).join("")}</table>
         <p class="total">${esc(b.total)}</p>
         <ul class="puces">${b.conseils.map((c) => `<li>${c}</li>`).join("")}</ul>
-      </div>
-      <details class="bloc credits"><summary>Crédits photos (Wikimedia Commons)</summary><p class="petit">Chaque photo renvoie à sa page sur Wikimedia Commons, avec son auteur et sa licence.</p><ul>${credits}</ul></details>
+      </details>
+      <details class="bloc repli credits"><summary><h2>📷 Crédits photos</h2><small>Wikimedia Commons</small></summary><p class="petit">Chaque photo renvoie à sa page sur Wikimedia Commons, avec son auteur et sa licence.</p><ul>${credits}</ul></details>
     </section>`;
   }
 
@@ -223,27 +229,31 @@
       </div></div>`;
       }
       const chemin = (allerHtml || listeChemin || detours ? `<details class="bloc-repli chemin"><summary><span>🚶 Pour y aller</span><small>${a ? esc(a.duree) : ""}${nChemin ? (a ? " · " : "") + nChemin + " à voir en chemin" : ""}</small></summary>${allerHtml}${listeChemin}${detours}</details>` : "")
-        + (listePlace ? `<details class="bloc-repli place" open><summary><span>${L && /musée/i.test(L.theme) && e.type === "visite" ? "🏛 Dans le musée" : "📍 Sur place"} : à ne pas manquer</span><small>${rPlace.length}</small></summary>${listePlace}</details>` : "");
+        + (listePlace ? `<details class="bloc-repli place"><summary><span>${L && /musée/i.test(L.theme) && e.type === "visite" ? "🏛 Dans le musée" : "📍 Sur place"} : à ne pas manquer</span><small>${rPlace.length}</small></summary>${listePlace}</details>` : "");
       const nomLieu = L && e.type === "visite" ? L.nom.replace(/\s+—.*$/, "") : null;
       const titreHtml = nomLieu ? `<h2>${esc(nomLieu)}</h2><div class="a-voir">🎯 ${esc(e.titre)}</div>` : `<h2>${esc(e.titre)}</h2>`;
+      const infos = [L ? (L.guide ? "🎧 guide" : "📖 fiche") : "", e.repas && e.repas.length ? "🍽 " + e.repas.length + " choix" : "", a ? "🚶 " + a.duree : "", (nChemin + rPlace.length) ? "👀 " + (nChemin + rPlace.length) + " à voir" : "", e.autres && e.autres.length ? e.autres.length + " option" + (e.autres.length > 1 ? "s" : "") : ""].filter(Boolean).join(" · ");
       return `${enTete}<div class="etape principale type-${e.type || "balade"} ${e.resa ? "reserve" : ""} ${i === ici ? "maintenant" : ""}" id="${j.id}-${i}">
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
         ${titreHtml}
         ${e.resa ? `<div class="resa-bandeau ${e.resaTodo ? "todo" : ""}">${e.resaTodo ? "🟡" : "✅"} ${esc(e.resa)}</div>` : ""}
+        <button class="etape-ouvrir" aria-expanded="false"><span class="eo-fl">▸ Déplier</span>${infos ? `<small>${infos}</small>` : ""}</button>
+        <div class="etape-corps">
         ${carteGuide}
         <p class="texte">${e.texte || ""}</p>
         ${boutons ? `<div class="actions">${boutons}</div>` : ""}
         ${repas}${chemin}
         ${blocAutres(e.autres, "Autres options pour ce créneau")}
+        </div>
       </div>`;
     }).join("");
     const d = new Date(j.date + "T12:00:00");
     const dateLongue = d.toLocaleDateString("fr-BE", { weekday: "long", day: "numeric", month: "long" });
     return `<section class="page" id="p-${j.id}">
-      <p class="surtitre">${esc(dateLongue)}</p><h1>${esc(j.titre)}</h1><p class="intro">${esc(j.intro)}</p>
-      <div class="outils">${j.carte ? `<a class="bouton" href="${parcoursMaps(j.carte)}" target="_blank" rel="noopener">🗺 Le parcours sur Maps</a>` : ""}<button class="bouton btn-detail" aria-pressed="false">🔎 Tout le détail</button><button class="bouton btn-pluie" aria-pressed="false">☔ Mode pluie</button></div>
+      <p class="surtitre">${esc(dateLongue)}</p><h1>${esc(j.titre)}</h1><details class="bloc-repli intro-repli"><summary><span>📝 Le résumé de la journée</span></summary><p class="intro">${esc(j.intro)}</p></details>
+      <div class="outils">${j.carte ? `<a class="bouton" href="${parcoursMaps(j.carte)}" target="_blank" rel="noopener">🗺 Le parcours sur Maps</a>` : ""}${BTN_TOUT}<button class="bouton btn-pluie" aria-pressed="false">☔ Mode pluie</button></div>
       <div class="parcours">${etapes}</div>
-      ${j.autres ? `<div class="bloc plans-b"><h2>Autres programmes possibles</h2>${j.autres.map(carteAutre).join("")}</div>` : ""}
+      ${j.autres ? repli("🔀 Autres programmes possibles", j.autres.map(carteAutre).join(""), j.autres.length + " plans", "plans-b") : ""}
       ${ici >= 0 ? `<a class="aller-maintenant" href="#${j.id}-${ici}" data-saut="${j.id}-${ici}">● Maintenant</a>` : ""}
     </section>`;
   }
@@ -251,6 +261,7 @@
   function pageLieux() {
     return `<section class="page" id="p-lieux"><p class="surtitre">${Object.keys(F.lieux).length} fiches · ${Object.values(F.lieux).filter((l) => l.guide).length} guides de visite</p><h1>Lieux & guides</h1>
       <p class="intro">Pourquoi y aller, les histoires, ce qu'il faut regarder, et pour les musées un guide salle par salle avec les photos des pièces maîtresses (🎧). Partout sur le site, les mots <span class="terme-demo">soulignés en pointillé</span> s'ouvrent d'un tap : qui, quoi, l'histoire, et un lien pour en savoir plus.</p>
+      <div class="outils">${BTN_TOUT}</div>
       <input class="recherche" type="search" id="recherche-lieux" placeholder="Chercher un lieu, un nom (Médicis, Galilée, Botticelli…)" aria-label="Chercher">
       <div class="filtres" id="filtres-lieux"><button aria-pressed="true" data-theme="">Tous</button><button aria-pressed="false" data-theme="guide">🎧 Avec guide</button>${THEMES.map((t) => `<button aria-pressed="false" data-theme="${esc(t)}">${esc(t)}</button>`).join("")}</div>
       <div class="liste" id="liste-lieux">${Object.entries(F.lieux).map(([id, l]) => {
@@ -262,17 +273,21 @@
   }
 
   function carteResto(r, dansFiche) {
-    return `<div class="${dansFiche ? "" : "bloc "}resto" data-gamme="${r.gamme}" data-prog="${r.prog ? 1 : 0}">
-      <div class="choix-haut"><span class="gamme g${r.gamme}">${GAMME[r.gamme]}</span>${r.prio ? '<span class="etiquette prio">★ votre trouvaille</span>' : ""}${r.prog ? '<span class="etiquette reco">au programme</span>' : ""}</div>
+    const tete = `<div class="choix-haut"><span class="gamme g${r.gamme}">${GAMME[r.gamme]}</span>${r.prio ? '<span class="etiquette prio">★ votre trouvaille</span>' : ""}${r.prog ? '<span class="etiquette reco">au programme</span>' : ""}</div>
       ${dansFiche ? "" : `<h3>${esc(r.nom)}</h3>`}
       <div class="ligne">${esc(r.type)} · <span class="prix">${esc(r.prix)}</span> · ${esc(r.zone)}</div>
-      ${r.quand ? `<div class="ligne quand">📅 ${esc(r.quand)}</div>` : ""}
+      ${r.quand ? `<div class="ligne quand">📅 ${esc(r.quand)}</div>` : ""}`;
+    const corps = carteRestoCorps(r);
+    if (!dansFiche) return `<details class="bloc resto repli-resto" data-gamme="${r.gamme}" data-prog="${r.prog ? 1 : 0}"><summary>${tete}</summary>${corps}</details>`;
+    return `<div class="resto" data-gamme="${r.gamme}" data-prog="${r.prog ? 1 : 0}">${tete}${corps}</div>`;
+  }
+  function carteRestoCorps(r) {
+    return `
       <p class="note">${r.pourquoi}</p>
       ${r.commander && r.commander.length ? `<div class="sous-titre">À commander</div><ul class="puces commander">${r.commander.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>` : ""}
       ${r.astuce ? `<p class="astuce">💡 ${esc(r.astuce)}</p>` : ""}
       <div class="ligne">🕒 ${esc(r.horaires)}</div>
-      <div class="actions"><a class="bouton" href="${maps(r.nom + ", " + r.adresse + ", Firenze")}" target="_blank" rel="noopener">📍 ${esc(r.adresse)}</a><a class="bouton" href="${aPied(r.nom + ", " + r.adresse + ", Firenze")}" target="_blank" rel="noopener">🚶 Y aller</a>${tel(r.tel)}</div>
-    </div>`;
+      <div class="actions"><a class="bouton" href="${maps(r.nom + ", " + r.adresse + ", Firenze")}" target="_blank" rel="noopener">📍 ${esc(r.adresse)}</a><a class="bouton" href="${aPied(r.nom + ", " + r.adresse + ", Firenze")}" target="_blank" rel="noopener">🚶 Y aller</a>${tel(r.tel)}</div>`;
   }
   function pageManger() {
     const cartes = F.gammes.filter((g) => g.n > 0).map((g) => {
@@ -280,13 +295,14 @@
       return `<button class="gamme-carte" data-g="${g.n}" aria-pressed="false"><span class="gamme g${g.n}">${GAMME[g.n]}</span><b>${esc(g.nom.replace(/^€+\s*/, ""))}</b><small>${esc(g.sous)}</small>${tops.length ? `<span class="tops">Au programme : ${esc(tops.join(" · "))}</span>` : ""}</button>`;
     }).join("");
     return `<section class="page" id="p-manger"><p class="surtitre">${F.restos.length} adresses vérifiées</p><h1>Manger & boire</h1>
-      <p class="intro">Trois gammes. Touchez-en une pour voir toutes ses adresses, avec ce qu'il faut y commander. « Au programme » : les adresses déjà placées dans vos journées (★ = vos propres trouvailles). Les autres sont des alternatives sérieuses, citées par le Gambero Rosso, le guide Michelin ou les meilleurs blogs locaux. Attention aux jours de fermeture : le dimanche et le lundi, beaucoup d'adresses ferment.</p>
+      <div class="outils">${BTN_TOUT}</div>
+      <details class="bloc-repli intro-repli"><summary><span>ℹ️ Comment lire cette page</span></summary><p class="intro">Trois gammes. Touchez-en une pour voir toutes ses adresses, avec ce qu'il faut y commander. « Au programme » : les adresses déjà placées dans vos journées (★ = vos propres trouvailles). Les autres sont des alternatives sérieuses, citées par le Gambero Rosso, le guide Michelin ou les meilleurs blogs locaux. Attention aux jours de fermeture : le dimanche et le lundi, beaucoup d'adresses ferment.</p></details>
       <div class="gammes">${cartes}</div>
       <div class="filtres" id="filtres-manger"><button aria-pressed="true" data-f="tout">Tout</button><button aria-pressed="false" data-f="prog">Au programme</button><button aria-pressed="false" data-f="0">🍦 Glaces & cafés</button></div>
       <div id="liste-restos">${F.restos.slice().sort((a, b) => (b.prog ? 1 : 0) - (a.prog ? 1 : 0)).map((r) => carteResto(r)).join("")}</div>
-      <div class="bloc"><h2>Que goûter à Florence</h2>
-        <div class="plats">${F.plats.map((p) => `<div class="plat"><h3>${esc(p.nom)}</h3><p>${p.texte}</p><div class="actions">${p.ou.map((id) => btnResto(id)).join("")}</div></div>`).join("")}</div>
-      </div>
+      <details class="bloc repli"><summary><h2>😋 Que goûter à Florence</h2><small>${F.plats.length} plats</small></summary>
+        <div class="plats">${F.plats.map((p) => repli(esc(p.nom), `<p>${p.texte}</p><div class="actions">${p.ou.map((id) => btnResto(id)).join("")}</div>`, "", "plat")).join("")}</div>
+      </details>
     </section>`;
   }
 
@@ -329,23 +345,23 @@
     liens.push(`<a href="${aPied(l.maps || l.nom)}" target="_blank" rel="noopener"><span class="ic">🚶</span>Itinéraire à pied</a>`);
     liens.push(`<a href="${maps(l.maps || l.nom)}" target="_blank" rel="noopener"><span class="ic">📍</span>Ouvrir dans Google Maps</a>`);
     const g = l.guide;
-    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)}</h4>${g.conseil ? `<p class="astuce">💡 ${esc(g.conseil)}</p>` : ""}
-      ${g.etapes.map((s, i) => `<div class="salle"><div class="salle-num">${i + 1}</div><div class="salle-corps"><div class="salle-nom">${esc(s.salle)}</div><h5>${esc(s.titre)}</h5>
+    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)} · ${g.etapes.length} étapes</h4>${g.conseil ? repli("💡 Le conseil pour la visite", `<p class="astuce">${esc(g.conseil)}</p>`, "", "conseil") : ""}
+      ${g.etapes.map((s, i) => `<details class="salle"><summary><span class="salle-num">${i + 1}</span><span class="salle-titre"><span class="salle-nom">${esc(s.salle)}</span><span class="salle-h">${esc(s.titre)}</span></span><span class="salle-fl">▸</span></summary><div class="salle-corps">
         ${s.oeuvres.map((o) => `<div class="oeuvre ${o.img ? "avec-photo" : ""}">${o.img ? photo(o.img, o.nom, "grande") : ""}<div class="oeuvre-texte"><b>${esc(o.nom)}</b>${o.auteur || o.date ? `<span class="auteur">${esc([o.auteur, o.date].filter(Boolean).join(", "))}</span>` : ""}<p>${o.texte}</p></div></div>`).join("")}
-      </div></div>`).join("")}` : "";
+      </div></details>`).join("")}` : "";
     const galerie = (l.photos || []).filter((k) => k !== l.img).map((k) => photo(k, l.nom, "galerie")).join("");
     ouvrir(l.theme + " · " + l.zone, l.nom, `
       ${l.img ? photo(l.img, l.nom, "entete") : ""}
       <p>${l.pourquoi}</p>
       ${guide}
-      ${l.histoires && l.histoires.length ? `<h4>Histoires et anecdotes</h4>${l.histoires.map((h) => `<p class="histoire">${h}</p>`).join("")}` : ""}
-      ${l.regarder && l.regarder.length ? `<h4>À regarder</h4><ul class="puces">${l.regarder.map((r) => `<li>${r}</li>`).join("")}</ul>` : ""}
-      ${galerie ? `<div class="galerie">${galerie}</div>` : ""}
-      <h4>Infos pratiques</h4><dl class="pratique">
+      ${l.histoires && l.histoires.length ? repli("📜 Histoires et anecdotes", l.histoires.map((h) => `<p class="histoire">${h}</p>`).join(""), l.histoires.length) : ""}
+      ${l.regarder && l.regarder.length ? repli("👀 À regarder", `<ul class="puces">${l.regarder.map((r) => `<li>${r}</li>`).join("")}</ul>`, l.regarder.length) : ""}
+      ${galerie ? repli("📷 Photos", `<div class="galerie">${galerie}</div>`, (l.photos || []).filter((k) => k !== l.img).length) : ""}
+      <details class="bloc-repli"><summary><span>🕒 Infos pratiques</span><small>${esc([p.horaires && p.horaires.split(",")[0], p.prix].filter(Boolean).join(" · ").slice(0, 40))}</small></summary><dl class="pratique">
         ${p.horaires ? `<dt>Horaires</dt><dd>${esc(p.horaires)}</dd>` : ""}${p.prix ? `<dt>Prix</dt><dd>${esc(p.prix)}</dd>` : ""}
         ${p.duree ? `<dt>Durée</dt><dd>${esc(p.duree)}</dd>` : ""}${p.moment ? `<dt>Quand</dt><dd>${esc(p.moment)}</dd>` : ""}
-        ${p.resa ? `<dt>Réservation</dt><dd>${esc(p.resa)}</dd>` : ""}</dl>
-      <h4>Liens</h4><div class="liens">${liens.join("")}</div>`);
+        ${p.resa ? `<dt>Réservation</dt><dd>${esc(p.resa)}</dd>` : ""}</dl></details>
+      ${repli("🔗 Liens, vidéos et itinéraire", `<div class="liens">${liens.join("")}</div>`, liens.length)}`);
   }
   function ficheResto(id) {
     const r = restoParId[id]; if (!r) return;
@@ -357,9 +373,10 @@
     const tm = e.target.closest("[data-terme]");
     if (tm) { e.preventDefault(); ouvrirTerme(tm.dataset.terme); return; }
     if (bulle.open && e.target.closest("#bulle [data-lieu]")) bulle.close();
-    const t = e.target.closest("[data-lieu], [data-resto], .btn-pluie, .btn-detail, .route-resume, #btn-photos, [data-saut]");
+    const t = e.target.closest("[data-lieu], [data-resto], .btn-pluie, .btn-tout, .etape-ouvrir, .route-resume, #btn-photos, [data-saut]");
     if (!t) return;
-    if (t.matches(".btn-detail")) { majDetail(!document.body.classList.contains("detail")); return; }
+    if (t.matches(".btn-tout")) { const pg = t.closest(".page"); toutDeplier(pg, t.getAttribute("aria-pressed") !== "true"); return; }
+    if (t.matches(".etape-ouvrir")) { const et = t.closest(".etape"); ouvrirEtape(et, !et.classList.contains("ouvert")); return; }
     if (t.matches(".route-resume")) { const et = t.closest(".etape"); const on = !et.classList.contains("ouvert"); et.classList.toggle("ouvert", on); t.setAttribute("aria-expanded", on); const sm = $("small", t); sm.textContent = on ? "▾ Replier" : sm.dataset.ferme; return; }
     if (t.matches(".btn-pluie")) { majPluie(!document.body.classList.contains("pluie")); return; }
     if (t.id === "btn-photos") { telechargerPhotos(t); return; }
@@ -378,13 +395,25 @@
   }
   majPluie(memo.lire("pluie", false));
   /* Vue essentielle (par défaut) ou tout le détail du parcours. */
+  function ouvrirEtape(et, on) {
+    et.classList.toggle("ouvert", on);
+    const b = $(".etape-ouvrir", et); if (b) { b.setAttribute("aria-expanded", on); $(".eo-fl", b).textContent = on ? "▾ Replier" : "▸ Déplier"; }
+    const r = $(".route-resume", et); if (r) { r.setAttribute("aria-expanded", on); const sm = $("small", r); if (sm) sm.textContent = on ? "▾ Replier" : sm.dataset.ferme; }
+  }
+  /* « Tout déplier » / « Tout replier » pour une page entière. */
+  function toutDeplier(pg, on) {
+    if (!pg) return;
+    $$(".etape", pg).forEach((et) => ouvrirEtape(et, on));
+    $$("details", pg).forEach((d) => { if (!d.classList.contains("credits")) d.open = on; });
+    $$(".btn-tout", pg).forEach((b) => { b.setAttribute("aria-pressed", on); b.textContent = on ? "↕ Tout replier" : "↕ Tout déplier"; });
+  }
   function majDetail(on) {
     document.body.classList.toggle("detail", on); memo.ecrire("detail", on);
     $$(".btn-detail").forEach((b) => { b.setAttribute("aria-pressed", on); b.textContent = on ? "🔎 Vue essentielle" : "🔎 Tout le détail"; });
     $$("details.bloc-repli.chemin").forEach((d) => { d.open = on; });
     $$(".etape.route").forEach((et) => { et.classList.remove("ouvert"); const b = $(".route-resume", et); if (b) { b.setAttribute("aria-expanded", "false"); const sm = $("small", b); if (sm) sm.textContent = sm.dataset.ferme; } });
   }
-  majDetail(memo.lire("detail", false));
+  majDetail(false);
 
   /* Filtres lieux */
   let themeLieu = "";
@@ -454,7 +483,7 @@
     $$("#onglets a").forEach((a) => {
       const on = a.dataset.id === id; if (on) { a.setAttribute("aria-current", "page"); a.scrollIntoView({ inline: "center", block: "nearest" }); } else a.removeAttribute("aria-current");
     });
-    if (etape) { const c = document.getElementById(etape); if (c && c.classList.contains("route")) c.classList.add("ouvert"); if (c) setTimeout(() => c.scrollIntoView({ block: "start" }), 50); }
+    if (etape) { const c = document.getElementById(etape); if (c && c.classList.contains("etape")) ouvrirEtape(c, true); if (c) setTimeout(() => c.scrollIntoView({ block: "start" }), 50); }
     else window.scrollTo(0, 0);
   }
   window.addEventListener("hashchange", () => { if (feuille.open) feuille.close(); afficher(); });
