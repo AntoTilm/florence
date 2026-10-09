@@ -18,6 +18,26 @@
   const MOMENTS = [[11 * 60 + 30, "Matin"], [13 * 60 + 30, "Midi"], [18 * 60 + 30, "Après-midi"], [99 * 60, "Soir"]];
   const moment = (h) => { const m = minutes(h); return m === null ? null : MOMENTS.find((x) => m < x[0])[1]; };
   const restoParId = Object.fromEntries(F.restos.map((r) => [r.id, r]));
+
+  /* « À ne pas manquer » des visites de musées : rangé dans le guide de visite du lieu
+     (œuvre repérée par sa photo, sinon par un nom propre ou une année commune ; le reste va dans « Avant d'entrer et autour »). */
+  const INCONT = {};
+  (function () {
+    const norm = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/<[^>]+>/g, "");
+    const cles = (t) => new Set((norm(t).match(/\b(\d{4}|[A-Z][\w-]{3,})\b/g) || []).filter((w) => !["Les", "Sur", "Dans", "Pour", "Avec"].includes(w)));
+    F.jours.forEach((j) => j.etapes.forEach((e) => {
+      const L = e.lieu && F.lieux[e.lieu];
+      if (!L || !L.guide || e.type !== "visite") return;
+      const I = INCONT[e.lieu] || (INCONT[e.lieu] = { oeuvres: new Set(), salles: new Set(), extras: [], noms: [] });
+      (e.regarder || []).filter((r) => !r.chemin).forEach((r) => {
+        let hit = null;
+        L.guide.etapes.forEach((s, si) => s.oeuvres.forEach((o, oi) => { if (!hit && r.img && o.img === r.img) hit = [si, oi]; }));
+        if (!hit) { const k = cles(r.titre); L.guide.etapes.forEach((s, si) => s.oeuvres.forEach((o, oi) => { if (hit) return; const k2 = cles(o.nom + " " + s.titre); for (const w of k) if (k2.has(w)) { hit = [si, oi]; return; } })); }
+        if (hit) { const cle = hit.join(":"); if (!I.oeuvres.has(cle)) { I.oeuvres.add(cle); I.salles.add(hit[0]); I.noms.push({ si: hit[0], nom: L.guide.etapes[hit[0]].oeuvres[hit[1]].nom }); } }
+        else if (!I.extras.some((x) => x.titre === r.titre)) I.extras.push(r);
+      });
+    }));
+  })();
   const BTN_TOUT = '<button class="bouton btn-tout" aria-pressed="false">↕ Tout déplier</button>';
 
   /* ---------------- Lexique (lexique.js) : mots cliquables dans les textes ---------------- */
@@ -202,12 +222,12 @@
       const allerHtml = a ? `<div class="aller"><div class="aller-haut"><span>🚶 <b>${esc(a.duree)}</b></span><a class="bouton petit-btn" href="${aPied(a.vers)}" target="_blank" rel="noopener">Itinéraire à pied</a></div><div class="via">${esc(a.via)}</div></div>` : "";
       const L = e.lieu && F.lieux[e.lieu];
       const carteGuide = L ? (L.guide
-        ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}</small></span><span class="cg-fl">›</span></button>`
+        ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}${INCONT[e.lieu] && INCONT[e.lieu].noms.length ? " · ⭐ " + INCONT[e.lieu].noms.length + " à ne pas manquer" : ""}</small></span><span class="cg-fl">›</span></button>`
         : `<button class="carte-guide fiche" data-lieu="${e.lieu}"><span class="cg-ic">📖</span><span><b>Fiche du lieu</b><small>Histoires, horaires, prix, liens</small></span><span class="cg-fl">›</span></button>`) : "";
       const boutons = e.resto && !e.repas ? btnResto(e.resto) : "";
       const tousChemin = e.type === "balade" || e.type === "pause";
       const rChemin = (e.regarder || []).filter((r) => tousChemin || r.chemin);
-      const rPlace = (e.regarder || []).filter((r) => !(tousChemin || r.chemin));
+      const rPlace = L && L.guide && e.type === "visite" ? [] : (e.regarder || []).filter((r) => !(tousChemin || r.chemin));
       const listeChemin = rChemin.length ? `<ul class="regards">${rChemin.map(carteRegarder).join("")}</ul>` : "";
       const listePlace = rPlace.length ? `<ul class="regards">${rPlace.map(carteRegarder).join("")}</ul>` : "";
       const regarder = (listeChemin ? `<div class="sous-titre">🚶 En chemin</div>${listeChemin}` : "") + (listePlace ? `<div class="sous-titre">📍 Sur place</div>${listePlace}` : "");
@@ -345,9 +365,12 @@
     liens.push(`<a href="${aPied(l.maps || l.nom)}" target="_blank" rel="noopener"><span class="ic">🚶</span>Itinéraire à pied</a>`);
     liens.push(`<a href="${maps(l.maps || l.nom)}" target="_blank" rel="noopener"><span class="ic">📍</span>Ouvrir dans Google Maps</a>`);
     const g = l.guide;
-    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)} · ${g.etapes.length} étapes</h4>${g.conseil ? repli("💡 Le conseil pour la visite", `<p class="astuce">${esc(g.conseil)}</p>`, "", "conseil") : ""}
-      ${g.etapes.map((s, i) => `<details class="salle"><summary><span class="salle-num">${i + 1}</span><span class="salle-titre"><span class="salle-nom">${esc(s.salle)}</span><span class="salle-h">${esc(s.titre)}</span></span><span class="salle-fl">▸</span></summary><div class="salle-corps">
-        ${s.oeuvres.map((o) => `<div class="oeuvre ${o.img ? "avec-photo" : ""}">${o.img ? photo(o.img, o.nom, "grande") : ""}<div class="oeuvre-texte"><b>${esc(o.nom)}</b>${o.auteur || o.date ? `<span class="auteur">${esc([o.auteur, o.date].filter(Boolean).join(", "))}</span>` : ""}<p>${o.texte}</p></div></div>`).join("")}
+    const I = INCONT[id] || { oeuvres: new Set(), salles: new Set(), extras: [], noms: [] };
+    const aNePasManquer = I.noms.length ? `<div class="incontournables"><span class="inc-titre">⭐ À ne pas manquer</span>${I.noms.map((n) => `<button class="inc-puce" data-salle="${n.si}">${esc(n.nom)}</button>`).join("")}</div>` : "";
+    const autour = I.extras.length ? repli("📍 Avant d'entrer et autour", `<ul class="regards">${I.extras.map(carteRegarder).join("")}</ul>`, I.extras.length, "autour") : "";
+    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)} · ${g.etapes.length} étapes</h4>${aNePasManquer}${g.conseil ? repli("💡 Le conseil pour la visite", `<p class="astuce">${esc(g.conseil)}</p>`, "", "conseil") : ""}${autour}
+      ${g.etapes.map((s, i) => `<details class="salle ${I.salles.has(i) ? "a-voir-absolument" : ""}" data-salle="${i}"><summary><span class="salle-num">${i + 1}</span><span class="salle-titre"><span class="salle-nom">${esc(s.salle)}${I.salles.has(i) ? ' <span class="etoile">⭐ à ne pas manquer</span>' : ""}</span><span class="salle-h">${esc(s.titre)}</span></span><span class="salle-fl">▸</span></summary><div class="salle-corps">
+        ${s.oeuvres.map((o, oi) => `<div class="oeuvre ${o.img ? "avec-photo" : ""} ${I.oeuvres.has(i + ":" + oi) ? "incontournable" : ""}">${o.img ? photo(o.img, o.nom, "grande") : ""}<div class="oeuvre-texte">${I.oeuvres.has(i + ":" + oi) ? '<span class="etoile">⭐ à ne pas manquer</span>' : ""}<b>${esc(o.nom)}</b>${o.auteur || o.date ? `<span class="auteur">${esc([o.auteur, o.date].filter(Boolean).join(", "))}</span>` : ""}<p>${o.texte}</p></div></div>`).join("")}
       </div></details>`).join("")}` : "";
     const galerie = (l.photos || []).filter((k) => k !== l.img).map((k) => photo(k, l.nom, "galerie")).join("");
     ouvrir(l.theme + " · " + l.zone, l.nom, `
@@ -370,6 +393,8 @@
 
   /* ---------------- Interactions ---------------- */
   document.addEventListener("click", (e) => {
+    const ps = e.target.closest(".inc-puce");
+    if (ps) { const d = $(`#feuille-corps details.salle[data-salle="${ps.dataset.salle}"]`); if (d) { d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); } return; }
     const tm = e.target.closest("[data-terme]");
     if (tm) { e.preventDefault(); ouvrirTerme(tm.dataset.terme); return; }
     if (bulle.open && e.target.closest("#bulle [data-lieu]")) bulle.close();

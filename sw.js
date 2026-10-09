@@ -1,6 +1,6 @@
 /* Hors ligne : garde une copie du site dans le téléphone.
    Changer VERSION à chaque publication pour forcer la mise à jour. */
-const VERSION = "florence-v9";
+const VERSION = "florence-v10";
 const PHOTOS = "florence-photos"; /* photos Wikimedia, gardées d'une version à l'autre */
 const FICHIERS = ["./", "index.html", "app.js", "donnees.js", "lexique.js", "icone.svg", "manifest.webmanifest"];
 

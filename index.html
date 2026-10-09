@@ -203,6 +203,16 @@
   details.bloc-repli.conseil { margin-bottom: 4px; }
   details.bloc-repli.conseil .astuce { margin: 0; }
 
+
+  /* --- Guide : « à ne pas manquer » intégré --- */
+  .incontournables { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 10px; }
+  .inc-titre { font-size: 13px; font-weight: 700; color: var(--or); margin-right: 2px; }
+  .inc-puce { font: inherit; font-size: 13.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--or); background: var(--or-doux); color: var(--texte); cursor: pointer; }
+  .etoile { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; text-transform: none; color: var(--or); }
+  .oeuvre-texte > .etoile { display: block; margin-bottom: 2px; }
+  details.salle.a-voir-absolument { border-color: color-mix(in srgb, var(--or) 60%, var(--trait)); }
+  details.salle { scroll-margin-top: 90px; }
+
   /* --- Lexique : mots cliquables et bulle --- */
   .terme { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; display: inline; text-align: inherit; cursor: pointer; text-decoration: underline dotted var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; -webkit-tap-highlight-color: transparent; }
   .terme:hover, .terme:focus-visible { color: var(--accent); }
