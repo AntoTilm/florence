@@ -261,7 +261,8 @@
         : `<button class="carte-guide fiche" data-lieu="${e.lieu}"><span class="cg-ic">📖</span><span><b>Fiche du lieu</b><small>Histoires, horaires, prix, liens</small></span><span class="cg-fl">›</span></button>`) : "";
       const boutons = e.resto && !e.repas ? btnResto(e.resto) : "";
       const chA = chapitresEtape(j, e);
-      const ecouter = e.type === "transport" || (!AUDIO.etapes[j.id + "|" + e.heure] && chA.length < 2 && !(e.regarder || []).length) ? "" : btnEcouter(`data-ecouter="etape" data-jour="${j.id}" data-i="${i}"`, chA, AUDIO.etapes[j.id + "|" + e.heure] ? "Écouter le récit" : "Écouter cette étape");
+      const ecrit = !!AUDIO.etapes[j.id + "|" + e.heure];
+      const ecouter = !ecrit && (e.type === "transport" || (chA.length < 2 && !(e.regarder || []).length)) ? "" : btnEcouter(`data-ecouter="etape" data-jour="${j.id}" data-i="${i}"`, chA, ecrit ? "Écouter le récit" : "Écouter cette étape");
       const tousChemin = e.type === "balade" || e.type === "pause";
       const rChemin = (e.regarder || []).filter((r) => tousChemin || r.chemin);
       const rPlace = L && L.guide && e.type === "visite" ? [] : (e.regarder || []).filter((r) => !(tousChemin || r.chemin));
