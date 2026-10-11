@@ -138,6 +138,29 @@
   .resto .note { font-size: 14.5px; margin: 8px 0 10px; }
   .resto .prix { color: var(--accent); font-weight: 600; }
 
+
+  /* --- Récits audio --- */
+  .btn-ecouter { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; color: var(--texte); background: var(--bleu-doux); border: 1.5px solid var(--bleu); border-radius: 14px; padding: 10px 14px; margin: 6px 0 12px; cursor: pointer; }
+  .btn-ecouter .be-ic { font-size: 20px; }
+  .btn-ecouter > span:nth-child(2) { flex: 1; display: flex; flex-direction: column; }
+  .btn-ecouter b, .btn-ecouter .be-fl { color: var(--bleu); }
+  .btn-ecouter small { opacity: .75; font-size: 12.5px; }
+  .salle-corps .btn-ecouter { margin-top: 0; }
+  #lecteur { position: fixed; left: 8px; right: 8px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 40; max-width: 744px; margin: 0 auto; display: flex; align-items: center; gap: 4px; padding: 8px 8px 8px 14px; border-radius: 16px; background: var(--bleu); color: #fff; box-shadow: 0 6px 24px rgba(0,0,0,.28); }
+  #lecteur[hidden] { display: none; }
+  #lecteur .lc-texte { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  #lecteur .lc-texte b, #lecteur .lc-texte small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #lecteur .lc-texte small { opacity: .85; font-size: 12px; }
+  #lecteur button { font: inherit; font-size: 17px; min-width: 36px; height: 38px; border: 0; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; cursor: pointer; padding: 0 8px; }
+  #lecteur button:disabled { opacity: .35; }
+  #lecteur #lc-vitesse { font-size: 13px; font-weight: 600; }
+  #lecteur.attente #lc-jouer { background: #fff; color: var(--bleu); animation: lc-pouls 1.6s ease-in-out infinite; }
+  @keyframes lc-pouls { 50% { transform: scale(1.1); } }
+  @media (prefers-color-scheme: dark) { #lecteur { color: #12202f; } #lecteur button { color: #12202f; background: rgba(0,0,0,.12); } #lecteur.attente #lc-jouer { background: #12202f; color: var(--bleu); } }
+  body.avec-lecteur { padding-bottom: 76px; }
+  body.avec-lecteur .aller-maintenant { bottom: calc(80px + env(safe-area-inset-bottom)); }
+  dialog.feuille #lecteur { position: sticky; left: auto; right: auto; bottom: calc(8px + env(safe-area-inset-bottom)); margin: 0 8px 8px; }
+  @media print { #lecteur, .btn-ecouter { display: none; } }
   /* --- Fiche (feuille modale) --- */
   dialog.feuille { border: 0; padding: 0; margin: auto auto 0; width: 100%; max-width: 760px; max-height: 92vh; border-radius: 18px 18px 0 0; background: var(--fond); color: var(--texte); }
   @media (min-width: 800px) { dialog.feuille { margin: auto; border-radius: 18px; max-height: 88vh; } }
@@ -488,6 +511,7 @@
 
 <script src="donnees.js"></script>
 <script src="lexique.js"></script>
+<script src="audio.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

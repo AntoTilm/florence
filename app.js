@@ -20,6 +20,40 @@
   const moment = (h) => { const m = minutes(h); return m === null ? null : MOMENTS.find((x) => m < x[0])[1]; };
   const restoParId = Object.fromEntries(F.restos.map((r) => [r.id, r]));
 
+  /* Récits audio (audio.js) : texte écrit pour l'oreille, sinon composé à partir des fiches. */
+  const AUDIO = window.FLO_AUDIO || { etapes: {}, salles: {} };
+  const sansHtml = (t) => String(t ?? "").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+  const ponctuer = (t) => { t = sansHtml(t); return /[.!?…»]$/.test(t) ? t : t + "."; };
+  function chapitresEtape(j, e) {
+    const s = AUDIO.etapes[j.id + "|" + e.heure];
+    if (s && s.length) return s;
+    const ch = [];
+    if (e.texte) ch.push({ titre: e.titre, texte: ponctuer(e.titre) + " " + sansHtml(e.texte) });
+    const r = e.regarder || [];
+    r.filter((x) => x.top).concat(r.filter((x) => !x.top)).forEach((x) => ch.push({ titre: sansHtml(x.titre), texte: ponctuer(x.titre) + " " + sansHtml(x.texte) }));
+    return ch;
+  }
+  function chapitresGuide(id) {
+    const l = F.lieux[id]; if (!l || !l.guide) return [];
+    const ecrits = AUDIO.salles[id] || [];
+    return l.guide.etapes.map((s, i) => ({
+      titre: s.salle + " · " + s.titre,
+      texte: ecrits[i] || ponctuer(s.salle + ". " + s.titre) + " " + s.oeuvres.map((o) => ponctuer(o.nom + (o.auteur ? ", par " + o.auteur : "")) + " " + sansHtml(o.texte)).join(" ")
+    }));
+  }
+  function chapitresLieu(id) {
+    const l = F.lieux[id]; if (!l) return [];
+    const ch = [{ titre: l.nom, texte: ponctuer(l.nom) + " " + sansHtml(l.pourquoi) }];
+    (l.histoires || []).forEach((h, i) => ch.push({ titre: "Histoire " + (i + 1), texte: sansHtml(h) }));
+    if (l.regarder && l.regarder.length) ch.push({ titre: "À regarder", texte: "À regarder. " + l.regarder.map(ponctuer).join(" ") });
+    return ch;
+  }
+  const minutesDe = (ch) => Math.max(1, Math.round(ch.reduce((n, c) => n + c.texte.split(/\s+/).length, 0) / 160));
+  function btnEcouter(attrs, ch, libelle) {
+    if (!ch.length || !("speechSynthesis" in window)) return "";
+    return `<button class="btn-ecouter" ${attrs}><span class="be-ic">🎧</span><span><b>${esc(libelle)}</b><small>~${minutesDe(ch)} min${ch.length > 1 ? " · " + ch.length + " parties" : ""}</small></span><span class="be-fl">▶</span></button>`;
+  }
+
   /* « À ne pas manquer » des visites de musées : rangé dans le guide de visite du lieu
      (œuvre repérée par sa photo, sinon par un nom propre ou une année commune ; le reste va dans « Avant d'entrer et autour »). */
   const INCONT = {};
@@ -226,6 +260,8 @@
         ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.plan ? "🗺 plan interactif · " : ""}${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}${INCONT[e.lieu] && INCONT[e.lieu].noms.length ? " · ⭐ " + INCONT[e.lieu].noms.length + " à ne pas manquer" : ""}</small></span><span class="cg-fl">›</span></button>`
         : `<button class="carte-guide fiche" data-lieu="${e.lieu}"><span class="cg-ic">📖</span><span><b>Fiche du lieu</b><small>Histoires, horaires, prix, liens</small></span><span class="cg-fl">›</span></button>`) : "";
       const boutons = e.resto && !e.repas ? btnResto(e.resto) : "";
+      const chA = chapitresEtape(j, e);
+      const ecouter = e.type === "transport" || (!AUDIO.etapes[j.id + "|" + e.heure] && chA.length < 2 && !(e.regarder || []).length) ? "" : btnEcouter(`data-ecouter="etape" data-jour="${j.id}" data-i="${i}"`, chA, AUDIO.etapes[j.id + "|" + e.heure] ? "Écouter le récit" : "Écouter cette étape");
       const tousChemin = e.type === "balade" || e.type === "pause";
       const rChemin = (e.regarder || []).filter((r) => tousChemin || r.chemin);
       const rPlace = L && L.guide && e.type === "visite" ? [] : (e.regarder || []).filter((r) => !(tousChemin || r.chemin));
@@ -248,6 +284,7 @@
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
         <h2>${esc(e.titre)}</h2>
         ${carteGuide}
+        ${ecouter}
         <p class="texte">${e.texte || ""}</p>
         ${boutons ? `<div class="actions">${boutons}</div>` : ""}
         ${repas}${regarder}${detours}
@@ -266,6 +303,7 @@
         <button class="etape-ouvrir" aria-expanded="false"><span class="eo-fl">▸ Déplier</span>${infos ? `<small>${infos}</small>` : ""}</button>
         <div class="etape-corps">
         ${carteGuide}
+        ${ecouter}
         <p class="texte">${e.texte || ""}</p>
         ${boutons ? `<div class="actions">${boutons}</div>` : ""}
         ${repas}${chemin}
@@ -337,10 +375,108 @@
   function ouvrir(meta, titre, corps) {
     $("#feuille-meta").textContent = meta; $("#feuille-titre").textContent = titre; $("#feuille-corps").innerHTML = corps; lierMots($("#feuille-corps"));
     if (!feuille.open) { feuille.showModal(); history.pushState({ feuille: 1 }, ""); }
+    if (typeof placerLecteur === "function") placerLecteur();
     feuille.scrollTop = 0; $("#feuille-corps").scrollTop = 0;
   }
   function fermer() { if (feuille.open) { if (history.state && history.state.feuille) history.back(); else feuille.close(); } }
   window.addEventListener("popstate", () => { if (bulle.open) bulle.close(); if (feuille.open) feuille.close(); });
+
+  /* ---------------- Lecteur audio (voix du téléphone) ----------------
+     Lit les chapitres un par un et s'arrête entre deux : « Suite » lance le suivant quand on y est.
+     La pause coupe et reprend à la phrase en cours (pause() est peu fiable sur Android). */
+  const LECT = { liste: [], i: 0, morceaux: [], m: 0, etat: "arret", jeton: 0, titre: "", verrou: null };
+  const synth = window.speechSynthesis;
+  const VITESSES = [0.9, 1, 1.15, 1.3];
+  let vitesse = memo.lire("vitesse", 1), voixNom = memo.lire("voix", "");
+  function voixFr() {
+    const v = synth ? synth.getVoices().filter((x) => /^fr/i.test(x.lang)) : [];
+    const choisie = v.find((x) => x.name === voixNom);
+    if (choisie) return choisie;
+    const score = (x) => (/fr[-_]FR/i.test(x.lang) ? 4 : 0) + (/google|neural|natural|premium|enhanced|amélie|amelie|thomas|audrey|aurélie|denise|henri/i.test(x.name) ? 3 : 0) + (x.localService ? 1 : 0);
+    return v.sort((a, b) => score(b) - score(a))[0] || null;
+  }
+  function decouper(t) {
+    const phrases = t.match(/[^.!?…;:]+[.!?…;:»]*\s*/g) || [t];
+    const out = []; let cur = "";
+    phrases.forEach((p) => { if ((cur + p).length > 220 && cur) { out.push(cur.trim()); cur = ""; } cur += p; });
+    if (cur.trim()) out.push(cur.trim());
+    return out;
+  }
+  const lecteur = document.createElement("div");
+  lecteur.id = "lecteur"; lecteur.hidden = true;
+  lecteur.innerHTML = `<div class="lc-texte"><b id="lc-titre"></b><small id="lc-sous"></small></div>
+    <button id="lc-jouer" aria-label="Lecture ou pause">⏸</button><button id="lc-suite" aria-label="Partie suivante">⏭</button>
+    <button id="lc-vitesse" aria-label="Vitesse">1×</button><button id="lc-voix" aria-label="Changer de voix">🗣</button><button id="lc-fermer" aria-label="Arrêter">✕</button>`;
+  document.body.appendChild(lecteur);
+  function placerLecteur() { const f = $("#feuille"); const cible = f && f.open ? f : document.body; if (lecteur.parentNode !== cible) cible.appendChild(lecteur); }
+  async function verrouEcran(on) {
+    try { if (on && "wakeLock" in navigator && !LECT.verrou) { LECT.verrou = await navigator.wakeLock.request("screen"); LECT.verrou.addEventListener("release", () => { LECT.verrou = null; }); } else if (!on && LECT.verrou) { await LECT.verrou.release(); LECT.verrou = null; } } catch (err) { /* écran : rien de grave */ }
+  }
+  function majLecteur() {
+    const c = LECT.liste[LECT.i];
+    document.body.classList.toggle("avec-lecteur", LECT.etat !== "arret");
+    lecteur.hidden = LECT.etat === "arret";
+    if (!c) return;
+    const n = LECT.liste.length, suiv = LECT.liste[LECT.i + 1];
+    $("#lc-titre").textContent = LECT.etat === "fin" && suiv ? "Suite : " + suiv.titre : c.titre;
+    $("#lc-sous").textContent = LECT.etat === "fin" ? (suiv ? "Touchez ▶ quand vous y êtes" : "Fin du récit") : LECT.titre + (n > 1 ? " · " + (LECT.i + 1) + "/" + n : "");
+    $("#lc-jouer").textContent = LECT.etat === "lecture" ? "⏸" : "▶";
+    $("#lc-suite").disabled = !suiv;
+    $("#lc-vitesse").textContent = String(vitesse).replace(".", ",") + "×";
+    lecteur.classList.toggle("attente", LECT.etat === "fin" && !!suiv);
+  }
+  function dire() {
+    const jeton = ++LECT.jeton;
+    const txt = LECT.morceaux[LECT.m];
+    if (txt == null) { LECT.etat = "fin"; verrouEcran(false); majLecteur(); return; }
+    const u = new SpeechSynthesisUtterance(txt);
+    const v = voixFr(); if (v) { u.voice = v; u.lang = v.lang; } else u.lang = "fr-FR";
+    u.rate = vitesse;
+    u.onend = () => { if (jeton !== LECT.jeton || LECT.etat !== "lecture") return; LECT.m++; dire(); };
+    u.onerror = (ev) => { if (jeton !== LECT.jeton || ev.error === "interrupted" || ev.error === "canceled") return; LECT.m++; dire(); };
+    synth.speak(u);
+  }
+  function jouerChapitre(i) {
+    if (!LECT.liste[i]) return;
+    synth.cancel(); LECT.jeton++;
+    LECT.i = i; LECT.m = 0; LECT.morceaux = decouper(LECT.liste[i].texte); LECT.etat = "lecture";
+    placerLecteur(); majLecteur(); verrouEcran(true);
+    setTimeout(dire, 60); /* Chrome Android : laisser cancel() finir */
+  }
+  function lancer(liste, i, titre) { LECT.liste = liste; LECT.titre = titre; jouerChapitre(i); }
+  function pause() { LECT.etat = "pause"; LECT.jeton++; synth.cancel(); verrouEcran(false); majLecteur(); }
+  function reprendre() { LECT.etat = "lecture"; majLecteur(); verrouEcran(true); dire(); }
+  function arreter() { LECT.etat = "arret"; LECT.jeton++; synth.cancel(); verrouEcran(false); majLecteur(); }
+  feuille.addEventListener("close", placerLecteur);
+  if (synth) synth.getVoices(); /* Chrome charge la liste des voix au premier appel */
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && LECT.etat === "lecture") verrouEcran(true); });
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ecouter]");
+    if (b) {
+      e.stopPropagation();
+      const k = b.dataset.ecouter, i = +b.dataset.i || 0;
+      if (k === "etape") {
+        const j = F.jours.find((x) => x.id === b.dataset.jour), et = j && j.etapes[i];
+        if (et) { const L = et.lieu && F.lieux[et.lieu]; lancer(chapitresEtape(j, et), 0, (L && et.type === "visite" ? L.nom : et.titre)); }
+      } else if (k === "guide") lancer(chapitresGuide(b.dataset.lieuAudio), i, F.lieux[b.dataset.lieuAudio].nom);
+      else if (k === "lieu") lancer(chapitresLieu(b.dataset.lieuAudio), 0, F.lieux[b.dataset.lieuAudio].nom);
+      return;
+    }
+    if (!e.target.closest("#lecteur")) return;
+    const id = e.target.closest("button") && e.target.closest("button").id;
+    if (id === "lc-jouer") { if (LECT.etat === "lecture") pause(); else if (LECT.etat === "pause") reprendre(); else if (LECT.etat === "fin") { if (LECT.liste[LECT.i + 1]) jouerChapitre(LECT.i + 1); else jouerChapitre(0); } }
+    else if (id === "lc-suite") jouerChapitre(LECT.i + 1);
+    else if (id === "lc-fermer") arreter();
+    else if (id === "lc-vitesse") { vitesse = VITESSES[(VITESSES.indexOf(vitesse) + 1) % VITESSES.length]; memo.ecrire("vitesse", vitesse); if (LECT.etat === "lecture") { LECT.jeton++; synth.cancel(); setTimeout(dire, 60); } majLecteur(); }
+    else if (id === "lc-voix") {
+      const v = synth.getVoices().filter((x) => /^fr/i.test(x.lang));
+      if (!v.length) { $("#lc-sous").textContent = "Aucune voix française installée sur ce téléphone"; return; }
+      const cur = voixFr(), n = v[(v.indexOf(v.find((x) => cur && x.name === cur.name)) + 1) % v.length];
+      voixNom = n.name; memo.ecrire("voix", voixNom);
+      $("#lc-sous").textContent = "Voix : " + n.name;
+      if (LECT.etat === "lecture") { LECT.jeton++; synth.cancel(); setTimeout(dire, 60); }
+    }
+  }, true);
 
   /* ---------------- Bulle du lexique ---------------- */
   const bulle = $("#bulle");
@@ -452,14 +588,16 @@
     const I = INCONT[id] || { oeuvres: new Set(), salles: new Set(), extras: [], noms: [] };
     const aNePasManquer = I.noms.length ? `<div class="incontournables"><span class="inc-titre">⭐ À ne pas manquer</span>${I.noms.map((n) => `<button class="inc-puce" data-salle="${n.si}">${esc(n.nom)}</button>`).join("")}</div>` : "";
     const autour = I.extras.length ? repli("📍 Avant d'entrer et autour", `<ul class="regards">${I.extras.map(carteRegarder).join("")}</ul>`, I.extras.length, "autour") : "";
-    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)} · ${g.etapes.length} étapes</h4>${l.plan ? blocPlan(id, l.plan, g) : ""}${aNePasManquer}${g.conseil ? repli("💡 Le conseil pour la visite", `<p class="astuce">${esc(g.conseil)}</p>`, "", "conseil") : ""}${autour}
+    const chG = g ? chapitresGuide(id) : [];
+    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)} · ${g.etapes.length} étapes</h4>${btnEcouter(`data-ecouter="guide" data-lieu-audio="${id}" data-i="0"`, chG, "Écouter le guide, salle par salle")}${l.plan ? blocPlan(id, l.plan, g) : ""}${aNePasManquer}${g.conseil ? repli("💡 Le conseil pour la visite", `<p class="astuce">${esc(g.conseil)}</p>`, "", "conseil") : ""}${autour}
       ${g.etapes.map((s, i) => `<details class="salle ${I.salles.has(i) ? "a-voir-absolument" : ""}" data-salle="${i}"><summary><span class="salle-num">${i + 1}</span><span class="salle-titre"><span class="salle-nom">${esc(s.salle)}${I.salles.has(i) ? ' <span class="etoile">⭐ à ne pas manquer</span>' : ""}</span><span class="salle-h">${esc(s.titre)}</span></span><span class="salle-fl">▸</span></summary><div class="salle-corps">
-        ${l.plan && s.plan ? `<div class="actions pl-voir-l"><button class="bouton petit-btn pl-voir" data-plan-id="${id}" data-plan-salle="${[].concat(s.plan)[0]}">🗺 Où est-ce sur le plan ?</button></div>` : ""}${s.oeuvres.map((o, oi) => `<div class="oeuvre ${o.img ? "avec-photo" : ""} ${I.oeuvres.has(i + ":" + oi) ? "incontournable" : ""}">${o.img ? photo(o.img, o.nom, "grande") : ""}<div class="oeuvre-texte">${I.oeuvres.has(i + ":" + oi) ? '<span class="etoile">⭐ à ne pas manquer</span>' : ""}<b>${esc(o.nom)}</b>${o.auteur || o.date ? `<span class="auteur">${esc([o.auteur, o.date].filter(Boolean).join(", "))}</span>` : ""}<p>${o.texte}</p></div></div>`).join("")}
+        ${btnEcouter(`data-ecouter="guide" data-lieu-audio="${id}" data-i="${i}"`, [chG[i]], "Écouter cette salle")}${l.plan && s.plan ? `<div class="actions pl-voir-l"><button class="bouton petit-btn pl-voir" data-plan-id="${id}" data-plan-salle="${[].concat(s.plan)[0]}">🗺 Où est-ce sur le plan ?</button></div>` : ""}${s.oeuvres.map((o, oi) => `<div class="oeuvre ${o.img ? "avec-photo" : ""} ${I.oeuvres.has(i + ":" + oi) ? "incontournable" : ""}">${o.img ? photo(o.img, o.nom, "grande") : ""}<div class="oeuvre-texte">${I.oeuvres.has(i + ":" + oi) ? '<span class="etoile">⭐ à ne pas manquer</span>' : ""}<b>${esc(o.nom)}</b>${o.auteur || o.date ? `<span class="auteur">${esc([o.auteur, o.date].filter(Boolean).join(", "))}</span>` : ""}<p>${o.texte}</p></div></div>`).join("")}
       </div></details>`).join("")}` : "";
     const galerie = (l.photos || []).filter((k) => k !== l.img).map((k) => photo(k, l.nom, "galerie")).join("");
     ouvrir(l.theme + " · " + l.zone, l.nom, `
       ${l.img ? photo(l.img, l.nom, "entete") : ""}
       <p>${l.pourquoi}</p>
+      ${!g && (l.histoires || []).length ? btnEcouter(`data-ecouter="lieu" data-lieu-audio="${id}" data-i="0"`, chapitresLieu(id), "Écouter les histoires") : ""}
       ${guide}
       ${l.histoires && l.histoires.length ? repli("📜 Histoires et anecdotes", l.histoires.map((h) => `<p class="histoire">${h}</p>`).join(""), l.histoires.length) : ""}
       ${l.regarder && l.regarder.length ? repli("👀 À regarder", `<ul class="puces">${l.regarder.map((r) => `<li>${r}</li>`).join("")}</ul>`, l.regarder.length) : ""}

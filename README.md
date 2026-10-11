@@ -6,6 +6,7 @@ Carnet de voyage publié sur https://antotilm.github.io/florence/ : parcours à 
 
 - `donnees.js` : **tout le contenu** (réservations, check-list, jours et étapes, lieux et guides, restos, plats, budget, photos). C'est le seul fichier à modifier.
 - `lexique.js` : le petit lexique (personnages, familles, événements, plats). Les mots listés deviennent cliquables partout dans le site et ouvrent une bulle avec l'explication et un lien Wikipédia ; `aLire` ajoute des liens « en savoir plus » en bas des fiches de lieux.
+- `audio.js` : les récits audio écrits pour l'oreille (par étape et par salle de guide). Le bouton 🎧 les fait lire par la voix française du téléphone ; sans texte écrit, le récit est composé automatiquement à partir de `donnees.js`.
 - `index.html` (mise en page et styles) et `app.js` (affichage) : rien à changer normalement.
 - `sw.js` : rend le site consultable hors ligne une fois ouvert. Changer `VERSION` à chaque publication.
 
