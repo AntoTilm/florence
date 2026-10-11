@@ -195,6 +195,14 @@ window.FLO = {
           ]
         },
         {
+          heure: "17h00", titre: "Une glace chez Gelateria dei Neri", type: "pause", resto: "gelateriadeineri",
+          aller: { duree: "1 min", via: "Via dei Neri, quelques numéros plus loin (n° 9/11r)", vers: "Gelateria dei Neri, Via dei Neri 9, Firenze" },
+          texte: "Glace artisanale faite maison, dans votre rue. Ouverte le dimanche jusqu'à minuit. À prendre : le <b>Moretto</b> (chocolat très dense, comme du Nutella glacé), le <b>pistache</b>, ou figue-ricotta. On peut goûter avant de choisir. On mange sa glace en marchant au début de la balade.",
+          autres: [
+            { titre: "Plan B : Vivoli", maps: "Vivoli, Via dell'Isola delle Stinche 7r, Firenze", duree: "5 min", texte: "Derrière Santa Croce, l'une des plus anciennes gelaterie de Florence." }
+          ]
+        },
+        {
           heure: "17h30", titre: "Balade jusqu'au quartier étudiant", type: "balade",
           aller: { duree: "40 min en flânant (1,9 km)", via: "Via dei Neri → piazza della Signoria → via de' Calzaiuoli → piazza del Duomo → via de' Martelli → via Cavour → piazza San Lorenzo → via Cavour → via degli Alfani → piazza SS. Annunziata", vers: "Piazza della Santissima Annunziata, Firenze" },
           texte: "Pas de programme : on remonte tranquillement vers le nord par le Duomo, on passe devant la maison des Médicis et leur église, et on finit sur la plus belle place de la ville, où l'on peut s'asseoir sur les marches avant l'apéro (Sonora est à 3 min).",
@@ -234,9 +242,6 @@ window.FLO = {
           texte: "La piazza Santa Croce de nuit, presque vide, avec la façade éclairée de la basilique que vous visitez demain matin. Puis 3 minutes jusqu'au logement.",
           regarder: [
             { top: true, titre: "L'étoile sur la façade", maps: "Basilica di Santa Croce, Firenze", texte: "Au-dessus du portail central, une grande étoile à six branches. La façade date de 1863 ; son architecte, Niccolò Matas, était né dans la communauté juive d'Ancône, et une tradition tenace dit qu'il y a placé l'étoile de David et qu'on l'a enterré pour cela sous les marches, et non dans l'église. Les historiens discutent encore de ce qui relève de la légende." }
-          ],
-          detours: [
-            { titre: "Une glace en rentrant", duree: "en bas de chez vous", texte: "La <b>Gelateria dei Neri</b> (via dei Neri) ferme tard." }
           ]
         },
       ]
