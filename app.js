@@ -229,15 +229,20 @@
       const tousChemin = e.type === "balade" || e.type === "pause";
       const rChemin = (e.regarder || []).filter((r) => tousChemin || r.chemin);
       const rPlace = L && L.guide && e.type === "visite" ? [] : (e.regarder || []).filter((r) => !(tousChemin || r.chemin));
-      const listeChemin = rChemin.length ? `<ul class="regards">${rChemin.map(carteRegarder).join("")}</ul>` : "";
-      const listePlace = rPlace.length ? `<ul class="regards">${rPlace.map(carteRegarder).join("")}</ul>` : "";
+      /* Seuls les points marqués top: true sont visibles ; le reste est replié dans « Envie d'en voir plus ? ». */
+      const tChemin = rChemin.filter((r) => r.top), tPlace = rPlace.filter((r) => r.top);
+      const oAutres = rChemin.filter((r) => !r.top).concat(rPlace.filter((r) => !r.top));
+      const listeChemin = tChemin.length ? `<ul class="regards">${tChemin.map(carteRegarder).join("")}</ul>` : "";
+      const listePlace = tPlace.length ? `<ul class="regards">${tPlace.map(carteRegarder).join("")}</ul>` : "";
       const regarder = (listeChemin ? `<div class="sous-titre">🚶 En chemin</div>${listeChemin}` : "") + (listePlace ? `<div class="sous-titre">📍 Sur place</div>${listePlace}` : "");
-      const detours = e.detours && e.detours.length ? `<div class="sous-titre">↪ Petits détours</div><ul class="detours">${e.detours.map((d) => `<li><b>${esc(d.titre)}</b>${pin(d.maps)} <span class="duree">${esc(d.duree || "")}</span><p>${d.texte}</p>${d.lieu ? `<div class="actions">${btnLieu(d.lieu, F.lieux[d.lieu] && F.lieux[d.lieu].nom)}</div>` : ""}</li>`).join("")}</ul>` : "";
+      const detoursListe = e.detours && e.detours.length ? `<div class="sous-titre">↪ Petits détours</div><ul class="detours">${e.detours.map((d) => `<li><b>${esc(d.titre)}</b>${pin(d.maps)} <span class="duree">${esc(d.duree || "")}</span><p>${d.texte}</p>${d.lieu ? `<div class="actions">${btnLieu(d.lieu, F.lieux[d.lieu] && F.lieux[d.lieu].nom)}</div>` : ""}</li>`).join("")}</ul>` : "";
+      const nPlus = oAutres.length + (e.detours || []).length;
+      const detours = nPlus ? `<details class="bloc-repli plus"><summary><span>➕ Envie d'en voir plus ?</span><small>${nPlus} en option</small></summary>${oAutres.length ? `<ul class="regards">${oAutres.map(carteRegarder).join("")}</ul>` : ""}${detoursListe}</details>` : "";
       const repas = e.repas && e.repas.length ? `<div class="repas">${e.repas.map(choixRepas).join("")}</div>` : "";
-      const nVoir = (e.regarder || []).length + (e.detours || []).length;
-      const nChemin = rChemin.length + (e.detours || []).length;
+      const nVoir = tChemin.length + tPlace.length;
+      const nChemin = tChemin.length;
       if (!princ) {
-        const resume = `<button class="route-resume" aria-expanded="false"><span>🚶 ${esc(e.heure)} · ${esc(e.titre)}</span><small data-ferme="${esc((nVoir ? nVoir + " à voir en chemin" : "en chemin") + (a ? " · " + a.duree : "") + " ▸")}">${nVoir ? nVoir + " à voir en chemin" : "en chemin"}${a ? " · " + esc(a.duree) : ""} ▸</small></button>`;
+        const resume = `<button class="route-resume" aria-expanded="false"><span>🚶 ${esc(e.heure)} · ${esc(e.titre)}</span><small data-ferme="${esc((nVoir ? nVoir + " à voir" + (nPlus ? " (+" + nPlus + ")" : "") : "en chemin") + (a ? " · " + a.duree : "") + " ▸")}">${nVoir ? nVoir + " à voir" + (nPlus ? " (+" + nPlus + ")" : "") : "en chemin"}${a ? " · " + esc(a.duree) : ""} ▸</small></button>`;
         return `${enTete}<div class="etape route type-${e.type || "balade"} ${i === ici ? "maintenant" : ""}" id="${j.id}-${i}">${resume}<div class="route-corps">
         ${allerHtml}
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
@@ -249,11 +254,11 @@
         ${blocAutres(e.autres, "Autres options pour ce créneau")}
       </div></div>`;
       }
-      const chemin = (allerHtml || listeChemin || detours ? `<details class="bloc-repli chemin"><summary><span>🚶 Pour y aller</span><small>${a ? esc(a.duree) : ""}${nChemin ? (a ? " · " : "") + nChemin + " à voir en chemin" : ""}</small></summary>${allerHtml}${listeChemin}${detours}</details>` : "")
-        + (listePlace ? `<details class="bloc-repli place"><summary><span>${L && /musée/i.test(L.theme) && e.type === "visite" ? "🏛 Dans le musée" : "📍 Sur place"} : à ne pas manquer</span><small>${rPlace.length}</small></summary>${listePlace}</details>` : "");
+      const chemin = (allerHtml || listeChemin ? `<details class="bloc-repli chemin"><summary><span>🚶 Pour y aller</span><small>${a ? esc(a.duree) : ""}${nChemin ? (a ? " · " : "") + nChemin + " à voir en chemin" : ""}</small></summary>${allerHtml}${listeChemin}</details>` : "")
+        + (listePlace ? `<details class="bloc-repli place"><summary><span>${L && /musée/i.test(L.theme) && e.type === "visite" ? "🏛 Dans le musée" : "📍 Sur place"} : à ne pas manquer</span><small>${tPlace.length}</small></summary>${listePlace}</details>` : "") + detours;
       const nomLieu = L && e.type === "visite" ? L.nom.replace(/\s+—.*$/, "") : null;
       const titreHtml = nomLieu ? `<h2>${esc(nomLieu)}</h2><div class="a-voir">🎯 ${esc(e.titre)}</div>` : `<h2>${esc(e.titre)}</h2>`;
-      const infos = [L ? (L.guide ? "🎧 guide" : "📖 fiche") : "", e.repas && e.repas.length ? "🍽 " + e.repas.length + " choix" : "", a ? "🚶 " + a.duree : "", (nChemin + rPlace.length) ? "👀 " + (nChemin + rPlace.length) + " à voir" : "", e.autres && e.autres.length ? e.autres.length + " option" + (e.autres.length > 1 ? "s" : "") : ""].filter(Boolean).join(" · ");
+      const infos = [L ? (L.guide ? "🎧 guide" : "📖 fiche") : "", e.repas && e.repas.length ? "🍽 " + e.repas.length + " choix" : "", a ? "🚶 " + a.duree : "", nVoir ? "👀 " + nVoir + " à voir" + (nPlus ? " (+" + nPlus + " en option)" : "") : (nPlus ? "➕ " + nPlus + " en option" : ""), e.autres && e.autres.length ? e.autres.length + " option" + (e.autres.length > 1 ? "s" : "") : ""].filter(Boolean).join(" · ");
       return `${enTete}<div class="etape principale type-${e.type || "balade"} ${e.resa ? "reserve" : ""} ${i === ici ? "maintenant" : ""}" id="${j.id}-${i}">
         <div class="heure">${TYPES[e.type] || "•"} ${esc(e.heure)}${i === ici ? ' <span class="pastille">● maintenant</span>' : ""}</div>
         ${titreHtml}
