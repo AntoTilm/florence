@@ -9,8 +9,15 @@
   const maps = (q) => "https://www.google.com/maps/search/?api=1&query=" + enc(q);
   const pin = (q) => q ? ` <a class="pin" href="${maps(q)}" target="_blank" rel="noopener" aria-label="Ouvrir dans Google Maps" title="Google Maps">📍</a>` : "";
   const aPied = (q) => "https://www.google.com/maps/dir/?api=1&destination=" + enc(q) + "&travelmode=walking";
-  const parcoursMaps = (c) => "https://www.google.com/maps/dir/?api=1&origin=" + enc(c.depart) + "&destination=" + enc(c.arrivee) +
-    (c.etapes && c.etapes.length ? "&waypoints=" + c.etapes.slice(0, 3).map(enc).join("%7C") : "") + "&travelmode=walking";
+  /* Trajet à pied avec tous les arrêts enchaînés (format /maps/dir/A/B/C, ouvert dans l'app Google Maps).
+     Origine vide = « Ma position ». 10 points maximum. */
+  const trajetMaps = (pts) => {
+    const ici = pts[0] === "";
+    const p = []; pts.filter(Boolean).forEach((x) => { if (p[p.length - 1] !== x) p.push(x); });
+    const q = (ici ? [""] : []).concat(p.slice(-(ici ? 9 : 10)));
+    return "https://www.google.com/maps/dir/" + q.map((x) => enc(x).replace(/%20/g, "+")).join("/") + "/data=!4m2!4m1!3e2";
+  };
+  const parcoursMaps = (c) => trajetMaps([c.depart].concat(c.etapes || [], [c.arrivee]));
   const LIBELLES = { calme: "calme", incontournable: "incontournable", pluie: "☔ si pluie", "pas-cher": "pas cher", "plus-cher": "plus cher", medicis: "Médicis", art: "art", vin: "vin", vue: "vue" };
   const GAMME = { 0: "🍦", 1: "€", 2: "€€", 3: "€€€" };
   const TYPES = { transport: "🚋", balade: "🚶", visite: "🏛", repas: "🍽", apero: "🍷", pause: "☕" };
@@ -21,6 +28,7 @@
   const restoParId = Object.fromEntries(F.restos.map((r) => [r.id, r]));
 
   /* Récits audio (audio.js) : texte écrit pour l'oreille, sinon composé à partir des fiches. */
+  const POINTS = [];
   const AUDIO = window.FLO_AUDIO || { etapes: {}, salles: {} };
   const sansHtml = (t) => String(t ?? "").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
   const ponctuer = (t) => { t = sansHtml(t); return /[.!?…»]$/.test(t) ? t : t + "."; };
@@ -232,8 +240,17 @@
     const pluie = liste.some((o) => (o.tags || []).includes("pluie"));
     return `<details class="autres ${pluie ? "a-pluie" : ""}"><summary>${esc(titre || "Autres options")} (${liste.length})${pluie ? " · ☔" : ""}</summary><div class="options">${liste.map(carteAutre).join("")}</div></details>`;
   }
+  /* Chaque point à regarder a son propre récit audio (titre + texte, puis les histoires de la fiche liée s'il y en a). */
+  function chapitresPoint(r) {
+    const ch = [{ titre: sansHtml(r.titre), texte: ponctuer(r.titre) + " " + sansHtml(r.texte) }];
+    const ids = [].concat(r.lieu || [], r.lieux || []);
+    ids.forEach((id) => { const l = F.lieux[id]; if (l && !l.guide) (l.histoires || []).forEach((h, i) => ch.push({ titre: l.nom + " · histoire " + (i + 1), texte: sansHtml(h) })); });
+    return ch;
+  }
   function carteRegarder(r) {
-    return `<li class="regard ${r.img ? "avec-photo" : ""}">${r.img ? photo(r.img, r.titre, "vignette") : ""}<div><b>${esc(r.titre)}</b>${pin(r.maps)}<p>${r.texte}</p></div></li>`;
+    const n = POINTS.push(r) - 1;
+    const ecoute = "speechSynthesis" in window ? `<button class="point-ecouter" data-ecouter="point" data-i="${n}" aria-label="Écouter : ${esc(sansHtml(r.titre))}">🎧 Écouter</button>` : "";
+    return `<li class="regard ${r.img ? "avec-photo" : ""}">${r.img ? photo(r.img, r.titre, "vignette") : ""}<div><b>${esc(r.titre)}</b>${pin(r.maps)}<p>${r.texte}</p>${ecoute}</div></li>`;
   }
   function choixRepas(c) {
     const r = restoParId[c.resto]; if (!r) return "";
@@ -254,7 +271,10 @@
       const enTete = mo && mo !== momentPrec ? `<div class="moment">${esc(mo)}</div>` : "";
       if (mo) momentPrec = mo;
       const a = e.aller;
-      const allerHtml = a ? `<div class="aller"><div class="aller-haut"><span>🚶 <b>${esc(a.duree)}</b></span><a class="bouton petit-btn" href="${aPied(a.vers)}" target="_blank" rel="noopener">Itinéraire à pied</a></div><div class="via">${esc(a.via)}</div><div class="via">➜ ${esc(a.vers.replace(/, Firenze$/, ""))}${pin(a.vers)}</div></div>` : "";
+      /* Arrêts du trajet : les points essentiels (top) à voir en chemin, dans l'ordre de la marche. */
+      const tousCheminT = e.type === "balade" || e.type === "pause";
+      const ptsTrajet = a ? (e.regarder || []).filter((r) => r.top && r.maps && (tousCheminT || r.chemin) && r.maps !== a.vers).map((r) => r.maps) : [];
+      const allerHtml = a ? `<div class="aller"><div class="aller-haut"><span>🚶 <b>${esc(a.duree)}</b></span>${ptsTrajet.length ? `<a class="bouton petit-btn" href="${trajetMaps([""].concat(ptsTrajet, [a.vers]))}" target="_blank" rel="noopener">🗺 Trajet complet · ${ptsTrajet.length + 1} arrêts</a>` : `<a class="bouton petit-btn" href="${aPied(a.vers)}" target="_blank" rel="noopener">Itinéraire à pied</a>`}</div><div class="via">${esc(a.via)}</div><div class="via">➜ ${esc(a.vers.replace(/, Firenze$/, ""))}${pin(a.vers)}</div></div>` : "";
       const L = e.lieu && F.lieux[e.lieu];
       const carteGuide = L ? (L.guide
         ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.plan ? "🗺 plan interactif · " : ""}${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}${INCONT[e.lieu] && INCONT[e.lieu].noms.length ? " · ⭐ " + INCONT[e.lieu].noms.length + " à ne pas manquer" : ""}</small></span><span class="cg-fl">›</span></button>`
@@ -460,6 +480,7 @@
         const j = F.jours.find((x) => x.id === b.dataset.jour), et = j && j.etapes[i];
         if (et) { const L = et.lieu && F.lieux[et.lieu]; lancer(chapitresEtape(j, et), 0, (L && et.type === "visite" ? L.nom : et.titre)); }
       } else if (k === "guide") lancer(chapitresGuide(b.dataset.lieuAudio), i, F.lieux[b.dataset.lieuAudio].nom);
+      else if (k === "point") { const r = POINTS[i]; if (r) lancer(chapitresPoint(r), 0, sansHtml(r.titre)); }
       else if (k === "lieu") lancer(chapitresLieu(b.dataset.lieuAudio), 0, F.lieux[b.dataset.lieuAudio].nom);
       return;
     }
