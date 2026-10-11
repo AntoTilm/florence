@@ -239,6 +239,21 @@ window.FLO = {
             { titre: "Une glace en rentrant", duree: "en bas de chez vous", texte: "La <b>Gelateria dei Neri</b> (via dei Neri) ferme tard." }
           ]
         },
+      ]
+    },
+    {
+      id: "lun", court: "Lun 12", date: "2026-10-12",
+      titre: "Santa Croce, le marché, le Duomo et la bistecca",
+      intro: "Le lundi, les grands musées d'État sont fermés (Offices, Accademia, Pitti, Bargello, Chapelles Médicis). C'est le jour de la Florence des Florentins : le panthéon de Santa Croce, le vrai marché, puis tout le complexe du Duomo avec le Giotto Pass, et le soir, l'Oltrarno jusqu'à la bistecca. La cathédrale ferme à 15h45 : elle passe avant le campanile.",
+      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Basilica di Santa Croce, Firenze", "Mercato di Sant'Ambrogio, Firenze", "Piazza del Duomo, Firenze"], arrivee: "Osteria dell'Enoteca, Via Romana 70r, Firenze" },
+      etapes: [
+        {
+          heure: "9h15", titre: "Café au comptoir, dans votre rue", type: "pause",
+          texte: "<b>Ditta Artigianale</b>, au 32 de la via dei Neri, est l'une des premières adresses de café de spécialité de Florence. Sinon, n'importe quel bar : on commande au comptoir, on boit debout, on paie en sortant. Un « caffè », c'est un espresso ; le cappuccino se boit le matin, jamais après un repas (les Italiens vous regarderont avec tendresse si vous le faites).",
+          regarder: [
+            { top: true, titre: "La Loggia del Grano, au bout de votre rue", maps: "Loggia del Grano, Firenze", img: "loggiagrano", texte: "Au bout de la via dei Neri, côté Offices, une loggia de 1619 avec une fontaine et le buste du grand-duc Cosme II : c'était le marché au grain construit pour les Médicis. Ses arcades ont été fermées plus tard, et l'ensemble a longtemps abrité un cinéma." }
+          ]
+        },
         {
           heure: "9h30", titre: "Santa Croce, le panthéon de l'Italie", type: "visite", lieu: "santacroce",
           aller: { duree: "4 min", via: "Via dei Neri → via de' Benci → piazza Santa Croce", vers: "Basilica di Santa Croce, Firenze" },
