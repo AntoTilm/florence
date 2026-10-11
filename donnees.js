@@ -36,7 +36,7 @@ window.FLO = {
     "Billets PDF des Offices (code CoopCulture 6R325YDT) enregistrés",
     "Giotto Pass réservé (créneau du campanile lundi 16h30–17h)",
     "Osteria dell'Enoteca réservée (lundi 20h)",
-    "Vineria Sonora réservée (dimanche 18h30) — Cibrèo Ristorante ✅ dimanche 21h30, Vini e Vecchi Sapori ✅ lundi 12h",
+    "Vineria Sonora réservée (dimanche 18h30) — Cibrèo Trattoria ✅ dimanche 21h30, Vini e Vecchi Sapori ✅ lundi 12h",
     "Hôte prévenu : arrivée vers 21h, valises gardées mardi jusqu'à 15h",
     "Deux cartes sans contact pour le tram (une validation par carte), ou tickets au distributeur",
     "Un peu de liquide (marché, Da Rocco, lampredotto : souvent cash)",
@@ -52,7 +52,7 @@ window.FLO = {
     { statut: "todo", titre: "Giotto Pass — campanile + baptistère + musée + crypte", quand: "Lun 12 · créneau tour 16h30–17h", detail: "20 €/pers. Le créneau de la tour est fixe et non modifiable : à réserver dès ce soir, c'est la dernière réservation de visite. Le reste du pass (baptistère, musée, crypte) se visite sans créneau, pendant 3 jours. Tour en restauration (échafaudage) : terrasse ouverte, vue un peu réduite.", lien: "https://tickets.duomo.firenze.it/en/", lienTexte: "Billetterie officielle du Duomo", lieu: "campanile" },
     { statut: "todo", titre: "Bistecca — Osteria dell'Enoteca", quand: "Lun 12 · 20h", detail: "Via Romana 70r. Fermée le mardi. Compter 70–90 €/pers. avec vin. Plan B : Cammillo (+39 055 212427), puis I'Raddi (+39 055 211072).", tel: "+39 055 228 6018", lien: "http://www.osteriadellenoteca.com/", lienTexte: "Site du restaurant", resto: "enoteca" },
     { statut: "todo", titre: "Vineria Sonora (vins nature)", quand: "Dim 11 · ~18h30", detail: "Via degli Alfani 39r. Ouverte le dimanche dès 17h, fermée le lundi. Table pour l'apéritif.", tel: "+39 333 199 9093", resto: "sonora" },
-    { statut: "ok", titre: "Dîner — Cibrèo Ristorante", quand: "Dim 11 · 21h30", detail: "Via Andrea del Verrocchio 8r, à deux pas du marché de Sant'Ambrogio, 10 min à pied de la Vineria Sonora. Réservation confirmée pour 2 personnes (lien tfk.io reçu par SMS). C'est le restaurant gastronomique de la maison Cibrèo, pas la trattoria : compter environ 60–80 € par personne avec le vin.", tel: "+39 055 234 1100", resto: "cibreoristorante" },
+    { statut: "ok", titre: "Dîner — Cibrèo Trattoria", quand: "Dim 11 · 21h30", detail: "Via de' Macci 122r, à deux pas du marché de Sant'Ambrogio, 10 min à pied de la Vineria Sonora. Réservation confirmée pour 2 personnes. C'est la trattoria de la maison Cibrèo (« il Cibreino »), pas le restaurant : compter environ 30–45 € par personne. Cuisine jusqu'à 22h30.", tel: "+39 055 234 1100", resto: "cibreo" },
     { statut: "ok", titre: "Déjeuner — Vini e Vecchi Sapori", quand: "Lun 12 · 12h00", detail: "Via dei Magazzini 3r, 3 min du logement. Réservé pour lundi midi.", tel: "+39 055 293045", resto: "vinivecchisapori" },
     { statut: "info", titre: "Gustarium (pizza al taglio)", quand: "Dim 11 · 12h00 pile", detail: "Pas de réservation. Ouvert du mardi au dimanche, le midi seulement (12h–15h30), et tout est souvent vendu vers 13h : être devant à l'ouverture.", tel: "+39 055 283469", resto: "gustarium" }
   ],
@@ -122,8 +122,8 @@ window.FLO = {
     {
       id: "dim", court: "Dim 11", date: "2026-10-11",
       titre: "Le David, les Médicis, les Offices et Dante",
-      intro: "Le seul réveil matinal du séjour (le David à 8h15). Ensuite la pizza de Gustarium, les Offices, une vraie pause au logement, puis une balade tranquille vers le nord jusqu'à la Vineria Sonora, et le dîner au Cibrèo Ristorante.",
-      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Galleria degli Uffizi, Firenze", "Gelateria Perché No, Via dei Tavolini 19r, Firenze", "Palazzo Medici Riccardi, Firenze", "Gelateria Carabè, Via Ricasoli 60r, Firenze", "Vineria Sonora, Via degli Alfani 39r, Firenze"], arrivee: "Cibrèo Ristorante, Via Andrea del Verrocchio 8r, Firenze" },
+      intro: "Le seul réveil matinal du séjour (le David à 8h15). Ensuite la pizza de Gustarium, les Offices, une vraie pause au logement, puis une balade tranquille vers le nord jusqu'à la Vineria Sonora, et le dîner à la Cibrèo Trattoria.",
+      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Galleria degli Uffizi, Firenze", "Gelateria Perché No, Via dei Tavolini 19r, Firenze", "Palazzo Medici Riccardi, Firenze", "Gelateria Carabè, Via Ricasoli 60r, Firenze", "Vineria Sonora, Via degli Alfani 39r, Firenze"], arrivee: "Trattoria Cibrèo, Via de' Macci 122r, Firenze" },
       etapes: [
         {
           heure: "7h50", titre: "Vers le David, dans la ville vide", type: "balade",
@@ -223,16 +223,16 @@ window.FLO = {
           ]
         },
         {
-          heure: "21h30", titre: "Dîner au Cibrèo Ristorante", type: "repas", resa: "Réservé · 21h30, 2 personnes",
-          aller: { duree: "10 min", via: "Via degli Alfani → borgo Pinti → via dei Pilastri → via Andrea del Verrocchio", vers: "Cibrèo Ristorante, Via Andrea del Verrocchio 8r, Firenze" },
-          texte: "La maison mère du Cibrèo, ouverte en 1979 par Fabio Picchi face au marché de Sant'Ambrogio, et devenue une institution florentine (Picchi est mort en 2022, la maison continue). Particularité célèbre : <b>pas de pâtes</b>, et pas de carte écrite au départ, on vous récite les plats à table. C'est la version « soirée » de la maison, plus chère que la trattoria d'à côté.",
+          heure: "21h30", titre: "Dîner à la Cibrèo Trattoria", type: "repas", resa: "Réservé · 21h30, 2 personnes",
+          aller: { duree: "10 min", via: "Via degli Alfani → borgo Pinti → via dei Pilastri → via de' Macci", vers: "Trattoria Cibrèo, Via de' Macci 122r, Firenze" },
+          texte: "La maison mère du Cibrèo, ouverte en 1979 par Fabio Picchi face au marché de Sant'Ambrogio, et devenue une institution florentine (Picchi est mort en 2022, la maison continue). Particularité célèbre : <b>pas de pâtes</b>, et pas de carte écrite au départ, on vous récite les plats à table. Ici, c'est la trattoria, « il Cibreino » : la version simple et moins chère de la maison, petite salle, cuisine florentine de famille. Bib Gourmand au Michelin 2026.",
           repas: [
-            { resto: "cibreoristorante", reco: true, texte: "Réservé à 21h30. Les classiques de la maison : le <b>velouté de poivrons jaunes</b>, le flan de ricotta et pommes de terre au ragù, le cou de poulet farci. Laissez-vous guider par ce qu'ils récitent." }
+            { resto: "cibreo", reco: true, texte: "Réservé à 21h30 (cuisine jusqu'à 22h30, ne pas traîner à la Sonora). À commander : la <b>pappa al pomodoro</b>, le pâté de foies de volaille du Cibrèo, et le gâteau au fromage à la marmelade d'oranges amères." }
           ]
         },
         {
           heure: "~23h15", titre: "Retour par Santa Croce", type: "balade",
-          aller: { duree: "12 min", via: "Via Andrea del Verrocchio → via de' Macci → via di San Giuseppe → piazza Santa Croce → via de' Benci → via dei Neri", vers: "Via dei Neri 16, Firenze" },
+          aller: { duree: "12 min", via: "Via de' Macci → via di San Giuseppe → piazza Santa Croce → via de' Benci → via dei Neri", vers: "Via dei Neri 16, Firenze" },
           texte: "La piazza Santa Croce de nuit, presque vide, avec la façade éclairée de la basilique que vous visitez demain matin. Puis 3 minutes jusqu'au logement.",
           regarder: [
             { top: true, titre: "L'étoile sur la façade", maps: "Basilica di Santa Croce, Firenze", texte: "Au-dessus du portail central, une grande étoile à six branches. La façade date de 1863 ; son architecte, Niccolò Matas, était né dans la communauté juive d'Ancône, et une tradition tenace dit qu'il y a placé l'étoile de David et qu'on l'a enterré pour cela sous les marches, et non dans l'église. Les historiens discutent encore de ce qui relève de la légende." }
@@ -1293,16 +1293,16 @@ window.FLO = {
       pourquoi: "Minuscule, bondée d'Italiens, à 3 min du logement, derrière le Palazzo Vecchio. Une cuisine de saison simple et parfaite, avec une ardoise du jour (pici au ragù, crostini de foies, poulet frit) ; les pappardelle au canard et le tiramisu à la framboise sont ses best-sellers.",
       commander: ["Pappardelle au canard (leur plat le plus célèbre)", "Crostini de foies de volaille", "Haricots cuits « al fiasco »", "Tiramisu à la framboise"],
       astuce: "Pas de pizza, pas de cappuccino. Réserver." },
-    { id: "cibreoristorante", gamme: 3, prog: true, nom: "Cibrèo Ristorante", zone: "Sant'Ambrogio", type: "Restaurant (cuisine florentine classique)", prix: "≈ 60–80 €", quand: "Dim 11 · 21h30 (réservé)",
+    { id: "cibreoristorante", gamme: 3, nom: "Cibrèo Ristorante", zone: "Sant'Ambrogio", type: "Restaurant (cuisine florentine classique)", prix: "≈ 60–80 €", quand: "Option (pas réservé)",
       horaires: "Midi et soir, à confirmer par téléphone", adresse: "Via Andrea del Verrocchio 8r", tel: "+39 055 234 1100",
       pourquoi: "La maison mère du Cibrèo, fondée en 1979 par Fabio Picchi face au marché de Sant'Ambrogio : une institution de la cuisine florentine, recommandée par le guide Michelin (€€€). Pas de pâtes, et les plats sont récités à table.",
       commander: ["Velouté de poivrons jaunes", "Flan de ricotta et pommes de terre au ragù", "Cou de poulet farci"],
-      astuce: "Même numéro que la trattoria d'à côté : c'est ici que la réservation a été prise." },
-    { id: "cibreo", gamme: 2, nom: "Cibrèo Trattoria (« il Cibreino »)", zone: "Sant'Ambrogio", type: "Trattoria", prix: "30–45 €", quand: "Plan B du dimanche soir",
+      astuce: "Même numéro que la trattoria d'à côté. La réservation de dimanche soir est à la trattoria, pas ici." },
+    { id: "cibreo", gamme: 2, prog: true, nom: "Cibrèo Trattoria (« il Cibreino »)", zone: "Sant'Ambrogio", type: "Trattoria", prix: "30–45 €", quand: "Dim 11 · 21h30 (réservé)",
       horaires: "Tous les jours 12h30–14h30, 19h–22h30", adresse: "Via de' Macci 122r", tel: "+39 055 234 1100",
       pourquoi: "Le côté simple de la maison fondée en 1979 par Fabio Picchi, figure de la cuisine florentine disparue en 2022. Bib Gourmand au guide Michelin 2026, dont l'inspecteur écrit que c'est là qu'il mangerait s'il était en vacances à Florence. Cuisine florentine de famille, pain sec et soupes, abats.",
       commander: ["Pappa al pomodoro", "Pâté du Cibrèo (foies de volaille)", "Lampredotto in umido", "Gâteau au fromage et marmelade d'oranges amères"],
-      astuce: "Réservations possibles maintenant (booking@cibreo.com) : la salle est petite." },
+      astuce: "Réservé dimanche 21h30. La salle est petite : arriver à l'heure, la cuisine ferme à 22h30." },
     { id: "zeb", gamme: 2, prog: true, nom: "Zeb", zone: "San Niccolò", type: "Comptoir de cuisine toscane", prix: "25–40 €", quand: "Mar 13 · 12h30",
       horaires: "Midi tous les jours sauf mercredi (12h30–15h) · pas de réservation le midi", adresse: "Via San Miniato 2r", tel: "+39 055 234 2864",
       pourquoi: "Une adresse familiale (une mère et son fils) que le guide Michelin classe parmi les meilleures tables abordables de Florence. On s'assoit sur des tabourets autour d'un long comptoir, comme dans un bar à sushis, face à la cuisine. Ardoise qui change chaque jour.",
@@ -1427,7 +1427,7 @@ window.FLO = {
       ["Tram aéroport (4 trajets à 2 €)", "8 €"],
       ["Cafés et petits-déjeuners au comptoir", "25–35 €"],
       ["Déjeuners (Gustarium, Da Rocco, Zeb)", "90–140 €"],
-      ["Repas marquants (Sonora + Cibrèo Ristorante, Vini e Vecchi Sapori, la bistecca)", "330–420 €"],
+      ["Repas marquants (Sonora + Cibrèo Trattoria, Vini e Vecchi Sapori, la bistecca)", "270–360 €"],
       ["Apéros, verres de vin, glaces", "50–80 €"]
     ],
     total: "≈ 670–890 € pour deux, hors vols et logement",
