@@ -223,7 +223,7 @@
       const allerHtml = a ? `<div class="aller"><div class="aller-haut"><span>🚶 <b>${esc(a.duree)}</b></span><a class="bouton petit-btn" href="${aPied(a.vers)}" target="_blank" rel="noopener">Itinéraire à pied</a></div><div class="via">${esc(a.via)}</div><div class="via">➜ ${esc(a.vers.replace(/, Firenze$/, ""))}${pin(a.vers)}</div></div>` : "";
       const L = e.lieu && F.lieux[e.lieu];
       const carteGuide = L ? (L.guide
-        ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}${INCONT[e.lieu] && INCONT[e.lieu].noms.length ? " · ⭐ " + INCONT[e.lieu].noms.length + " à ne pas manquer" : ""}</small></span><span class="cg-fl">›</span></button>`
+        ? `<button class="carte-guide" data-lieu="${e.lieu}"><span class="cg-ic">🎧</span><span><b>Guide de visite</b><small>${L.plan ? "🗺 plan interactif · " : ""}${L.guide.etapes.length} étapes salle par salle · ${esc(L.guide.duree)}${INCONT[e.lieu] && INCONT[e.lieu].noms.length ? " · ⭐ " + INCONT[e.lieu].noms.length + " à ne pas manquer" : ""}</small></span><span class="cg-fl">›</span></button>`
         : `<button class="carte-guide fiche" data-lieu="${e.lieu}"><span class="cg-ic">📖</span><span><b>Fiche du lieu</b><small>Histoires, horaires, prix, liens</small></span><span class="cg-fl">›</span></button>`) : "";
       const boutons = e.resto && !e.repas ? btnResto(e.resto) : "";
       const tousChemin = e.type === "balade" || e.type === "pause";
@@ -361,6 +361,84 @@
   feuille.addEventListener("cancel", (e) => { e.preventDefault(); fermer(); });
   feuille.addEventListener("click", (e) => { if (e.target === feuille) fermer(); });
 
+  /* ---------------- Plan interactif d'un musée (lieux[id].plan) ---------------- */
+  const PLANS = {}, ICI = {};
+  const planNom = (s) => (s.num ? "Salle " + s.num + " · " : "") + (s.titre || String(s.nom || "").replace("|", " et "));
+  function salleSvg(s, liste) {
+    const cls = ["pl-salle", s.sec ? "sec" : "", s.top ? "top" : "", s.type ? "pl-" + s.type : ""].filter(Boolean).join(" ");
+    const lab = esc(planNom(s));
+    if (s.type === "repere") {
+      return `<g class="${cls}" data-salle-plan="${s.id}" role="button" tabindex="0" aria-label="${lab}"><circle class="f" cx="${s.cx}" cy="${s.cy}" r="12"/><text class="ic" x="${s.cx}" y="${s.cy + 4.5}">${s.icone}</text><circle class="pl-pt" cx="${s.cx + 10}" cy="${s.cy - 10}" r="5"/></g>`;
+    }
+    const { x, y, w, h } = s;
+    let forme;
+    if (s.forme === "oct") { const c = Math.round(Math.min(w, h) * 0.29); forme = `<polygon class="f" points="${x + c},${y} ${x + w - c},${y} ${x + w},${y + c} ${x + w},${y + h - c} ${x + w - c},${y + h} ${x + c},${y + h} ${x},${y + h - c} ${x},${y + c}"/>`; }
+    else forme = `<rect class="f" x="${x}" y="${y}" width="${w}" height="${h}" rx="4"/>`;
+    const lignes = String(s.nom || "").split("|").filter(Boolean);
+    let textes = "";
+    if (liste) {
+      textes = `<text class="n gauche" x="${x + 10}" y="${y + h / 2 + 4}">${s.icone ? s.icone : esc(s.num || "")}</text><text class="s gauche" x="${x + (s.icone ? 34 : 62)}" y="${y + h / 2 + 4}">${esc(lignes.join(" "))}</text>`
+        + (s.top ? `<text class="pl-et" x="${x + w - 14}" y="${y + h / 2 + 5}">★</text>` : "");
+    } else {
+      const l1 = (s.icone ? s.icone + " " : "") + (s.num || lignes.shift() || "");
+      const tout = [l1].concat(lignes), lh = 11.5;
+      let yy = y + h / 2 - ((tout.length - 1) * lh) / 2 + 4;
+      tout.forEach((t, k) => { textes += `<text class="${k ? "s" : "n"}" x="${x + w / 2}" y="${yy}">${esc(t)}</text>`; yy += lh; });
+      if (s.top) textes += `<text class="pl-et" x="${x + w - 9}" y="${y + 12}">★</text>`;
+    }
+    return `<g class="${cls}" data-salle-plan="${s.id}" role="button" tabindex="0" aria-label="${lab}">${forme}${textes}<circle class="pl-pt" cx="${x + 9}" cy="${y + 9}" r="5"/></g>`;
+  }
+  function blocPlan(id, P, g) {
+    const guideDe = {};
+    if (g) g.etapes.forEach((s, i) => [].concat(s.plan || []).forEach((k) => { guideDe[k] = i; }));
+    const ordre = [];
+    P.etages.forEach((e, n) => e.salles.forEach((s) => ordre.push({ s, e: n })));
+    PLANS[id] = { P, guideDe, ordre };
+    const nTop = ordre.filter((x) => x.s.top).length;
+    return `<section class="plan" data-plan="${id}">
+      <div class="pl-tete"><b>🗺 Plan interactif</b><small>⭐ ${nTop} arrêts à ne pas manquer</small></div>
+      <div class="pl-onglets">${P.etages.map((e, n) => `<button class="pl-onglet ${n ? "" : "actif"}" data-etage="${n}">${esc(e.nom)}${e.sous ? `<small>${esc(e.sous)}</small>` : ""}</button>`).join("")}</div>
+      ${P.etages.map((e, n) => `<svg class="pl-svg ${n ? "" : "actif"}" data-etage="${n}" viewBox="${e.vue}" role="img" aria-label="Plan du ${esc(e.nom)}">${e.decor || ""}${e.salles.map((s) => salleSvg(s, e.liste)).join("")}</svg>`).join("")}
+      <div class="pl-legende"><span><i class="lg top"></i>à ne pas manquer</span><span><i class="lg"></i>dans le guide</span><span><i class="lg sec"></i>secondaire</span><span><i class="lg rt"></i>sens de visite</span></div>
+      <div class="pl-info" aria-live="polite"><p class="pl-aide">Touchez une salle pour voir ce qu'il y a dedans. Puis « 📍 On est ici » : le plan vous indique le prochain arrêt à ne pas manquer.</p></div>
+      ${P.note ? `<p class="petit pl-note">${esc(P.note)}</p>` : ""}
+    </section>`;
+  }
+  function planIci(id, v) {
+    const k = "florence-plan-" + id;
+    if (v !== undefined) { ICI[id] = v; try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (_) { /* stockage indisponible */ } }
+    else if (!(id in ICI)) { try { ICI[id] = localStorage.getItem(k) || ""; } catch (_) { ICI[id] = ""; } }
+    return ICI[id];
+  }
+  function planRacine(id) { return $(`#feuille-corps .plan[data-plan="${id}"]`); }
+  function planEtage(racine, n) {
+    $$(".pl-onglet", racine).forEach((b) => b.classList.toggle("actif", +b.dataset.etage === n));
+    $$(".pl-svg", racine).forEach((sv) => sv.classList.toggle("actif", +sv.dataset.etage === n));
+  }
+  function planMarquer(id) {
+    const racine = planRacine(id); if (!racine) return;
+    const v = planIci(id);
+    $$(".pl-salle.ici", racine).forEach((n) => n.classList.remove("ici"));
+    if (v) { const n = $(`[data-salle-plan="${v}"]`, racine); if (n) n.classList.add("ici"); }
+  }
+  function planChoisir(id, sid, defiler) {
+    const R = PLANS[id], racine = planRacine(id); if (!R || !racine) return;
+    const k = R.ordre.findIndex((x) => x.s.id === sid); if (k < 0) return;
+    const { s, e } = R.ordre[k];
+    planEtage(racine, e);
+    $$(".pl-salle.choisie", racine).forEach((n) => n.classList.remove("choisie"));
+    const el = $(`[data-salle-plan="${sid}"]`, racine); if (el) el.classList.add("choisie");
+    const ici = planIci(id) === sid, gi = R.guideDe[sid];
+    const suite = R.ordre.slice(k + 1).find((x) => x.s.top);
+    const etiquette = s.top ? ' <span class="etoile">⭐ à ne pas manquer</span>' : s.sec ? ' <span class="pl-sec">secondaire</span>' : "";
+    $(".pl-info", racine).innerHTML = `<div class="pl-i-tete">${s.num ? `<span class="pl-num">Salle ${esc(s.num)}</span>` : ""}<b>${esc(s.titre || String(s.nom).replace("|", " et "))}</b>${etiquette}</div>
+      <p>${s.voir || ""}</p>
+      <div class="actions"><button class="bouton petit-btn pl-ici ${ici ? "on" : ""}" data-plan-id="${id}" data-sid="${sid}">📍 ${ici ? "Vous êtes ici" : "On est ici"}</button>${gi != null ? `<button class="bouton petit-btn pl-guide" data-salle-guide="${gi}">🎧 Le guide de cette salle</button>` : ""}</div>
+      <p class="pl-suite">${suite ? `➜ Prochain arrêt à ne pas manquer : <button class="pl-lien" data-plan-id="${id}" data-aller="${suite.s.id}">${esc(planNom(suite.s))}</button>${suite.e !== e ? " · " + esc(R.P.etages[suite.e].nom) : ""}` : "C'est le dernier arrêt à ne pas manquer. Bravo !"}</p>`;
+    if (defiler) racine.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function planInit(id) { planMarquer(id); const v = planIci(id); if (v) planChoisir(id, v); }
+
   function ficheLieu(id) {
     const l = F.lieux[id]; if (!l) return;
     const p = l.pratique || {};
@@ -374,9 +452,9 @@
     const I = INCONT[id] || { oeuvres: new Set(), salles: new Set(), extras: [], noms: [] };
     const aNePasManquer = I.noms.length ? `<div class="incontournables"><span class="inc-titre">⭐ À ne pas manquer</span>${I.noms.map((n) => `<button class="inc-puce" data-salle="${n.si}">${esc(n.nom)}</button>`).join("")}</div>` : "";
     const autour = I.extras.length ? repli("📍 Avant d'entrer et autour", `<ul class="regards">${I.extras.map(carteRegarder).join("")}</ul>`, I.extras.length, "autour") : "";
-    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)} · ${g.etapes.length} étapes</h4>${aNePasManquer}${g.conseil ? repli("💡 Le conseil pour la visite", `<p class="astuce">${esc(g.conseil)}</p>`, "", "conseil") : ""}${autour}
+    const guide = g ? `<h4>🎧 Visite guidée · ${esc(g.duree)} · ${g.etapes.length} étapes</h4>${l.plan ? blocPlan(id, l.plan, g) : ""}${aNePasManquer}${g.conseil ? repli("💡 Le conseil pour la visite", `<p class="astuce">${esc(g.conseil)}</p>`, "", "conseil") : ""}${autour}
       ${g.etapes.map((s, i) => `<details class="salle ${I.salles.has(i) ? "a-voir-absolument" : ""}" data-salle="${i}"><summary><span class="salle-num">${i + 1}</span><span class="salle-titre"><span class="salle-nom">${esc(s.salle)}${I.salles.has(i) ? ' <span class="etoile">⭐ à ne pas manquer</span>' : ""}</span><span class="salle-h">${esc(s.titre)}</span></span><span class="salle-fl">▸</span></summary><div class="salle-corps">
-        ${s.oeuvres.map((o, oi) => `<div class="oeuvre ${o.img ? "avec-photo" : ""} ${I.oeuvres.has(i + ":" + oi) ? "incontournable" : ""}">${o.img ? photo(o.img, o.nom, "grande") : ""}<div class="oeuvre-texte">${I.oeuvres.has(i + ":" + oi) ? '<span class="etoile">⭐ à ne pas manquer</span>' : ""}<b>${esc(o.nom)}</b>${o.auteur || o.date ? `<span class="auteur">${esc([o.auteur, o.date].filter(Boolean).join(", "))}</span>` : ""}<p>${o.texte}</p></div></div>`).join("")}
+        ${l.plan && s.plan ? `<div class="actions pl-voir-l"><button class="bouton petit-btn pl-voir" data-plan-id="${id}" data-plan-salle="${[].concat(s.plan)[0]}">🗺 Où est-ce sur le plan ?</button></div>` : ""}${s.oeuvres.map((o, oi) => `<div class="oeuvre ${o.img ? "avec-photo" : ""} ${I.oeuvres.has(i + ":" + oi) ? "incontournable" : ""}">${o.img ? photo(o.img, o.nom, "grande") : ""}<div class="oeuvre-texte">${I.oeuvres.has(i + ":" + oi) ? '<span class="etoile">⭐ à ne pas manquer</span>' : ""}<b>${esc(o.nom)}</b>${o.auteur || o.date ? `<span class="auteur">${esc([o.auteur, o.date].filter(Boolean).join(", "))}</span>` : ""}<p>${o.texte}</p></div></div>`).join("")}
       </div></details>`).join("")}` : "";
     const galerie = (l.photos || []).filter((k) => k !== l.img).map((k) => photo(k, l.nom, "galerie")).join("");
     ouvrir(l.theme + " · " + l.zone, l.nom, `
@@ -391,6 +469,7 @@
         ${p.duree ? `<dt>Durée</dt><dd>${esc(p.duree)}</dd>` : ""}${p.moment ? `<dt>Quand</dt><dd>${esc(p.moment)}</dd>` : ""}
         ${p.resa ? `<dt>Réservation</dt><dd>${esc(p.resa)}</dd>` : ""}</dl></details>
       ${repli("🔗 Liens, vidéos et itinéraire", `<div class="liens">${liens.join("")}</div>`, liens.length)}`);
+    if (l.plan) planInit(id);
   }
   function ficheResto(id) {
     const r = restoParId[id]; if (!r) return;
@@ -399,6 +478,18 @@
 
   /* ---------------- Interactions ---------------- */
   document.addEventListener("click", (e) => {
+    const pls = e.target.closest("[data-salle-plan]");
+    if (pls) { planChoisir(pls.closest(".plan").dataset.plan, pls.dataset.sallePlan); return; }
+    const plo = e.target.closest(".pl-onglet");
+    if (plo) { planEtage(plo.closest(".plan"), +plo.dataset.etage); return; }
+    const pli = e.target.closest(".pl-ici");
+    if (pli) { const id = pli.dataset.planId, sid = pli.dataset.sid; planIci(id, planIci(id) === sid ? "" : sid); planMarquer(id); planChoisir(id, sid); return; }
+    const pla = e.target.closest(".pl-lien");
+    if (pla) { planChoisir(pla.dataset.planId, pla.dataset.aller); return; }
+    const plg = e.target.closest(".pl-guide");
+    if (plg) { const d = $(`#feuille-corps details.salle[data-salle="${plg.dataset.salleGuide}"]`); if (d) { d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); } return; }
+    const plv = e.target.closest(".pl-voir");
+    if (plv) { planChoisir(plv.dataset.planId, plv.dataset.planSalle, true); return; }
     const ps = e.target.closest(".inc-puce");
     if (ps) { const d = $(`#feuille-corps details.salle[data-salle="${ps.dataset.salle}"]`); if (d) { d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); } return; }
     const tm = e.target.closest("[data-terme]");

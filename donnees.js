@@ -175,7 +175,7 @@ window.FLO = {
         {
           heure: "13h45", titre: "Botticelli, Michel-Ange, Léonard, Caravage", type: "visite", lieu: "offices",
           resa: "Offices · entrée 13h45 — réservé (CoopCulture 6R325YDT)",
-          texte: "Présentez-vous vers 13h30 à la <b>Porte 1</b> (entrée des billets réservés), PDF sur le téléphone ; la Porte 3, en face, ne sert qu'à retirer des billets. Compter 2h30–3h. Depuis le 16 juin 2026, la <b>Naissance de Vénus</b> et le <b>Printemps</b> de Botticelli se font face pour la première fois, dans des salles rénovées : les grandes parois vitrées ont disparu, les tableaux sont désormais dans des caissons étanches qui se font oublier. Le parcours salle par salle, avec les photos de ce qu'il faut voir, est dans le guide.",
+          texte: "Présentez-vous vers 13h30 à la <b>Porte 1</b> (entrée des billets réservés), PDF sur le téléphone ; la Porte 3, en face, ne sert qu'à retirer des billets. Compter 2h30–3h. Depuis le 16 juin 2026, la <b>Naissance de Vénus</b> et le <b>Printemps</b> de Botticelli se font face pour la première fois, dans des salles rénovées : les grandes parois vitrées ont disparu, les tableaux sont désormais dans des caissons étanches qui se font oublier. Le parcours salle par salle, avec les photos de ce qu'il faut voir et un plan interactif du musée, est dans le guide.",
           regarder: [
             { titre: "La Naissance de Vénus", img: "venus", texte: "Vénus arrive sur sa coquille, poussée par le souffle de Zéphyr. La tradition veut que son visage soit celui de Simonetta Vespucci, la beauté de Florence, morte à 22 ans." },
             { titre: "Le Tondo Doni de Michel-Ange", img: "doni", texte: "Sa seule peinture sur bois achevée, dans le cadre qu'il a dessiné lui-même. Le client a voulu marchander : il a fini par payer le double." },
@@ -519,52 +519,113 @@ window.FLO = {
     },
 
     offices: {
+      plan: {
+        note: "Plan schématique redessiné d'après le plan du musée et les annonces officielles (salle 35 Léonard, salle 41 Michel-Ange et Raphaël, salles Botticelli rénovées en juin 2026). Les numéros peuvent bouger : fiez-vous aussi aux noms des artistes affichés à l'entrée des salles.",
+        etages: [
+          {
+            nom: "2e étage", sous: "on commence ici", vue: "0 0 360 540",
+            decor: '<text class="pl-txt pl-c" x="180" y="13">↑ Piazza della Signoria</text>'
+              + '<rect class="pl-cour" x="128" y="34" width="104" height="406" rx="3"/>'
+              + '<text class="pl-txt pl-c" transform="translate(180 236) rotate(-90)">Piazzale degli Uffizi (la cour)</text>'
+              + '<rect class="pl-couloir" x="236" y="34" width="28" height="440"/>'
+              + '<rect class="pl-couloir" x="96" y="34" width="28" height="440"/>'
+              + '<rect class="pl-couloir" x="96" y="444" width="168" height="30"/>'
+              + '<text class="pl-txt pl-c" x="250" y="29">couloir est</text>'
+              + '<text class="pl-txt pl-c" x="110" y="29">couloir ouest</text>'
+              + '<rect class="pl-eau" x="0" y="490" width="360" height="50"/>'
+              + '<text class="pl-txt pl-eau-t pl-c" x="200" y="520">Arno</text>'
+              + '<text class="pl-txt" x="8" y="520">← Ponte Vecchio</text>'
+              + '<path class="pl-route" d="M250 56 V459 H110 V82"/>'
+              + '<path class="pl-fleche" d="M244 150 h12 l-6 9 z"/><path class="pl-fleche" d="M244 300 h12 l-6 9 z"/>'
+              + '<path class="pl-fleche" d="M232 453 v12 l-9 -6 z"/>'
+              + '<path class="pl-fleche" d="M104 390 h12 l-6 -9 z"/><path class="pl-fleche" d="M104 200 h12 l-6 -9 z"/>'
+              + '<text class="pl-txt" x="131" y="86">← vers le 1er étage</text>',
+            salles: [
+              { id: "entree", type: "repere", icone: "⬇", cx: 250, cy: 44, nom: "Arrivée", titre: "L'arrivée au 2e étage", voir: "On monte directement au 2e étage par le grand escalier de Vasari. Le couloir est part vers l'Arno : levez les yeux vers les plafonds peints de grotesques, et regardez les bustes antiques d'empereurs qui le bordent." },
+              { id: "s1", num: "1", nom: "", titre: "Archéologie", x: 268, y: 34, w: 84, h: 22, sec: true, voir: "Sculptures antiques. Secondaire : on peut passer." },
+              { id: "s2", num: "2", nom: "Giotto", x: 268, y: 58, w: 84, h: 40, top: true, voir: "Les trois grandes Vierges en majesté de Cimabue, Duccio et Giotto, côte à côte : en trente ans, la peinture passe de l'icône byzantine à un corps qui pèse sur son trône. Le meilleur point de départ." },
+              { id: "s3", num: "3", nom: "Sienne", x: 268, y: 100, w: 84, h: 32, voir: "Sienne au XIVe siècle : l'Annonciation de Simone Martini, tout en or, où les mots de l'ange sortent de sa bouche, gravés dans le fond." },
+              { id: "s4", num: "4", nom: "", titre: "Florence au XIVe siècle", x: 268, y: 134, w: 84, h: 22, sec: true, voir: "Florence au XIVe siècle, les héritiers de Giotto. Secondaire." },
+              { id: "s5", num: "5–6", nom: "Gothique", x: 268, y: 158, w: 84, h: 32, voir: "Le gothique international : l'Adoration des Mages de Gentile da Fabriano, un cortège de cour couvert d'or, avec chevaux, chiens et singes." },
+              { id: "s7", num: "7–8", nom: "Uccello|Piero, Lippi", x: 268, y: 192, w: 84, h: 44, top: true, voir: "La Bataille de San Romano d'Uccello, le duc et la duchesse d'Urbino de Piero della Francesca (lui toujours de profil : il avait perdu un œil en tournoi) et la Vierge de Filippo Lippi, le moine qui avait enlevé une nonne." },
+              { id: "s9", num: "9", nom: "Pollaiolo", x: 268, y: 238, w: 84, h: 30, sec: true, voir: "Les frères Pollaiolo et leurs Vertus, avec la Force, la première œuvre connue de Botticelli. On entre ensuite chez lui." },
+              { id: "s10", num: "10–14", nom: "Botticelli", x: 268, y: 270, w: 84, h: 66, top: true, voir: "Le sommet de la visite. Depuis juin 2026, la Naissance de Vénus et le Printemps se font face, sans les grandes vitres. Le parcours s'ouvre sur l'Adoration des Mages (Botticelli s'y est peint en manteau jaune, à droite, et vous regarde) et se termine par la sombre Calomnie." },
+              { id: "s15", num: "15–17", nom: "", titre: "Salles secondaires", x: 268, y: 338, w: 84, h: 20, sec: true, voir: "Salles secondaires. On peut passer." },
+              { id: "s18", num: "18", nom: "Tribune", forme: "oct", x: 284, y: 360, w: 52, h: 44, voir: "La Tribune : la salle octogonale où les Médicis gardaient leurs trésors, sous une coupole incrustée de nacre. On la regarde depuis le seuil." },
+              { id: "s19", num: "19–23", nom: "autres écoles", x: 268, y: 406, w: 84, h: 34, sec: true, voir: "Peinture du XVe siècle hors de Florence. À voir seulement s'il vous reste de l'énergie." },
+              { id: "fenetre", type: "repere", icone: "👁", cx: 180, cy: 459, top: true, nom: "La vue", titre: "La fenêtre sur l'Arno", voir: "La pause du milieu de visite. D'un côté l'Arno et le Ponte Vecchio, avec le couloir de Vasari qui court au-dessus des boutiques ; de l'autre, toute la cour des Offices jusqu'à la tour du Palazzo Vecchio. LA photo." },
+              { id: "s33", num: "33–34", nom: "Antiques", x: 8, y: 352, w: 84, h: 88, sec: true, voir: "Sculptures antiques et souvenirs du jardin de San Marco, où Laurent le Magnifique a repéré le jeune Michel-Ange. Secondaire." },
+              { id: "s35", num: "35", nom: "Léonard", x: 8, y: 278, w: 84, h: 72, top: true, voir: "Léonard : le Baptême du Christ de Verrocchio, où l'élève de 20 ans a peint l'ange de gauche, l'Annonciation, et la grande Adoration des Mages restée inachevée quand il est parti pour Milan." },
+              { id: "s38", num: "38", nom: "Hermaphrodite", x: 8, y: 242, w: 84, h: 34, sec: true, voir: "Statues antiques. Secondaire." },
+              { id: "s41", num: "41", nom: "Michel-Ange|Raphaël", x: 8, y: 164, w: 84, h: 76, top: true, voir: "Les deux génies dans la même salle : le Tondo Doni, le seul tableau de Michel-Ange à Florence, dans son cadre d'origine, et la Madone au chardonneret de Raphaël, recollée après l'effondrement d'une maison." },
+              { id: "s42", num: "42", nom: "Niobé", x: 8, y: 116, w: 84, h: 46, sec: true, voir: "La salle de Niobé : un grand salon néoclassique où les statues des enfants de Niobé fuient les flèches d'Apollon et d'Artémis. Belle à traverser." },
+              { id: "s43", num: "43–45", nom: "", titre: "Salles secondaires", x: 8, y: 74, w: 84, h: 40, sec: true, voir: "Salles secondaires ou expositions. On peut passer." },
+              { id: "cafe", type: "zone", icone: "☕", nom: "Café · terrasse", x: 8, y: 34, w: 116, h: 36, voir: "Le café, sur la terrasse au-dessus de la Loggia dei Lanzi : la tour du Palazzo Vecchio et la coupole à portée de main. La pause idéale avant le 1er étage (toilettes juste en dessous). L'escalier vers le 1er étage est à côté." }
+            ]
+          },
+          {
+            nom: "1er étage", sous: "la fin du parcours", vue: "0 0 360 374", liste: true,
+            decor: '<path class="pl-route" d="M18 22 V366"/><text class="pl-txt" x="34" y="13">Dans l\'ordre du parcours (schéma)</text>',
+            salles: [
+              { id: "arrivee1", type: "repere", icone: "⬇", cx: 18, cy: 34, nom: "Arrivée", titre: "L'arrivée au 1er étage", voir: "On descend depuis le café. Le parcours continue dans l'ordre chronologique : XVIe puis XVIIe siècle." },
+              { id: "p46", num: "46–55", nom: "Salles bleues : peintres étrangers", x: 34, y: 22, w: 318, h: 34, sec: true, voir: "Peintres espagnols, flamands, hollandais et français des XVIIe et XVIIIe siècles. À traverser selon votre énergie." },
+              { id: "p57", num: "56–61", nom: "Salles rouges : Andrea del Sarto, Pontormo", x: 34, y: 62, w: 318, h: 34, sec: true, voir: "Andrea del Sarto (la Madone aux Harpies), Rosso Fiorentino, Pontormo : la Florence maniériste." },
+              { id: "p62", num: "62–65", nom: "Vasari, Bronzino, les Médicis", x: 34, y: 102, w: 318, h: 34, sec: true, voir: "Vasari, Bronzino et les portraits officiels des Médicis, dont Éléonore de Tolède dans sa robe de brocart." },
+              { id: "s74", num: "74", nom: "Parmigianino · la Madone au long cou", x: 34, y: 142, w: 318, h: 40, voir: "La Madone au long cou : cou, doigts et jambes étirés à l'extrême. Tout le maniérisme dans un seul tableau." },
+              { id: "s83", num: "83", nom: "Titien · la Vénus d'Urbin", x: 34, y: 188, w: 318, h: 48, top: true, voir: "Titien : la Vénus d'Urbin (1538), qui scandalisa Mark Twain, et la Flore. Regardez le petit chien endormi et les servantes au fond, qui cherchent sa robe dans un coffre." },
+              { id: "s90", num: "90–93", nom: "Le Caravage et Artemisia", x: 34, y: 242, w: 318, h: 48, top: true, voir: "Le Caravage : la Méduse peinte sur un bouclier de parade, le Bacchus, le Sacrifice d'Isaac. Et la Judith décapitant Holopherne d'Artemisia Gentileschi, l'un des tableaux les plus violents du musée." },
+              { id: "p95", num: "94–101", nom: "Le XVIIe siècle", x: 34, y: 296, w: 318, h: 34, sec: true, voir: "Peinture du XVIIe siècle (Florence, Sienne, Guido Reni). Secondaire." },
+              { id: "sortie", type: "zone", icone: "🚪", nom: "Sortie (librairie, rez-de-chaussée)", x: 34, y: 336, w: 318, h: 30, voir: "On redescend vers la sortie et la librairie. Dehors : vous êtes à 2 minutes du logement." }
+            ]
+          }
+        ]
+      },
       nom: "Galerie des Offices (Uffizi)", theme: "Musées et palais", zone: "Centre", img: "venus",
       resume: "La plus grande collection de la Renaissance, à 2 minutes de chez vous.",
       pourquoi: "Botticelli, Léonard, Michel-Ange, Raphaël, Titien, Caravage dans un seul bâtiment. Réservé dimanche 13h45. Depuis juin 2026, les salles Botticelli rénovées mettent la Naissance de Vénus et le Printemps face à face pour la première fois.",
       guide: {
         duree: "2h30–3h",
-        conseil: "Montez directement au 2e étage. Suivez le couloir est (statues antiques, plafonds peints de grotesques) dans l'ordre chronologique : des fonds d'or gothiques à Botticelli, puis Léonard. Faites une pause à la fenêtre au bout du couloir, face à l'Arno. Ensuite le couloir ouest (Michel-Ange, Raphaël), puis le 1er étage (Titien, Caravage). Les numéros de salle peuvent changer : fiez-vous aux noms des artistes. Pause possible au café sur le toit de la Loggia dei Lanzi.",
+        conseil: "Montez directement au 2e étage et suivez le plan : le couloir est dans l'ordre chronologique (des fonds d'or à Botticelli, puis la Tribune), la pause à la fenêtre sur l'Arno, le couloir ouest (Léonard, puis Michel-Ange et Raphaël), le café sur la Loggia dei Lanzi, puis le 1er étage (Titien, Caravage). Les salles grises du plan sont secondaires : passez vite si l'énergie baisse.",
         etapes: [
-          { salle: "Salle 2", titre: "Le face-à-face des trois Vierges", oeuvres: [
+          { plan: "s2", salle: "Salle 2", titre: "Le face-à-face des trois Vierges", oeuvres: [
             { nom: "La Maestà d'Ognissanti", auteur: "Giotto", date: "vers 1310", img: "maestagiotto", texte: "Trois grandes Vierges en majesté dans la même salle : Cimabue, Duccio, Giotto. Comparez. Chez Giotto, la Vierge a un vrai corps sous sa robe, un genou qui avance, un trône en perspective ; les anges regardent vraiment. C'est le début de la peinture moderne. Dante l'avait vu : « Cimabue croyait tenir le champ de la peinture, et maintenant c'est Giotto qu'on acclame »." }
           ] },
-          { salle: "Salle 3", titre: "L'or de Sienne", oeuvres: [
+          { plan: "s3", salle: "Salle 3", titre: "L'or de Sienne", oeuvres: [
             { nom: "L'Annonciation", auteur: "Simone Martini", date: "1333", img: "annonciationmartini", texte: "Les mots de l'ange sortent littéralement de sa bouche, gravés dans l'or : « Ave gratia plena ». Marie recule, effarouchée, en serrant son manteau. Une élégance siennoise qui n'a rien à voir avec la solidité de Giotto." }
           ] },
-          { salle: "Salles 5–6", titre: "Le gothique international", oeuvres: [
+          { plan: "s5", salle: "Salles 5–6", titre: "Le gothique international", oeuvres: [
             { nom: "L'Adoration des Mages", auteur: "Gentile da Fabriano", date: "1423", img: "gentile", texte: "Commandée par Palla Strozzi, l'homme le plus riche de Florence (avant que les Médicis ne l'exilent). De l'or en relief partout, des chevaux, des chiens, des singes, des faucons : un cortège de luxe. Regardez la prédelle en bas, avec une des premières scènes de nuit de la peinture." }
           ] },
-          { salle: "Salles 7–8", titre: "Une bataille, un duc sans nez et une nonne enlevée", oeuvres: [
+          { plan: "s7", salle: "Salles 7–8", titre: "Une bataille, un duc sans nez et une nonne enlevée", oeuvres: [
             { nom: "La Bataille de San Romano", auteur: "Paolo Uccello", date: "vers 1438", img: "sanromano", texte: "Un des trois panneaux (les autres sont à Londres et au Louvre) qui décoraient la chambre de <b>Laurent le Magnifique</b> : il les avait obtenus, plus ou moins de force, de la famille qui les avait commandés. Uccello était obsédé par la perspective : lances brisées au sol alignées vers le point de fuite, chevaux comme des jouets." },
             { nom: "Le Duc et la Duchesse d'Urbino", auteur: "Piero della Francesca", date: "vers 1473–1475", img: "ducsurbino", texte: "Federico da Montefeltro est toujours peint de profil gauche : il avait perdu l'œil droit et l'arête du nez dans un tournoi. Son épouse, Battista Sforza, est très pâle : après une série de filles, elle avait enfin donné un fils au duc, et elle est morte quelques mois plus tard, à 26 ans ; le portrait est posthume. Ils se regardent pour l'éternité. Retournez le panneau : au dos, les deux époux défilent sur des chars de triomphe." },
             { nom: "La Vierge à l'Enfant avec deux anges (la « Lippina »)", auteur: "Filippo Lippi", date: "vers 1465", img: "lippina", texte: "Le modèle serait Lucrezia Buti, une jeune religieuse que le moine-peintre Filippo Lippi a enlevée de son couvent. Le scandale fut énorme, Cosme de Médicis s'en mêla, le pape finit par les relever de leurs vœux. Leur fils, Filippino, deviendra peintre et élève de… Botticelli, lui-même élève de Filippo." }
           ] },
-          { salle: "Salles Botticelli (rénovées en juin 2026)", titre: "Vénus et le Printemps, face à face", oeuvres: [
+          { plan: "s10", salle: "Salles Botticelli (rénovées en juin 2026)", titre: "Vénus et le Printemps, face à face", oeuvres: [
             { nom: "L'Adoration des Mages (au début du parcours)", auteur: "Botticelli", date: "vers 1475", texte: "Le nouvel accrochage s'ouvre sur ce petit tableau qui est un portrait de famille déguisé : le vieux roi agenouillé aux pieds de l'Enfant, c'est Cosme l'Ancien ; ses fils Pierre et Jean sont les deux autres mages ; Laurent et Julien se tiennent dans la foule. Et tout à droite, drapé dans un manteau jaune, un homme regarde droit vers vous : c'est <b>Botticelli lui-même</b>, l'un des rares autoportraits du peintre." },
             { nom: "La Naissance de Vénus", auteur: "Botticelli", date: "vers 1485", img: "venus", texte: "Vénus, née de l'écume, arrive sur une coquille. À gauche, Zéphyr et une nymphe soufflent ; à droite, une Heure lui tend un manteau brodé de fleurs. Le cou trop long, l'épaule qui tombe, la pose impossible : Botticelli se moque du réalisme, il veut la grâce. La tradition veut que le visage soit celui de Simonetta Vespucci, la plus belle femme de Florence, aimée (platoniquement ?) de Julien de Médicis, morte de tuberculose à 22 ans. Botticelli repose, comme elle, à l'église d'Ognissanti, celle des Vespucci ; la légende veut qu'il ait demandé à être enterré à ses pieds." },
             { nom: "Le Printemps (Primavera)", auteur: "Botticelli", date: "vers 1480", img: "primavera", texte: "Lisez-le de droite à gauche : Zéphyr, bleu, attrape la nymphe Chloris, qui se transforme en Flora, la robe couverte de fleurs. Au centre, Vénus ; au-dessus, Cupidon tire à l'aveugle sur les trois Grâces qui dansent. À gauche, Mercure chasse les nuages avec son caducée. Le sol est un tapis de plusieurs centaines de plantes, presque toutes identifiables. Peint pour un cousin de Laurent le Magnifique, probablement pour un mariage." },
             { nom: "Les Madones de Botticelli", auteur: "Botticelli", texte: "De part et d'autre de Vénus, le nouvel accrochage a placé les deux grandes Madones rondes, celle du <b>Magnificat</b> et celle de <b>la Grenade</b> : le même visage que la déesse. C'est voulu : pour les philosophes de l'entourage de Laurent, comme Marsile Ficin, la beauté païenne et la beauté chrétienne disaient la même chose. Plus tard, Botticelli devient un fidèle de Savonarole et sa peinture s'assombrit ; on raconte qu'il aurait jeté certaines de ses toiles « païennes » au bûcher des vanités, mais aucun document ne le prouve. Le parcours se termine par sa <b>Calomnie</b> (1495), tourmentée, à l'opposé de Vénus." }
           ] },
-          { salle: "Salle 35 — Léonard", titre: "Léonard à 20 ans", oeuvres: [
+          { plan: "s18", salle: "La Tribune (salle 18)", titre: "Le coffre à bijoux des Médicis", oeuvres: [
+            { nom: "La Tribune", auteur: "Buontalenti", date: "1584", img: "tribuna", texte: "Une salle octogonale qu'on regarde depuis le seuil : coupole incrustée de milliers de coquillages de nacre, sol de marbres précieux, et au centre la Vénus Médicis antique. François Ier y rangeait ses plus grands trésors. C'était l'étape obligée du « Grand Tour » des aristocrates européens au XVIIIe siècle." }
+          ] },
+          { plan: "fenetre", salle: "La fenêtre sur l'Arno", titre: "La pause", oeuvres: [
+            { nom: "La vue", texte: "Au bout du couloir, la fenêtre donne sur le Ponte Vecchio et le couloir de Vasari, qui part juste sous vos pieds et file au-dessus des boutiques. Prenez cinq minutes." }
+          ] },
+          { plan: "s35", salle: "Salle 35 — Léonard", titre: "Léonard à 20 ans", oeuvres: [
             { nom: "Le Baptême du Christ", auteur: "Verrocchio et Léonard", date: "1470–1475", img: "bapteme", texte: "Le tableau de l'atelier de Verrocchio, où Léonard était apprenti. L'ange de gauche, de profil, est de sa main, avec ses cheveux bouclés et son regard rêveur. Selon Vasari, en voyant cet ange, Verrocchio aurait décidé de ne plus jamais toucher un pinceau, humilié par son élève." },
             { nom: "L'Annonciation", auteur: "Léonard de Vinci", date: "vers 1472–1476", img: "annonciationleo", texte: "Léonard a une vingtaine d'années. Les ailes de l'ange sont étudiées sur de vrais oiseaux (on les a d'ailleurs allongées plus tard, maladroitement). Au fond, les montagnes bleuissent dans la brume : la perspective atmosphérique, son invention. Dans la même salle, son <b>Adoration des Mages</b> inachevée, un chaos génial resté à l'état de dessin." }
           ] },
-          { salle: "La Tribune (salle 18)", titre: "Le coffre à bijoux des Médicis", oeuvres: [
-            { nom: "La Tribune", auteur: "Buontalenti", date: "1584", img: "tribuna", texte: "Une salle octogonale qu'on regarde depuis le seuil : coupole incrustée de milliers de coquillages de nacre, sol de marbres précieux, et au centre la Vénus Médicis antique. François Ier y rangeait ses plus grands trésors. C'était l'étape obligée du « Grand Tour » des aristocrates européens au XVIIIe siècle." }
-          ] },
-          { salle: "La fenêtre sur l'Arno", titre: "La pause", oeuvres: [
-            { nom: "La vue", texte: "Au bout du couloir, la fenêtre donne sur le Ponte Vecchio et le couloir de Vasari, qui part juste sous vos pieds et file au-dessus des boutiques. Prenez cinq minutes." }
-          ] },
-          { salle: "Salle 41 — Michel-Ange et Raphaël", titre: "Les deux génies dans la même salle", oeuvres: [
+          { plan: "s41", salle: "Salle 41 — Michel-Ange et Raphaël", titre: "Les deux génies dans la même salle", oeuvres: [
             { nom: "Le Tondo Doni", auteur: "Michel-Ange", date: "1505–1506", img: "doni", texte: "Sa seule peinture sur bois achevée, faite pour le mariage du riche marchand Agnolo Doni, dans un cadre que Michel-Ange a dessiné. La Vierge, musclée comme un athlète, se tord pour passer l'Enfant à Joseph : on reconnaît le futur peintre de la chapelle Sixtine. Selon Vasari, Michel-Ange en demandait 70 ducats ; Doni, marchand avisé, n'en envoya que 40. Michel-Ange renvoya l'argent et exigea 100 ou le tableau. Doni proposa alors les 70 du début… et Michel-Ange en voulut le double, 140. Doni a payé." },
             { nom: "La Madone au chardonneret", auteur: "Raphaël", date: "vers 1505", img: "cardellino", texte: "Un cadeau de mariage, lui aussi. En 1547, la maison du propriétaire s'est effondrée dans un glissement de terrain et le tableau s'est brisé en 17 morceaux ; on l'a recollé, puis restauré pendant dix ans (2008). Dans la même salle, Raphaël a peint les portraits… d'Agnolo et Maddalena Doni, les clients de Michel-Ange." }
           ] },
-          { salle: "1er étage — Titien et le maniérisme", titre: "La Vénus qui choqua Mark Twain", oeuvres: [
+          { plan: ["s74", "s83"], salle: "1er étage — Titien et le maniérisme", titre: "La Vénus qui choqua Mark Twain", oeuvres: [
             { nom: "La Vénus d'Urbin", auteur: "Titien", date: "1538", img: "venusurbino", texte: "Un tableau privé pour le duc d'Urbino : une femme nue, qui vous regarde droit dans les yeux, un petit chien endormi à ses pieds (la fidélité), deux servantes qui fouillent un coffre de mariage au fond. Mark Twain, en visite, la trouva « le tableau le plus immonde » du monde. Manet s'en est inspiré pour son Olympia." },
             { nom: "La Madone au long cou", auteur: "Parmigianino", date: "1534–1540", img: "longcou", texte: "Si elle est exposée : le maniérisme poussé à l'extrême. Un cou de cygne, des doigts interminables, un Enfant géant et, au fond, une colonne qui ne soutient rien. Le tableau est resté inachevé." }
           ] },
-          { salle: "Salles du Caravage (1er étage)", titre: "Le Caravage et Artemisia", oeuvres: [
+          { plan: "s90", salle: "Salles du Caravage (1er étage)", titre: "Le Caravage et Artemisia", oeuvres: [
             { nom: "Méduse", auteur: "Le Caravage", date: "vers 1597", img: "meduse", texte: "Peinte sur un vrai bouclier de parade, offert par un cardinal au grand-duc Ferdinand Ier. L'instant exact où la tête vient d'être tranchée : la bouche crie encore, le sang gicle. Le visage serait celui du Caravage lui-même." },
             { nom: "Bacchus", auteur: "Le Caravage", date: "vers 1596", img: "bacchuscara", texte: "Un jeune homme un peu éméché, des ongles sales, des fruits qui pourrissent dans la coupe. Dans le reflet de la carafe de vin, en bas à gauche, une restauration a révélé un minuscule autoportrait du peintre à son chevalet." },
             { nom: "Judith décapitant Holopherne", auteur: "Artemisia Gentileschi", date: "vers 1620", img: "judithartemisia", texte: "Le tableau le plus violent du musée. Artemisia avait été violée à 17 ans par son professeur, Agostino Tassi ; au procès, à Rome, c'est elle qu'on a torturée pour vérifier son témoignage. Elle s'installe ensuite à Florence et devient la première femme admise à l'Accademia del Disegno. Ici, Judith ne détourne pas les yeux." }

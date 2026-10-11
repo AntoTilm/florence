@@ -410,6 +410,60 @@
   .oeuvre-texte p { margin: 4px 0 0; font-size: 15px; }
 
   @media print { nav.onglets, .outils, .choisir, .aller-maintenant { display: none; } .page[hidden] { display: block; } details { display: block; } }
+
+  /* Plan interactif des musées */
+  .plan { margin: 12px 0 14px; border: 1px solid var(--trait); border-radius: 14px; background: var(--carte); padding: 10px; box-shadow: var(--ombre); }
+  .pl-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .pl-tete small { color: var(--or); font-weight: 600; }
+  .pl-onglets { display: flex; gap: 6px; margin-bottom: 8px; }
+  .pl-onglet { flex: 1; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--trait); background: var(--fond); color: var(--texte); border-radius: 12px; padding: 6px 8px; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .pl-onglet small { font-weight: 400; font-size: 11.5px; color: var(--doux); }
+  .pl-onglet.actif { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .pl-onglet.actif small { color: #fff; opacity: .85; }
+  .pl-svg { display: none; width: 100%; height: auto; -webkit-tap-highlight-color: transparent; }
+  .pl-svg.actif { display: block; }
+  .pl-svg text { font-family: inherit; text-anchor: middle; pointer-events: none; }
+  .pl-svg text.gauche, .pl-svg .pl-txt { text-anchor: start; }
+  .pl-svg .pl-txt.pl-c { text-anchor: middle; }
+  .pl-cour { fill: var(--fond); stroke: var(--trait); stroke-dasharray: 3 3; }
+  .pl-couloir { fill: var(--accent-doux); }
+  .pl-eau { fill: var(--bleu-doux); }
+  .pl-eau-t { fill: var(--bleu); font-style: italic; }
+  .pl-route { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 5 4; opacity: .8; }
+  .pl-fleche { fill: var(--accent); }
+  .pl-txt { fill: var(--doux); font-size: 10px; }
+  .pl-salle { cursor: pointer; outline: none; }
+  .pl-salle .f { fill: var(--carte); stroke: var(--doux); stroke-width: 1.2; transition: fill .15s; }
+  .pl-salle .n { font-size: 12px; font-weight: 700; fill: var(--texte); }
+  .pl-salle .s { font-size: 10px; fill: var(--texte); }
+  .pl-salle .ic { font-size: 13px; }
+  .pl-salle.sec .f { fill: var(--fond); stroke: var(--trait); }
+  .pl-salle.sec text { fill: var(--doux); }
+  .pl-salle.top .f { fill: var(--or-doux); stroke: var(--or); stroke-width: 1.8; }
+  .pl-salle.pl-zone .f { fill: var(--vert-doux); stroke: var(--vert); }
+  .pl-et { fill: var(--or); font-size: 12px; }
+  .pl-salle.choisie .f { stroke: var(--accent); stroke-width: 3; }
+  .pl-salle .pl-pt { display: none; fill: var(--vert); stroke: var(--carte); stroke-width: 1.5; }
+  .pl-salle.ici .pl-pt { display: block; animation: pl-pouls 1.4s ease-in-out infinite; }
+  .pl-salle.ici .f { stroke: var(--vert); stroke-width: 3; }
+  @keyframes pl-pouls { 50% { opacity: .3; } }
+  .pl-legende { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 6px 2px 0; font-size: 12px; color: var(--doux); }
+  .pl-legende .lg { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; background: var(--carte); border: 1.2px solid var(--doux); }
+  .pl-legende .lg.top { background: var(--or-doux); border-color: var(--or); }
+  .pl-legende .lg.sec { background: var(--fond); border-color: var(--trait); }
+  .pl-legende .lg.rt { border: none; border-top: 2px dashed var(--accent); border-radius: 0; height: 0; width: 16px; vertical-align: 3px; }
+  .pl-info { margin-top: 8px; padding: 10px 12px; border-radius: 10px; background: var(--fond); }
+  .pl-info p { margin: 6px 0; }
+  .pl-aide { color: var(--doux); font-size: 14px; }
+  .pl-i-tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+  .pl-i-tete b { font: 600 17px/1.2 Fraunces, Georgia, serif; }
+  .pl-num { font-size: 12px; font-weight: 700; color: #fff; background: var(--accent); border-radius: 999px; padding: 1px 8px; }
+  .pl-sec { font-size: 12px; color: var(--doux); }
+  .pl-ici.on { background: var(--vert); border-color: var(--vert); color: #fff; }
+  .pl-suite { font-size: 14px; }
+  .pl-lien { font: inherit; font-weight: 700; color: var(--accent); background: none; border: none; padding: 0; text-decoration: underline; cursor: pointer; text-align: left; }
+  .pl-note { margin: 8px 2px 0; font-size: 12px; }
+  .pl-voir-l { margin: 0 0 8px; }
 </style>
 </head>
 <body>
