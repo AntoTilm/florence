@@ -36,7 +36,7 @@ window.FLO = {
     "Billets PDF des Offices (code CoopCulture 6R325YDT) enregistrés",
     "Giotto Pass réservé (créneau du campanile lundi 16h30–17h)",
     "Osteria dell'Enoteca réservée (lundi 20h)",
-    "Vineria Sonora (18h30) et Vini e Vecchi Sapori (20h15) réservés pour dimanche soir",
+    "Vineria Sonora réservée (dimanche 18h30) — Cibrèo Ristorante ✅ dimanche 20h30, Vini e Vecchi Sapori ✅ lundi 12h",
     "Hôte prévenu : arrivée vers 21h, valises gardées mardi jusqu'à 15h",
     "Deux cartes sans contact pour le tram (une validation par carte), ou tickets au distributeur",
     "Un peu de liquide (marché, Da Rocco, lampredotto : souvent cash)",
@@ -52,7 +52,8 @@ window.FLO = {
     { statut: "todo", titre: "Giotto Pass — campanile + baptistère + musée + crypte", quand: "Lun 12 · créneau tour 16h30–17h", detail: "20 €/pers. Le créneau de la tour est fixe et non modifiable : à réserver dès ce soir, c'est la dernière réservation de visite. Le reste du pass (baptistère, musée, crypte) se visite sans créneau, pendant 3 jours. Tour en restauration (échafaudage) : terrasse ouverte, vue un peu réduite.", lien: "https://tickets.duomo.firenze.it/en/", lienTexte: "Billetterie officielle du Duomo", lieu: "campanile" },
     { statut: "todo", titre: "Bistecca — Osteria dell'Enoteca", quand: "Lun 12 · 20h", detail: "Via Romana 70r. Fermée le mardi. Compter 70–90 €/pers. avec vin. Plan B : Cammillo (+39 055 212427), puis I'Raddi (+39 055 211072).", tel: "+39 055 228 6018", lien: "http://www.osteriadellenoteca.com/", lienTexte: "Site du restaurant", resto: "enoteca" },
     { statut: "todo", titre: "Vineria Sonora (vins nature)", quand: "Dim 11 · ~18h30", detail: "Via degli Alfani 39r. Ouverte le dimanche dès 17h, fermée le lundi. Table pour l'apéritif.", tel: "+39 333 199 9093", resto: "sonora" },
-    { statut: "todo", titre: "Dîner — Vini e Vecchi Sapori", quand: "Dim 11 · ~20h15", detail: "Via dei Magazzini 3r, 3 min du logement. Ouvert le dimanche 19h–23h (Google Maps, mis à jour par le restaurant). Pas réservé samedi : appeler dès midi. Plan B : Fuori Porta (sans réservation) ou Cibrèo Trattoria (+39 055 234 1100).", tel: "+39 055 293045", resto: "vinivecchisapori" },
+    { statut: "ok", titre: "Dîner — Cibrèo Ristorante", quand: "Dim 11 · 20h30", detail: "Via Andrea del Verrocchio 8r, à deux pas du marché de Sant'Ambrogio, 10 min à pied de la Vineria Sonora. Réservation confirmée pour 2 personnes (lien tfk.io reçu par SMS). C'est le restaurant gastronomique de la maison Cibrèo, pas la trattoria : compter environ 60–80 € par personne avec le vin.", tel: "+39 055 234 1100", resto: "cibreoristorante" },
+    { statut: "ok", titre: "Déjeuner — Vini e Vecchi Sapori", quand: "Lun 12 · 12h00", detail: "Via dei Magazzini 3r, 3 min du logement. Réservé pour lundi midi.", tel: "+39 055 293045", resto: "vinivecchisapori" },
     { statut: "info", titre: "Gustarium (pizza al taglio)", quand: "Dim 11 · 12h00 pile", detail: "Pas de réservation. Ouvert du mardi au dimanche, le midi seulement (12h–15h30), et tout est souvent vendu vers 13h : être devant à l'ouverture.", tel: "+39 055 283469", resto: "gustarium" }
   ],
 
@@ -121,8 +122,8 @@ window.FLO = {
     {
       id: "dim", court: "Dim 11", date: "2026-10-11",
       titre: "Le David, les Médicis, les Offices et Dante",
-      intro: "Le seul réveil matinal du séjour (le David à 8h15). Ensuite la pizza de Gustarium, les Offices, une vraie pause au logement, puis une balade tranquille vers le nord jusqu'à la Vineria Sonora, et le dîner chez Vini e Vecchi Sapori, à 3 min de chez vous.",
-      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Galleria degli Uffizi, Firenze", "Palazzo Medici Riccardi, Firenze", "Vineria Sonora, Via degli Alfani 39r, Firenze"], arrivee: "Vini e Vecchi Sapori, Via dei Magazzini 3r, Firenze" },
+      intro: "Le seul réveil matinal du séjour (le David à 8h15). Ensuite la pizza de Gustarium, les Offices, une vraie pause au logement, puis une balade tranquille vers le nord jusqu'à la Vineria Sonora, et le dîner au Cibrèo Ristorante.",
+      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Galleria degli Uffizi, Firenze", "Palazzo Medici Riccardi, Firenze", "Vineria Sonora, Via degli Alfani 39r, Firenze"], arrivee: "Cibrèo Ristorante, Via Andrea del Verrocchio 8r, Firenze" },
       etapes: [
         {
           heure: "7h50", titre: "Vers le David, dans la ville vide", type: "balade",
@@ -220,39 +221,22 @@ window.FLO = {
           ]
         },
         {
-          heure: "20h15", titre: "Dîner chez Vini e Vecchi Sapori", type: "repas",
-          aller: { duree: "15 min", via: "Via degli Alfani → via dei Servi → piazza del Duomo → via de' Calzaiuoli → piazza della Signoria → via dei Magazzini", vers: "Vini e Vecchi Sapori, Via dei Magazzini 3r, Firenze" },
-          texte: "Le dîner raté de samedi, ce soir. Ouvert le dimanche 19h–23h (horaires mis à jour par le restaurant sur Google Maps). Salle minuscule : <b>appelez pour réserver</b> (+39 055 293045). En redescendant, le Duomo illuminé, puis vous êtes à 3 min du logement.",
-          regarder: [
-            { chemin: true, top: true, titre: "Le Duomo de nuit, par la via dei Servi", maps: "Via dei Servi, Firenze", texte: "En descendant la via dei Servi, la coupole grandit à chaque pas au bout de la rue. Le marbre blanc vient de Carrare, le vert de Prato, le rose de la Maremme ; la façade ne date que de 1887." }
-          ],
+          heure: "20h30", titre: "Dîner au Cibrèo Ristorante", type: "repas", resa: "Réservé · 20h30, 2 personnes",
+          aller: { duree: "10 min", via: "Via degli Alfani → borgo Pinti → via dei Pilastri → via Andrea del Verrocchio", vers: "Cibrèo Ristorante, Via Andrea del Verrocchio 8r, Firenze" },
+          texte: "La maison mère du Cibrèo, ouverte en 1979 par Fabio Picchi face au marché de Sant'Ambrogio, et devenue une institution florentine (Picchi est mort en 2022, la maison continue). Particularité célèbre : <b>pas de pâtes</b>, et pas de carte écrite au départ, on vous récite les plats à table. C'est la version « soirée » de la maison, plus chère que la trattoria d'à côté.",
           repas: [
-            { resto: "vinivecchisapori", reco: true, texte: "Minuscule osteria derrière le Palazzo Vecchio, pleine de Florentins. Prenez les <b>pappardelle au canard</b>, leur plat le plus célèbre, des crostini de foie, et le <b>tiramisu à la framboise</b>." },
-            { resto: "fuoriporta", texte: "Plan B sans réservation : l'enoteca de San Niccolò (12 min le long de l'Arno), cuisine non-stop. Crostoni chauds, planches, un verre parmi 600 vins." },
-            { resto: "cibreo", texte: "Autre plan B, ouvert tous les jours : la trattoria du Cibrèo, via de' Macci (10 min de Sonora). Pappa al pomodoro, pâté du Cibrèo, lampredotto in umido." }
+            { resto: "cibreoristorante", reco: true, texte: "Réservé à 20h30. Les classiques de la maison : le <b>velouté de poivrons jaunes</b>, le flan de ricotta et pommes de terre au ragù, le cou de poulet farci. Laissez-vous guider par ce qu'ils récitent." }
           ]
         },
         {
-          heure: "22h15", titre: "Retour, et un dernier pont si l'envie vous prend", type: "balade",
-          aller: { duree: "3 min", via: "Via dei Magazzini → piazza della Signoria → via dei Neri", vers: "Via dei Neri 16, Firenze" },
-          texte: "Le logement est à 3 minutes. Si vous avez encore envie de marcher, le Ponte Santa Trinita de nuit est à 8 minutes : c'est de là qu'on a la plus belle vue sur le Ponte Vecchio illuminé (sinon, vous y passez demain au coucher du soleil).",
+          heure: "22h30", titre: "Retour par Santa Croce", type: "balade",
+          aller: { duree: "12 min", via: "Via Andrea del Verrocchio → via de' Macci → via di San Giuseppe → piazza Santa Croce → via de' Benci → via dei Neri", vers: "Via dei Neri 16, Firenze" },
+          texte: "La piazza Santa Croce de nuit, presque vide, avec la façade éclairée de la basilique que vous visitez demain matin. Puis 3 minutes jusqu'au logement.",
+          regarder: [
+            { top: true, titre: "L'étoile sur la façade", maps: "Basilica di Santa Croce, Firenze", texte: "Au-dessus du portail central, une grande étoile à six branches. La façade date de 1863 ; son architecte, Niccolò Matas, était né dans la communauté juive d'Ancône, et une tradition tenace dit qu'il y a placé l'étoile de David et qu'on l'a enterré pour cela sous les marches, et non dans l'église. Les historiens discutent encore de ce qui relève de la légende." }
+          ],
           detours: [
             { titre: "Une glace en rentrant", duree: "en bas de chez vous", texte: "La <b>Gelateria dei Neri</b> (via dei Neri) ferme tard." }
-          ]
-        }
-      ]
-    },
-    {
-      id: "lun", court: "Lun 12", date: "2026-10-12",
-      titre: "Santa Croce, le marché, le Duomo et la bistecca",
-      intro: "Le lundi, les grands musées d'État sont fermés (Offices, Accademia, Pitti, Bargello, Chapelles Médicis). C'est le jour de la Florence des Florentins : le panthéon de Santa Croce, le vrai marché, puis tout le complexe du Duomo avec le Giotto Pass, et le soir, l'Oltrarno jusqu'à la bistecca. La cathédrale ferme à 15h45 : elle passe avant le campanile.",
-      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Basilica di Santa Croce, Firenze", "Mercato di Sant'Ambrogio, Firenze", "Piazza del Duomo, Firenze"], arrivee: "Osteria dell'Enoteca, Via Romana 70r, Firenze" },
-      etapes: [
-        {
-          heure: "9h15", titre: "Café au comptoir, dans votre rue", type: "pause",
-          texte: "<b>Ditta Artigianale</b>, au 32 de la via dei Neri, est l'une des premières adresses de café de spécialité de Florence. Sinon, n'importe quel bar : on commande au comptoir, on boit debout, on paie en sortant. Un « caffè », c'est un espresso ; le cappuccino se boit le matin, jamais après un repas (les Italiens vous regarderont avec tendresse si vous le faites).",
-          regarder: [
-            { top: true, titre: "La Loggia del Grano, au bout de votre rue", maps: "Loggia del Grano, Firenze", img: "loggiagrano", texte: "Au bout de la via dei Neri, côté Offices, une loggia de 1619 avec une fontaine et le buste du grand-duc Cosme II : c'était le marché au grain construit pour les Médicis. Ses arcades ont été fermées plus tard, et l'ensemble a longtemps abrité un cinéma." }
           ]
         },
         {
@@ -285,20 +269,22 @@ window.FLO = {
           ]
         },
         {
-          heure: "12h00", titre: "Déjeuner au marché", type: "repas",
-          texte: "Arrivez à midi pile chez Da Rocco, avant les employés du quartier : tables partagées, plats du jour, cash. C'est le déjeuner le plus honnête de Florence.",
+          heure: "12h00", titre: "Déjeuner chez Vini e Vecchi Sapori", type: "repas", resa: "Réservé · 12h00",
+          aller: { duree: "15 min", via: "Piazza Ghiberti → via Pietrapiana → borgo degli Albizi → via del Proconsolo → piazza San Firenze → via dei Magazzini", vers: "Vini e Vecchi Sapori, Via dei Magazzini 3r, Firenze" },
+          texte: "Le dîner raté de samedi, rattrapé à midi. Partez du marché vers 11h45 : la plus belle rue de palais du quartier est sur le chemin.",
+          regarder: [
+            { top: true, chemin: true, titre: "Le borgo degli Albizi", maps: "Borgo degli Albizi, Firenze", texte: "La plus belle rue de palais du quartier porte le nom des <b>Albizi</b>, la famille qui gouvernait Florence avant les Médicis. En 1433, ce sont eux qui firent arrêter et exiler Cosme l'Ancien ; un an plus tard, Cosme revenait et c'est Rinaldo degli Albizi qui partait en exil, pour toujours. Au n° 18, le Palazzo Valori est couvert de bustes d'illustres Florentins que les habitants ont surnommés « i Visacci », les vilaines têtes." }
+          ],
           repas: [
-            { resto: "darocco", reco: true, texte: "Le comptoir à l'intérieur de la halle. Ribollita ou pappa al pomodoro (≈ 10 €), puis trippa, peposo ou rosbif (≈ 13 €), un verre de vin de la maison (4 €) : 15–25 € par personne selon la faim." },
-            { resto: "semel", texte: "Plus rapide : des panini d'auteur, debout sur la place. Le menu change chaque jour (âne braisé, hareng et pecorino…). Pas de modification." },
-            { resto: "lortone", texte: "Pour s'asseoir plus confortablement : le bistrot que le guide Michelin recommande, face au marché. Pici à l'aglione, gnudi, tagliatelle au ragù de sanglier." }
+            { resto: "vinivecchisapori", reco: true, texte: "Réservé à midi. Minuscule osteria derrière le Palazzo Vecchio, pleine de Florentins. Prenez les <b>pappardelle au canard</b>, leur plat le plus célèbre, des crostini de foie, et le <b>tiramisu à la framboise</b>." },
+            { resto: "darocco", texte: "Si vous préférez rester au marché : le comptoir de Da Rocco, dans la halle. Ribollita, trippa, peposo, 15–25 € par personne, cash." }
           ]
         },
         {
           heure: "13h45", titre: "La cathédrale (gratuite, avant 15h45)", type: "visite", lieu: "duomo",
-          aller: { duree: "12 min", via: "Via Pietrapiana → borgo degli Albizi → via del Proconsolo → piazza del Duomo", vers: "Cattedrale di Santa Maria del Fiore, Firenze" },
+          aller: { duree: "8 min", via: "Via dei Magazzini → piazza della Signoria → via de' Calzaiuoli → piazza del Duomo", vers: "Cattedrale di Santa Maria del Fiore, Firenze" },
           texte: "Entrée gratuite (lun–sam 10h15–15h45), la file avance vite en début d'après-midi en semaine. Épaules et genoux couverts. Compter 30–45 min. L'intérieur est sobre, mais chargé d'histoires : un mercenaire anglais peint en statue, une horloge qui tourne à l'envers, Dante en exil, et le chœur où les Pazzi ont poignardé Julien de Médicis. Descendez aussi à la <b>crypte de Santa Reparata</b>, incluse dans le Giotto Pass : elle ferme à 16h, c'est donc maintenant ou jamais.",
           regarder: [
-            { top: true, chemin: true, titre: "Le borgo degli Albizi", maps: "Borgo degli Albizi, Firenze", texte: "La plus belle rue de palais du quartier porte le nom des <b>Albizi</b>, la famille qui gouvernait Florence avant les Médicis. En 1433, ce sont eux qui firent arrêter et exiler Cosme l'Ancien ; un an plus tard, Cosme revenait et c'est Rinaldo degli Albizi qui partait en exil, pour toujours. Au n° 18, le Palazzo Valori est couvert de bustes d'illustres Florentins que les habitants ont surnommés « i Visacci », les vilaines têtes." },
             { chemin: true, titre: "La tête de taureau", maps: "Porta della Mandorla, Firenze", texte: "Avant d'entrer, longez le flanc nord de la cathédrale (côté via Ricasoli) jusqu'à la Porta della Mandorla. Levez les yeux : une tête de taureau dépasse d'un chapiteau. Hommage aux bœufs qui ont tiré les matériaux du chantier, disent les sérieux. La légende préfère une autre histoire : un maître d'œuvre, amant de la femme d'un boulanger, aurait été dénoncé par le mari ; il se serait vengé en tournant les cornes de la bête vers la fenêtre du cocu." },
             { titre: "Le mercenaire de papier", img: "hawkwood", texte: "Mur de gauche : un chevalier sur son cheval, en trompe-l'œil vert. C'est <b>John Hawkwood</b>, condottiere anglais qui servit Florence. La ville lui avait promis un monument équestre en marbre ; elle lui a offert une fresque de Paolo Uccello (1436). Beaucoup moins cher." },
             { top: true, titre: "L'horloge qui tourne à l'envers", img: "horloge", texte: "Au revers de la façade, l'horloge d'Uccello (1443) n'a qu'une aiguille, tourne dans le sens inverse des nôtres et compte 24 heures : la journée commençait au coucher du soleil. Elle fonctionne toujours." },
@@ -1231,7 +1217,7 @@ window.FLO = {
       pourquoi: "Votre trouvaille, et les avis sont unanimes : une pâte légère, alvéolée, qui « fond en bouche », des farines choisies, des garnitures de saison. Le patron explique chaque pizza avec passion et ferme quand tout est vendu.",
       commander: ["3–4 petites parts différentes, au poids, à partager", "Une pizza à la farine complète si elle est proposée", "Un verre de vin"],
       astuce: "Être devant à 12h00 pile. Peu de places assises." },
-    { id: "darocco", gamme: 1, prog: true, nom: "Da Rocco", zone: "Santa Croce", type: "Comptoir du marché (midi)", prix: "15–25 €", quand: "Lun 12 · 12h00",
+    { id: "darocco", gamme: 1, nom: "Da Rocco", zone: "Santa Croce", type: "Comptoir du marché (midi)", prix: "15–25 €", quand: "Plan B du lundi midi",
       horaires: "Lun–sam 11h30–14h30 · fermé dimanche", adresse: "Marché de Sant'Ambrogio (dans la halle)",
       pourquoi: "Le repas le plus honnête de Florence : la cantine des marchands et des employés du quartier, tables partagées, plats du jour écrits à la main.",
       commander: ["Ribollita ou pappa al pomodoro (≈ 10 €)", "Trippa, peposo ou rosbif (≈ 13 €)", "Un verre de vin de la maison (4 €)"],
@@ -1288,11 +1274,16 @@ window.FLO = {
       commander: ["Des pâtes fraîches", "Un lampredotto si vous ne l'avez pas encore goûté"] },
 
     /* ---------- €€ ---------- */
-    { id: "vinivecchisapori", gamme: 2, prog: true, nom: "Vini e Vecchi Sapori", zone: "Centre", type: "Osteria", prix: "25–40 €", quand: "Dim 11 · ~20h15",
+    { id: "vinivecchisapori", gamme: 2, prog: true, nom: "Vini e Vecchi Sapori", zone: "Centre", type: "Osteria", prix: "25–40 €", quand: "Lun 12 · 12h00 (réservé)",
       horaires: "Tous les jours 12h–15h, 19h–23h (Google Maps, mis à jour par le restaurant)", adresse: "Via dei Magazzini 3r", tel: "+39 055 293045",
       pourquoi: "Minuscule, bondée d'Italiens, à 3 min du logement, derrière le Palazzo Vecchio. Une cuisine de saison simple et parfaite, avec une ardoise du jour (pici au ragù, crostini de foies, poulet frit) ; les pappardelle au canard et le tiramisu à la framboise sont ses best-sellers.",
       commander: ["Pappardelle au canard (leur plat le plus célèbre)", "Crostini de foies de volaille", "Haricots cuits « al fiasco »", "Tiramisu à la framboise"],
       astuce: "Pas de pizza, pas de cappuccino. Réserver." },
+    { id: "cibreoristorante", gamme: 3, prog: true, nom: "Cibrèo Ristorante", zone: "Sant'Ambrogio", type: "Restaurant (cuisine florentine classique)", prix: "≈ 60–80 €", quand: "Dim 11 · 20h30 (réservé)",
+      horaires: "Midi et soir, à confirmer par téléphone", adresse: "Via Andrea del Verrocchio 8r", tel: "+39 055 234 1100",
+      pourquoi: "La maison mère du Cibrèo, fondée en 1979 par Fabio Picchi face au marché de Sant'Ambrogio : une institution de la cuisine florentine, recommandée par le guide Michelin (€€€). Pas de pâtes, et les plats sont récités à table.",
+      commander: ["Velouté de poivrons jaunes", "Flan de ricotta et pommes de terre au ragù", "Cou de poulet farci"],
+      astuce: "Même numéro que la trattoria d'à côté : c'est ici que la réservation a été prise." },
     { id: "cibreo", gamme: 2, nom: "Cibrèo Trattoria (« il Cibreino »)", zone: "Sant'Ambrogio", type: "Trattoria", prix: "30–45 €", quand: "Plan B du dimanche soir",
       horaires: "Tous les jours 12h30–14h30, 19h–22h30", adresse: "Via de' Macci 122r", tel: "+39 055 234 1100",
       pourquoi: "Le côté simple de la maison fondée en 1979 par Fabio Picchi, figure de la cuisine florentine disparue en 2022. Bib Gourmand au guide Michelin 2026, dont l'inspecteur écrit que c'est là qu'il mangerait s'il était en vacances à Florence. Cuisine florentine de famille, pain sec et soupes, abats.",
@@ -1422,7 +1413,7 @@ window.FLO = {
       ["Tram aéroport (4 trajets à 2 €)", "8 €"],
       ["Cafés et petits-déjeuners au comptoir", "25–35 €"],
       ["Déjeuners (Gustarium, Da Rocco, Zeb)", "90–140 €"],
-      ["Dîners (Sonora + Vini e Vecchi Sapori, la bistecca)", "330–420 €"],
+      ["Repas marquants (Sonora + Cibrèo Ristorante, Vini e Vecchi Sapori, la bistecca)", "330–420 €"],
       ["Apéros, verres de vin, glaces", "50–80 €"]
     ],
     total: "≈ 670–890 € pour deux, hors vols et logement",
