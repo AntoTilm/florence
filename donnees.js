@@ -37,7 +37,6 @@ window.FLO = {
     "Giotto Pass réservé (créneau du campanile lundi 16h30–17h)",
     "Osteria dell'Enoteca réservée (lundi 20h)",
     "Vineria Sonora réservée (dimanche 18h30) — Cibrèo Trattoria ✅ dimanche 21h30",
-    "Billets Santa Croce pour mardi 9h30 (billetterie en ligne, pour éviter la file)",
     "Hôte prévenu : arrivée vers 21h, valises gardées mardi jusqu'à 15h",
     "Deux cartes sans contact pour le tram (une validation par carte), ou tickets au distributeur",
     "Un peu de liquide (marché, Da Rocco, lampredotto : souvent cash)",
@@ -54,7 +53,7 @@ window.FLO = {
     { statut: "todo", titre: "Bistecca — Osteria dell'Enoteca", quand: "Lun 12 · 20h", detail: "Via Romana 70r. Fermée le mardi. Compter 70–90 €/pers. avec vin. Plan B : Cammillo (+39 055 212427), puis I'Raddi (+39 055 211072).", tel: "+39 055 228 6018", lien: "http://www.osteriadellenoteca.com/", lienTexte: "Site du restaurant", resto: "enoteca" },
     { statut: "todo", titre: "Vineria Sonora (vins nature)", quand: "Dim 11 · ~18h30", detail: "Via degli Alfani 39r. Ouverte le dimanche dès 17h, fermée le lundi. Table pour l'apéritif.", tel: "+39 333 199 9093", resto: "sonora" },
     { statut: "ok", titre: "Dîner — Cibrèo Trattoria", quand: "Dim 11 · 21h30", detail: "Via de' Macci 122r, à deux pas du marché de Sant'Ambrogio, 10 min à pied de la Vineria Sonora. Réservation confirmée pour 2 personnes. C'est la trattoria de la maison Cibrèo (« il Cibreino »), pas le restaurant : compter environ 30–45 € par personne. Cuisine jusqu'à 22h30.", tel: "+39 055 234 1100", resto: "cibreo" },
-    { statut: "todo", titre: "Santa Croce", quand: "Mar 13 · 9h30", detail: "Lundi, la file du guichet était trop longue : prenez les billets en ligne (≈ 10 € + 1 € de frais par billet). Arrivez vers 9h20 à l'entrée du côté gauche (nord) de la basilique, largo Bargellini, billets sur le téléphone. Épaules et genoux couverts.", lien: "https://ticket.santacroceopera.it/en/", lienTexte: "Billetterie officielle", lieu: "santacroce" },
+    { statut: "info", titre: "Santa Croce (pas faite)", quand: "Mar 13", detail: "Finalement pas faite : matinée gardée pour la balade et la dolce vita. Pour une prochaine fois.", lien: "https://ticket.santacroceopera.it/en/", lienTexte: "Billetterie officielle", lieu: "santacroce" },
     { statut: "info", titre: "Gustarium (pizza al taglio)", quand: "Dim 11 · 12h00 pile", detail: "Pas de réservation. Ouvert du mardi au dimanche, le midi seulement (12h–15h30), et tout est souvent vendu vers 13h : être devant à l'ouverture.", tel: "+39 055 283469", resto: "gustarium" }
   ],
 
@@ -385,30 +384,17 @@ window.FLO = {
     },
     {
       id: "mar", court: "Mar 13", date: "2026-10-13",
-      titre: "Santa Croce, puis la colline de San Miniato",
-      intro: "<b>Changé lundi :</b> Santa Croce, ratée lundi à cause de la file, ouvre la journée à 9h30, à 4 minutes du logement, avec des billets en ligne. Ensuite, on traverse l'Arno, on monte par San Niccolò et les rampes jusqu'au Piazzale et à San Miniato, puis on redescend droit sur Zeb. Santa Felicita et la Costa San Giorgio passent en option. Départ du logement vers 15h10, en tram. S'il pleut, des plans B au sec plus bas.",
-      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Basilica di Santa Croce, Firenze", "Piazzale Michelangelo, Firenze", "Basilica di San Miniato al Monte, Firenze"], arrivee: "Zeb, Via San Miniato 2r, Firenze" },
+      titre: "La colline de San Miniato, la dolce vita",
+      intro: "<b>Changé sur place :</b> pas de Santa Croce finalement, c'était trop pour une dernière matinée. On a pris le temps : la balade vers San Miniato et son monastère, puis un verre chez Le Volpi e l'Uva. Départ du logement vers 15h10, en tram.",
+      carte: { depart: "Via dei Neri 16, Firenze", etapes: ["Piazzale Michelangelo, Firenze", "Basilica di San Miniato al Monte, Firenze"], arrivee: "Le Volpi e l'Uva, Piazza dei Rossi 1r, Firenze" },
       etapes: [
         {
           heure: "9h00", titre: "Check-out et valises", type: "pause",
-          texte: "Demandez à l'hôte de garder les valises jusqu'à 15h. Sinon, des consignes à la journée existent dans le centre (Bounce, Radical Storage : réservation sur leur appli). Un café au comptoir de la via dei Neri, sans traîner : Santa Croce ouvre à 9h30."
+          texte: "Demandez à l'hôte de garder les valises jusqu'à 15h. Sinon, des consignes à la journée existent dans le centre (Bounce, Radical Storage : réservation sur leur appli). Un café au comptoir de la via dei Neri, sans se presser."
         },
         {
-          heure: "9h30", titre: "Santa Croce, le panthéon de l'Italie", type: "visite", lieu: "santacroce",
-          resa: "Billets en ligne · 9h30 — À RÉSERVER", resaTodo: true,
-          aller: { duree: "4 min", via: "Via dei Neri → via de' Benci → piazza Santa Croce", vers: "Basilica di Santa Croce, Firenze" },
-          texte: "Déplacée de lundi : la file du guichet était trop longue. Avec les billets achetés en ligne (≈ 10 € + 1 € de frais), présentez-vous vers 9h20 à l'entrée du côté gauche (nord) de la basilique, largo Bargellini, sans repasser par la file d'achat. Compter 1h–1h15 avec la chapelle Pazzi et le musée. Épaules et genoux couverts. Michel-Ange, Galilée, Machiavel, Rossini, un cénotaphe de Dante, les fresques de Giotto de la chapelle Bardi, tout juste restaurées, et le crucifix de Cimabue noyé par la crue de 1966. Le guide de visite est dans la fiche.",
-          regarder: [
-            { titre: "Sur la place : le disque de 1565", maps: "Piazza Santa Croce, Firenze", img: "antella", texte: "La façade peinte du Palazzo dell'Antella, côté droit de la place. Sous ses fenêtres, un disque de marbre de 1565 marque la ligne médiane du terrain du <b>calcio storico</b>, un mélange de football, de rugby et de lutte en costumes Renaissance qui se joue encore ici chaque mois de juin, entre les quatre quartiers de la ville." },
-            { titre: "Dante, qui n'est pas enterré là", img: "dantestatue", texte: "La grande statue sur les marches (1865, pour les 600 ans de sa naissance) regarde la ville qui l'a exilé. Florence l'a condamné à mort en 1302 ; il est mort à Ravenne en 1321, et Ravenne refuse depuis 700 ans de rendre le corps. Dans l'église, son tombeau est vide." },
-            { top: true, titre: "Michel-Ange face à Galilée", img: "tombemichelange", texte: "Le tombeau de Michel-Ange (par Vasari) est le premier à droite en entrant. Michel-Ange avait voulu être enterré ici pour, au Jugement dernier, voir en premier la coupole de Brunelleschi par la porte ouverte. Galilée lui fait face dans l'allée de gauche : il est né l'année de la mort de Michel-Ange, en 1564." },
-            { top: true, titre: "Le crucifix noyé de Cimabue", img: "cimabue", texte: "Au musée, le grand crucifix peint par Cimabue vers 1280. Le 4 novembre 1966, il a passé des heures sous l'eau boueuse et perdu une grande partie de sa peinture. Il est devenu le symbole des « anges de la boue », les volontaires du monde entier venus sauver les œuvres. Il est désormais accroché à un système qui peut le hisser en cas de nouvelle crue." },
-            { titre: "La dame à la lampe, dans le cloître", texte: "Dans le premier cloître, une statue de jeune femme tenant une lampe (1913) : <b>Florence Nightingale</b>, la fondatrice des soins infirmiers modernes. Elle était née ici, à Florence, en 1820, de parents anglais en voyage, qui lui ont donné le nom de la ville. La « dame à la lampe », c'était son surnom pendant la guerre de Crimée, quand elle faisait ses rondes la nuit auprès des blessés." }
-          ]
-        },
-        {
-          heure: "10h45", titre: "La montée : San Niccolò et les rampes", type: "balade",
-          aller: { duree: "35 min, dont une montée en escaliers", via: "Piazza Santa Croce → via de' Benci → Ponte alle Grazie → via di San Niccolò → Porta San Niccolò → rampes du Poggi → Piazzale Michelangelo", vers: "Piazzale Michelangelo, Firenze" },
+          heure: "Matin", titre: "La montée : San Niccolò et les rampes", type: "balade",
+          aller: { duree: "35 min, dont une montée en escaliers", via: "Via dei Neri → via de' Benci → Ponte alle Grazie → via di San Niccolò → Porta San Niccolò → rampes du Poggi → Piazzale Michelangelo", vers: "Piazzale Michelangelo, Firenze" },
           texte: "On descend vers l'Arno, on traverse, puis on grimpe par les escaliers et les grottes artificielles des rampes jusqu'au grand balcon de la ville. En fin de matinée, le Piazzale est encore calme.",
           regarder: [
             { titre: "Le pont des recluses", maps: "Ponte alle Grazie, Firenze", texte: "Le Ponte alle Grazie médiéval portait de petites maisons et des chapelles. Selon la tradition, des femmes s'y étaient fait emmurer dans de minuscules cellules pour vivre en prière ; on les appelait « le Murate ». Elles ont fini par déménager dans un couvent de la via Ghibellina, devenu ensuite prison, puis aujourd'hui un café littéraire. Le pont actuel date de 1957 : l'ancien a sauté en 1944." },
@@ -417,7 +403,7 @@ window.FLO = {
           ]
         },
         {
-          heure: "11h30", titre: "San Miniato al Monte", type: "visite", lieu: "sanminiato",
+          heure: "Fin de matinée", titre: "San Miniato al Monte", type: "visite", lieu: "sanminiato",
           aller: { duree: "5 min, par l'escalier", via: "Piazzale Michelangelo → escalier de San Salvatore al Monte", vers: "Basilica di San Miniato al Monte, Firenze" },
           texte: "Gratuit, ouvert le matin. La plus belle église romane de Florence, et la plus belle vue, au-dessus de tout. La façade, le clocher et la toiture sortent de dix-huit mois de restauration (inaugurée le 7 mai 2026) : les marbres n'ont jamais été aussi nets. Compter 30–45 min avec la vue et le cimetière. Le guide est dans la fiche.",
           regarder: [
@@ -428,19 +414,20 @@ window.FLO = {
           ]
         },
         {
-          heure: "12h30", titre: "Dernier déjeuner à San Niccolò", type: "repas",
+          heure: "12h30", titre: "Dernier verre, dernier déjeuner", type: "repas",
           aller: { duree: "10 min, en descente", via: "San Miniato → via del Monte alle Croci → Porta San Miniato → via di San Miniato", vers: "Zeb, Via San Miniato 2r, Firenze" },
           texte: "Depuis San Miniato, on redescend tout droit par la via del Monte alle Croci et la petite Porta San Miniato : Zeb est juste en bas. Pas de réservation le midi : arrivez vers 12h30, on s'assoit au comptoir face à la cuisine. Pas de stress pour l'horaire : vous êtes à 15 minutes du logement.",
           repas: [
-            { resto: "zeb", reco: true, texte: "Un comptoir façon bar à sushis, une mère et son fils, et une ardoise qui change chaque jour. Prenez ce que Giuseppina recommande : pici, ribollita, <b>peposo</b> (bœuf mijoté au poivre et au vin), trippa. Gâteau aux pommes, amandes et pignons pour finir." },
+            { resto: "volpi", reco: true, texte: "<b>Fait :</b> redescente vers le Ponte Vecchio pour un dernier verre et un plateau chez Le Volpi e l'Uva, piazza dei Rossi." },
+            { resto: "zeb", texte: "Un comptoir façon bar à sushis, une mère et son fils, et une ardoise qui change chaque jour. Prenez ce que Giuseppina recommande : pici, ribollita, <b>peposo</b> (bœuf mijoté au poivre et au vin), trippa. Gâteau aux pommes, amandes et pignons pour finir." },
             { resto: "fuoriporta", texte: "Juste à côté, face à la porte médiévale (mar–ven 12h–15h30) : crostoni, pâtes, et un dernier verre parmi 600 vins." },
             { resto: "delfagioli", texte: "S'il pleut et que vous êtes resté au centre : la trattoria familiale à 3 min du logement (lun–ven). Pici à l'aglione, bœuf braisé, cantucci maison." }
           ]
         },
         {
           heure: "14h00", titre: "Une dernière glace, et les valises", type: "balade",
-          aller: { duree: "15 min", via: "Via di San Niccolò → Ponte alle Grazie → via de' Benci → via Isola delle Stinche (Vivoli) → via dei Neri", vers: "Vivoli, Via Isola delle Stinche 7r, Firenze" },
-          texte: "Retour par le Ponte alle Grazie, traversé ce matin. Vivoli, l'un des plus anciens glaciers de Florence, est sur le chemin. Récupérez les valises vers 14h45.",
+          aller: { duree: "15 min", via: "Ponte Vecchio → via Por Santa Maria → piazza della Signoria → via dei Neri (Vivoli à 3 min : via Isola delle Stinche)", vers: "Vivoli, Via Isola delle Stinche 7r, Firenze" },
+          texte: "Retour par le Ponte Vecchio, 10 minutes jusqu'au logement. Vivoli, l'un des plus anciens glaciers de Florence, est à 3 minutes. Récupérez les valises vers 14h45.",
           regarder: [
             { top: true, titre: "Le dernier gelato", maps: "Vivoli, Via Isola delle Stinche 7r, Firenze", texte: "Chez Vivoli, l'« affogato » : une boule de glace noyée dans un espresso. Ou une glace au riz, la spécialité d'autrefois." }
           ]
@@ -455,7 +442,8 @@ window.FLO = {
         }
       ],
       autres: [
-        { titre: "La montée par la Costa San Giorgio", tags: ["calme", "vue"], lieux: ["costasangiorgio", "santafelicita"], texte: "Le parcours prévu au départ, remplacé par Santa Croce : Santa Felicita, puis une ruelle entre les murs et les oliviers, la maison de Galilée, le Forte Belvedere et les remparts jusqu'à San Miniato (45 min). Pour une prochaine fois." },
+        { titre: "Santa Croce, pour une prochaine fois", tags: ["pluie", "art"], lieux: ["santacroce"], texte: "Pas faite : on a préféré prendre le temps. Michel-Ange, Galilée, Machiavel, les Giotto de la chapelle Bardi. Le guide reste dans la fiche." },
+        { titre: "La montée par la Costa San Giorgio", tags: ["calme", "vue"], lieux: ["costasangiorgio", "santafelicita"], texte: "Le parcours prévu au départ : Santa Felicita, puis une ruelle entre les murs et les oliviers, la maison de Galilée, le Forte Belvedere et les remparts jusqu'à San Miniato (45 min). Pour une prochaine fois." },
         { titre: "Jardins de Boboli", tags: ["calme", "medicis", "vue"], lieux: ["boboli"], texte: "À la place de San Miniato : 10 € au guichet, ouverts dès 8h15. 1h30–2h : l'amphithéâtre, la grotte de Buontalenti, le nain Morgante sur sa tortue, la vue du haut." },
         { titre: "Bargello : la sculpture et les potences", tags: ["pluie", "art"], lieux: ["bargello"], texte: "Ouvert le mardi dès 8h15, 12 €, 1h30. Les deux David de Donatello, les panneaux du concours de 1401, le Bacchus ivre de Michel-Ange. L'ancienne prison où l'on pendait les conjurés." },
         { titre: "Palazzo Vecchio : les intrigues", tags: ["pluie", "medicis"], lieux: ["palazzovecchio"], texte: "Ouvert le mardi 9h–19h, 18 €, 1h30. La cellule de Cosme, le Studiolo secret, le Léonard peut-être caché sous la fresque de Vasari." },
@@ -1404,7 +1392,7 @@ window.FLO = {
   budget: {
     lignes: [
       ["Réservations (Accademia 48 + Offices 58 + Giotto Pass 40)", "146 €"],
-      ["Visites sur place (Santa Croce, et une option : Palazzo Vecchio, Boboli, Bargello ou Chapelles Médicis)", "20–60 €"],
+      ["Visites sur place (une option : Palazzo Vecchio, Boboli, Bargello ou Chapelles Médicis)", "0–40 €"],
       ["Tram aéroport (4 trajets à 2 €)", "8 €"],
       ["Cafés et petits-déjeuners au comptoir", "25–35 €"],
       ["Déjeuners (Gustarium, Da Rocco, Zeb)", "90–140 €"],
